@@ -48,6 +48,6 @@ void generateHomeHtml(Folder folder, String outputPath) {
 </html>
 ''';
 
-  var homeHtmlFile = File('$outputPath/home.html');
+  var homeHtmlFile = File('$outputPath/index.html');
   homeHtmlFile.writeAsString(homeHtmlContext);
 }
