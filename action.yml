@@ -1,6 +1,6 @@
-name: vis
+name: markdown_web
 author: suinua
-description: a
+description: convert md files to html
 branding:
   icon: plus
   color: green
