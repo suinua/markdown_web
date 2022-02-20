@@ -1,0 +1,13 @@
+name: vis
+author: suinua
+description: a
+branding:
+  icon: plus
+  color: green
+inputs:
+  articlesDirectoryPath:
+    description: 'path to articles directory'
+    required: true
+runs:
+  using: docker
+  image: Dockerfile

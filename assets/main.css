@@ -1,0 +1,27 @@
+.container-box {
+    overflow: hidden;
+}
+
+.container{
+    width: 40%;
+    float: left;
+}
+
+.container-divider {
+    margin-left: 3%;
+    margin-right: 3%;
+    float: left;
+    border-left: 1px solid #E1E1E1;
+    height: 500px;
+}
+
+.folder {
+}
+
+.children {
+    margin-left: 3%;
+    display: none;
+}
+
+.article {
+}
