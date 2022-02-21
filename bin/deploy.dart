@@ -26,7 +26,7 @@ void main() async {
     '--global',
     '--add',
     'user.password',
-    env['PERSONAL_TOKEN']!
+    env['INPUT_GITHUB_TOKEN']!
   ]);
   print(env);
 
@@ -60,7 +60,7 @@ void main() async {
 
   //Remote
   var remoteUrl =
-      'https://x-access-token:${env['PERSONAL_TOKEN']}@github.com/${env['GITHUB_REPOSITORY']}.git';
+      'https://x-access-token:${env['INPUT_GITHUB_TOKEN']}@github.com/${env['GITHUB_REPOSITORY']}.git';
   var remoteResult =
       await Process.run('git', ['remote', 'add', 'origin', remoteUrl]);
   print('git remote add $remoteUrl > stdout: ${remoteResult.stdout}');
