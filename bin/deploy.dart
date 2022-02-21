@@ -13,8 +13,8 @@ void main() async {
   Directory.current = outputPath;
 
   //Set git user
-  await Process.run('git', ['config', 'user.name', env['GITHUB_ACTOR']!]);
-  await Process.run('git', ['config', 'user.email', '${env['GITHUB_ACTOR']}@users.noreply.github.com']);
+  await Process.run('git', ['config', '--global', 'user.name', env['GITHUB_ACTOR']!]);
+  await Process.run('git', ['config', '--global', 'user.email', '${env['GITHUB_ACTOR']}@users.noreply.github.com']);
 
   //Git set
   var initResult = await Process.run('git', ['init']);
