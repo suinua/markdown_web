@@ -51,7 +51,7 @@ void main() async {
   print('git remote add $remoteUrl > stderr: ${remoteResult.stderr}');
 
   //Push
-  var pushResult = await Process.run('git', ['push', '-f', 'origin']);
-  print('git push -f origin > stdout: ${pushResult.stdout}');
-  print('git push -f origin > stderr: ${pushResult.stderr}');
+  var pushResult = await Process.run('git', ['push', '-f', 'origin', 'gh-pages']);
+  print('git push -f origin gh-pages > stdout: ${pushResult.stdout}');
+  print('git push -f origin gh-pages > stderr: ${pushResult.stderr}');
 }
