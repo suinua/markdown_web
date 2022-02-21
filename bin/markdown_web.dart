@@ -21,7 +21,7 @@ void main() {
 
   } else {
     articlesPath =
-        '${env['GITHUB_WORKSPACE']}/' + env['INPUT_ARTICLESDIRECTORYPATH']!;
+        '${env['GITHUB_WORKSPACE']}/' + env['INPUT_ARTICLES_DIRECTORY_PATH']!;
     outputPath = Directory.current.path + '/output';
 
   }

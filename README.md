@@ -13,7 +13,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: suinua/vis@master
+      - uses: suinua/markdown_web@master
         with:
-          articlesDirectoryPath: 'articles'
+          articles_directory_path: 'articles'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 ```
