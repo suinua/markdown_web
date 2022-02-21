@@ -6,7 +6,7 @@ cp -r /assets/* output
 dart2js -O2 -o output/main.js web/main.dart
 dart bin/markdown_web.dart
 echo $INPUT_REPOSITORYNAME
-#cp -r output home/runner/work/$INPUT_REPOSITORYNAME/$INPUT_REPOSITORYNAME/output
-#cd home/runner/work/$REPO_NAME/$REPO_NAME
-#pwd
-#ls
+cp -r output home/runner/work/$INPUT_REPOSITORYNAME/$INPUT_REPOSITORYNAME/output
+cd home/runner/work/$REPO_NAME/$REPO_NAME
+pwd
+ls
