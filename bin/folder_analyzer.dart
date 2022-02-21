@@ -7,7 +7,7 @@ class LocalFile {
   final String context;
 
   LocalFile(this.path)
-      : name = path.replaceFirst(RegExp(r'(.*)\'+Platform.pathSeparator), ''),
+      : name = path.replaceFirst(RegExp(r'(.*)\' + Platform.pathSeparator), ''),
         tags = _getTags(path),
         context = _getContext(path);
 
@@ -23,10 +23,8 @@ class LocalFile {
 
   static String _getContext(String path) {
     var file = File(path);
-    var result = '';
-    file.readAsString().then((value) => result = value);
-
-    return result.split('\n').sublist(1).join('\n');
+    var context = file.readAsStringSync();
+    return context.split('\n').sublist(1).join('\n');
   }
 
   Map asJson() {
@@ -40,7 +38,8 @@ class LocalFolder {
   List<LocalFile> files = [];
   List<LocalFolder> folders = [];
 
-  LocalFolder(this.path) : name = path.replaceFirst(RegExp(r'(.*)\'+Platform.pathSeparator), '');
+  LocalFolder(this.path)
+      : name = path.replaceFirst(RegExp(r'(.*)\' + Platform.pathSeparator), '');
 
   void addFolder(LocalFolder folder) {
     folders.add(folder);
