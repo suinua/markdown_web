@@ -8,6 +8,9 @@ inputs:
   articlesDirectoryPath:
     description: 'path to articles directory'
     required: true
+  repositoryName:
+    description: 'repository name without user name'
+    required: true
 runs:
   using: docker
   image: Dockerfile
