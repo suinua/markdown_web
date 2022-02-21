@@ -13,8 +13,15 @@ void main() async {
   Directory.current = outputPath;
 
   //Set git user
-  await Process.run('git', ['config', '--global', 'user.name', env['GITHUB_ACTOR']!]);
-  await Process.run('git', ['config', '--global', 'user.email', '${env['GITHUB_ACTOR']}@users.noreply.github.com']);
+  await Process.run(
+      'git', ['config', '--global', 'user.name', env['GITHUB_ACTOR']!]);
+  await Process.run('git', [
+    'config',
+    '--global',
+    'user.email',
+    '${env['GITHUB_ACTOR']}@users.noreply.github.com'
+  ]);
+  print(env);
 
   //Git set
   var initResult = await Process.run('git', ['init']);
@@ -45,13 +52,16 @@ void main() async {
   print('git branch -d master > stderr: ${branchRemoveResult.stderr}');
 
   //Remote
-  var remoteUrl = 'https://x-access-token:${env['PERSONAL_TOKEN']}@github.com/${env['GITHUB_REPOSITORY']}.git';
-  var remoteResult = await Process.run('git', ['remote','add','origin', remoteUrl]);
+  var remoteUrl =
+      'https://x-access-token:${env['PERSONAL_TOKEN']}@github.com/${env['GITHUB_REPOSITORY']}.git';
+  var remoteResult =
+      await Process.run('git', ['remote', 'add', 'origin', remoteUrl]);
   print('git remote add $remoteUrl > stdout: ${remoteResult.stdout}');
   print('git remote add $remoteUrl > stderr: ${remoteResult.stderr}');
 
   //Push
-  var pushResult = await Process.run('git', ['push', '-f', 'origin', 'gh-pages']);
+  var pushResult =
+      await Process.run('git', ['push', '-f', 'origin', 'gh-pages']);
   print('git push -f origin gh-pages > stdout: ${pushResult.stdout}');
   print('git push -f origin gh-pages > stderr: ${pushResult.stderr}');
 }
