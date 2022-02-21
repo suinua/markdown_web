@@ -45,7 +45,7 @@ void main() async {
   print('git branch -d master > stderr: ${branchRemoveResult.stderr}');
 
   //Remote
-  var remoteUrl = 'https://${env['GITHUB_ACTOR']}:${env['GITHUB_TOKEN']}@github.com/${env['GITHUB_REPOSITORY']}.git';
+  var remoteUrl = 'https://${env['GITHUB_ACTOR']}:${env['PERSONAL_TOKEN']}@github.com/${env['GITHUB_REPOSITORY']}.git';
   var remoteResult = await Process.run('git', ['remote','add','origin', remoteUrl]);
   print('git remote add $remoteUrl > stdout: ${remoteResult.stdout}');
   print('git remote add $remoteUrl > stderr: ${remoteResult.stderr}');
