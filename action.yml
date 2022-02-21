@@ -5,7 +5,7 @@ branding:
   icon: plus
   color: green
 inputs:
-  articlesDirectoryPath:
+  articles_directory_path:
     description: 'path to articles directory'
     required: true
   github_token:
