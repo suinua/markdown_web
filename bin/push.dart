@@ -23,17 +23,14 @@ void main() async {
 
   //Add
   for (var element in targets) {
-    var addResult = await Process.run('git', ['add', element]);
-    if (addResult.stderr != '') print('git add error:' + addResult.stderr);
+    await Process.run('git', ['add', element]);
   }
 
   //Commit
-  var commitResult = await Process.run('git', ['commit', '-m', 'deploy']);
-  if (commitResult.stderr != '') print('commit error:' + commitResult.stderr);
+  await Process.run('git', ['commit', '-m', 'deploy']);
 
   //Push
   var remoteRepo =
       'https://${env['GITHUB_ACTOR']}:${env['GITHUB_TOKEN']}@github.com/${env['GITHUB_REPOSITORY']}.git';
-  var pushResult = await Process.run('git', ['push', '-f', remoteRepo]);
-  if (pushResult.stderr != '') print('push stderr:' + pushResult.stderr);
+  await Process.run('git', ['push', '-f', remoteRepo]);
 }
