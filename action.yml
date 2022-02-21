@@ -11,5 +11,3 @@ inputs:
 runs:
   using: docker
   image: Dockerfile
-  env:
-    REPO_NAME: ${{ github.event.repository.name }}
