@@ -5,6 +5,7 @@ mkdir "output"
 cp -r /assets/* output
 dart2js -O2 -o output/main.js web/main.dart
 dart bin/markdown_web.dart
-mkdir /home/runner/work/$INPUT_REPOSITORYNAME/$INPUT_REPOSITORYNAME/output
-cp -r output /home/runner/work/$INPUT_REPOSITORYNAME/$INPUT_REPOSITORYNAME/output
-ls /home/runner/work/
+echo "ls"
+ls
+echo "ls home"
+ls home
