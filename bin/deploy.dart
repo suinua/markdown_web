@@ -16,17 +16,32 @@ void main() async {
   await Process.run('git', ['config', 'user.name', 'gh-action-vis']);
   await Process.run('git', ['config', 'user.email', 'gh-action-vis@users.noreply.github.com']);
   //Git set
-  await Process.run('git', ['init']);
+  var initResult = await Process.run('git', ['init']);
+  print('git init > stdout: ${initResult.stdout}');
+  print('git init > stderr: ${initResult.stderr}');
+
   //Add
-  await Process.run('git', ['add', '--all']);
+  var addResult = await Process.run('git', ['add', '--all']);
+  print('git add --all > stdout: ${addResult.stdout}');
+  print('git add --all > stderr: ${addResult.stderr}');
+
   //Commit
-  await Process.run('git', ['commit', '-m', 'deploy']);
+  var commitResult = await Process.run('git', ['commit', '-m', 'deploy']);
+  print('git commit > stdout: ${commitResult.stdout}');
+  print('git commit > stderr: ${commitResult.stderr}');
+
   //Branch
-  await Process.run('git', ['checkout', 'gh-pages']);
-  await Process.run('git', ['branch', '-d', 'master']);
+  var checkoutResult = await Process.run('git', ['checkout', 'gh-pages']);
+  print('git checkout gh-pages > stdout: ${checkoutResult.stdout}');
+  print('git checkout gh-pages > stderr: ${checkoutResult.stderr}');
+
+  var branchRemoveResult = await Process.run('git', ['branch', '-d', 'master']);
+  print('git branch -d master > stdout: ${branchRemoveResult.stdout}');
+  print('git branch -d master > stderr: ${branchRemoveResult.stderr}');
 
   //Push
   var remoteRepo =
       'https://${env['GITHUB_ACTOR']}:${env['GITHUB_TOKEN']}@github.com/${env['GITHUB_REPOSITORY']}.git';
-  await Process.run('git', ['push', '-f', remoteRepo, 'gh-pages']);
+  var pushResult = await Process.run('git', ['push', '-f', remoteRepo, 'gh-pages']);
+  print('git push -f $remoteRepo gh-pages > stderr: ${pushResult.stderr}');
 }
