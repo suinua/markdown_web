@@ -7,9 +7,7 @@ void main() async {
   var targets = <String>[];
   var children = Directory(outputPath).listSync();
   for (var child in children) {
-    if (!child.path.contains('README')) {
-      targets.add(child.path.replaceFirst('//output/', ''));
-    }
+    targets.add(child.path.replaceFirst('//output/', ''));
   }
 
   Directory.current = '${env['GITHUB_WORKSPACE']}/';
@@ -20,11 +18,12 @@ void main() async {
       ['config', 'user.email', 'gh-action-vis@users.noreply.github.com']);
 
   //Branch
-  await Process.run('git', ['branch', 'gh-pages']);
-  await Process.run('git', ['checkout', 'gh-pages']);
+  await Process.run('git', ['checkout', '--orphan', 'gh-pages']);
+  await Process.run('git', ['rm', ' --cachedn', '-r', '.']);
 
   //Add
   for (var element in targets) {
+    print('git add $element');
     await Process.run('git', ['add', element]);
   }
 
