@@ -16,7 +16,7 @@ void main() async {
   await Process.run('git', ['config', 'user.name', 'gh-action-vis']);
   await Process.run('git', ['config', 'user.email', 'gh-action-vis@users.noreply.github.com']);
   //Git set
-  await Process.run('git', ['init', '--initial-branch', 'gh-pages']);
+  await Process.run('git', ['init']);
   //Add
   await Process.run('git', ['add', '--all']);
   //Commit
