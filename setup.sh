@@ -7,8 +7,8 @@ dart2js -O2 -o output/main.js web/main.dart
 dart bin/markdown_web.dart
 path="suinua/sample_code"
 path=`echo ${GITHUB_REPOSITORY//*\//}`
-echo path
+echo $path
 cp -r output $path/output
-cd home/runner/work/$GITHUB_REPOSITORY/$GITHUB_REPOSITORY
+cd home/runner/work/$path/$path
 pwd
 ls
