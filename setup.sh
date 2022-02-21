@@ -5,7 +5,8 @@ mkdir "output"
 cp -r /assets/* output
 dart2js -O2 -o output/main.js web/main.dart
 dart bin/markdown_web.dart
-cp -r output /home/runner/work/$GITHUB_REPOSITORY/$GITHUB_REPOSITORY
-cd /home/runner/work/$GITHUB_REPOSITORY/$GITHUB_REPOSITORY
+echo home/runner/work/$GITHUB_REPOSITORY/$GITHUB_REPOSITORY
+cp -r output home/runner/work/$GITHUB_REPOSITORY/$GITHUB_REPOSITORY/output
+cd home/runner/work/$GITHUB_REPOSITORY/$GITHUB_REPOSITORY
 pwd
 ls
