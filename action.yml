@@ -11,6 +11,9 @@ inputs:
   github_token:
     description: ''
     required: true
+  personal_token:
+      description: ''
+      required: true
 runs:
   using: docker
   image: Dockerfile
