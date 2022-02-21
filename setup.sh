@@ -5,4 +5,4 @@ mkdir "output"
 cp -r /assets/* output
 dart2js -O2 -o output/main.js web/main.dart
 dart bin/markdown_web.dart
-echo ${{ github.event.repository.name }}
+echo github.event.repository.name
