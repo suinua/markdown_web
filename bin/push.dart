@@ -7,7 +7,9 @@ void main() async {
   var targets = <String>[];
   var children = Directory(outputPath).listSync();
   for (var child in children) {
-    targets.add(child.path.replaceFirst('//output/', ''));
+    if (!child.path.contains('README')) {
+      targets.add(child.path.replaceFirst('//output/', ''));
+    }
   }
 
   Directory.current = '${env['GITHUB_WORKSPACE']}/';
