@@ -44,9 +44,14 @@ void main() async {
   print('git branch -d master > stdout: ${branchRemoveResult.stdout}');
   print('git branch -d master > stderr: ${branchRemoveResult.stderr}');
 
+  //Remote
+  var remoteUrl = 'https://${env['GITHUB_ACTOR']}:${env['GITHUB_TOKEN']}@github.com/${env['GITHUB_REPOSITORY']}.git';
+  var remoteResult = await Process.run('git', ['remote','set-url','origin', remoteUrl]);
+  print('git remote set-url origin $remoteUrl > stdout: ${remoteResult.stdout}');
+  print('git remote set-url origin $remoteUrl > stderr: ${remoteResult.stderr}');
+  
   //Push
-  var remoteRepo =
-      'https://${env['GITHUB_ACTOR']}:${env['GITHUB_TOKEN']}@github.com/${env['GITHUB_REPOSITORY']}.git';
-  var pushResult = await Process.run('git', ['push', '-f', remoteRepo, 'gh-pages']);
-  print('git push -f $remoteRepo gh-pages > stderr: ${pushResult.stderr}');
+  var pushResult = await Process.run('git', ['push', '-f']);
+  print('git push -f> stdout: ${pushResult.stdout}');
+  print('git push -f> stderr: ${pushResult.stderr}');
 }
