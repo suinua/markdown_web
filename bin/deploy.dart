@@ -46,12 +46,12 @@ void main() async {
 
   //Remote
   var remoteUrl = 'https://${env['GITHUB_ACTOR']}:${env['GITHUB_TOKEN']}@github.com/${env['GITHUB_REPOSITORY']}.git';
-  var remoteResult = await Process.run('git', ['remote','set-url','origin', remoteUrl]);
-  print('git remote set-url origin $remoteUrl > stdout: ${remoteResult.stdout}');
-  print('git remote set-url origin $remoteUrl > stderr: ${remoteResult.stderr}');
-  
+  var remoteResult = await Process.run('git', ['remote','add','origin', remoteUrl]);
+  print('git remote add $remoteUrl > stdout: ${remoteResult.stdout}');
+  print('git remote add $remoteUrl > stderr: ${remoteResult.stderr}');
+
   //Push
-  var pushResult = await Process.run('git', ['push', '-f']);
-  print('git push -f> stdout: ${pushResult.stdout}');
-  print('git push -f> stderr: ${pushResult.stderr}');
+  var pushResult = await Process.run('git', ['push', '-f', 'origin']);
+  print('git push -f origin > stdout: ${pushResult.stdout}');
+  print('git push -f origin > stderr: ${pushResult.stderr}');
 }
