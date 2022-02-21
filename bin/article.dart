@@ -16,7 +16,7 @@ class Article {
       : tags = localFile.tags.map((e) => Tag(e)).toList(),
         title = localFile.name.replaceAll('.md', ''),
         body = localFile.context,
-        url = localFile.path.replaceAll(RegExp(r'(.*)articles\' + Platform.pathSeparator), '').replaceAll('md', 'html');
+        url = localFile.path.replaceAll(RegExp(r'(.*)' + (Platform.environment['INPUT_ARTICLES_DIRECTORY_PATH'] ?? 'articles') + r'\' + Platform.pathSeparator), '').replaceAll('md', 'html');
 
   String toHtmlAsMenu() {
     return '''
