@@ -36,7 +36,7 @@ void main() async {
   print('git branch gh-pages > stdout: ${branchCreateResult.stdout}');
   print('git branch gh-pages > stderr: ${branchCreateResult.stderr}');
 
-  var checkoutResult = await Process.run('git', ['branch', 'gh-pages']);
+  var checkoutResult = await Process.run('git', ['checkout', 'gh-pages']);
   print('git checkout gh-pages > stdout: ${checkoutResult.stdout}');
   print('git checkout gh-pages > stderr: ${checkoutResult.stderr}');
 
