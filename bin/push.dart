@@ -27,13 +27,12 @@ void main() async {
     print('git add error:' + result.stderr);
   }
 
-  var commitResult =  await Process.run('git', ['commit', '-m', 'deploy']);
+  var commitResult = await Process.run('git', ['commit', '-m', 'deploy']);
   print('commit error:' + commitResult.stderr);
 
   //Push
   var remoteRepo =
       'https://${env['GITHUB_ACTOR']}:${env['GITHUB_TOKEN']}@github.com/${env['GITHUB_REPOSITORY']}.git';
-  print(remoteRepo);
-  var pushResult = await Process.run('git', ['push', remoteRepo]);
+  var pushResult = await Process.run('git', ['-f', 'push', remoteRepo]);
   print('push stderr:' + pushResult.stderr);
 }
