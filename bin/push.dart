@@ -21,18 +21,19 @@ void main() async {
   await Process.run('git', ['branch', 'gh-pages']);
   await Process.run('git', ['checkout', 'gh-pages']);
 
-  //Commit
+  //Add
   for (var element in targets) {
-    var result = await Process.run('git', ['add', element]);
-    print('git add error:' + result.stderr);
+    var addResult = await Process.run('git', ['add', element]);
+    if (addResult.stderr != '') print('git add error:' + addResult.stderr);
   }
 
+  //Commit
   var commitResult = await Process.run('git', ['commit', '-m', 'deploy']);
-  print('commit error:' + commitResult.stderr);
+  if (commitResult.stderr != '')  print('commit error:' + commitResult.stderr);
 
   //Push
   var remoteRepo =
       'https://${env['GITHUB_ACTOR']}:${env['GITHUB_TOKEN']}@github.com/${env['GITHUB_REPOSITORY']}.git';
   var pushResult = await Process.run('git', ['-f', 'push', remoteRepo]);
-  print('push stderr:' + pushResult.stderr);
+  if (pushResult.stderr != '') print('push stderr:' + pushResult.stderr);
 }
