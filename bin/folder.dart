@@ -43,6 +43,9 @@ class Folder {
   void saveAsHtml(String parentPath) {
     var path = parentPath + Platform.pathSeparator + name;
     Directory(path).create().then((_){
+      if (articles.length + folders.length == 0) {
+        File(path + Platform.pathSeparator + '.gitkeep').create();
+      }
       articles.forEach((article) {
         article.saveAsHtml(path);
       });
