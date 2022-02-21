@@ -21,14 +21,6 @@ void main() async {
     'user.email',
     '${env['GITHUB_ACTOR']}@users.noreply.github.com'
   ]);
-  await Process.run('git', [
-    'config',
-    '--global',
-    '--add',
-    'user.password',
-    env['INPUT_GITHUB_TOKEN']!
-  ]);
-  print(env);
 
   //Git set
   var initResult = await Process.run('git', ['init']);
