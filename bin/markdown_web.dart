@@ -6,10 +6,27 @@ import 'folder_analyzer.dart';
 void main() {
   var env = Platform.environment;
 
-  var articlesPath ='${env['GITHUB_WORKSPACE']}/' + env['INPUT_ARTICLESDIRECTORYPATH']!;
-  var outputPath = Directory.current.path + '/output';
+  var debug = !env.keys.contains('GITHUB_WORKSPACE');
+  var articlesPath = '';
+  var outputPath = '';
 
-  Directory(outputPath).create().then((_){
+  if (debug) {
+    var basePath = Platform.script
+        .toString()
+        .replaceAll('file:///', '')
+        .replaceAll('/bin/markdown_web.dart', '')
+        .replaceAll('/', Platform.pathSeparator);
+    articlesPath = basePath + Platform.pathSeparator + 'articles';
+    outputPath = basePath + Platform.pathSeparator + 'output';
+
+  } else {
+    articlesPath =
+        '${env['GITHUB_WORKSPACE']}/' + env['INPUT_ARTICLESDIRECTORYPATH']!;
+    outputPath = Directory.current.path + '/output';
+
+  }
+
+  Directory(outputPath).create().then((_) {
     var folder = Folder.fromLocalFolder(analyze(LocalFolder(articlesPath)));
     generateHomeHtml(folder, outputPath);
     folder.saveAsHtml(outputPath);

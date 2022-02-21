@@ -7,7 +7,7 @@ class LocalFile {
   final String context;
 
   LocalFile(this.path)
-      : name = path.replaceFirst(RegExp(r'(.*)/'), ''),
+      : name = path.replaceFirst(RegExp(r'(.*)\'+Platform.pathSeparator), ''),
         tags = _getTags(path),
         context = _getContext(path);
 
@@ -27,7 +27,6 @@ class LocalFile {
     file.readAsString().then((value) => result = value);
 
     return result.split('\n').sublist(1).join('\n');
-    ;
   }
 
   Map asJson() {
@@ -41,7 +40,7 @@ class LocalFolder {
   List<LocalFile> files = [];
   List<LocalFolder> folders = [];
 
-  LocalFolder(this.path) : name = path.replaceFirst(RegExp(r'(.*)/'), '');
+  LocalFolder(this.path) : name = path.replaceFirst(RegExp(r'(.*)\'+Platform.pathSeparator), '');
 
   void addFolder(LocalFolder folder) {
     folders.add(folder);

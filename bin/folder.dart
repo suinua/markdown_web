@@ -41,7 +41,7 @@ class Folder {
   }
 
   void saveAsHtml(String parentPath) {
-    var path = '$parentPath/$name';
+    var path = parentPath + Platform.pathSeparator + name;
     Directory(path).create().then((_){
       articles.forEach((article) {
         article.saveAsHtml(path);
