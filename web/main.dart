@@ -12,8 +12,10 @@ void main() {
 
   querySelectorAll('.article').forEach((article) {
     var articleContainer = querySelector('#article-container');
-    HttpRequest.getString('').then((value){
-      articleContainer?.innerHtml = value;
+    article.onClick.listen((event) {
+      HttpRequest.getString(window.location.href + 'articles/${article.id}').then((value){
+        articleContainer?.innerHtml = value;
+      });
     });
   });
 }
