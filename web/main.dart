@@ -1,6 +1,9 @@
 import 'dart:html';
 
+import 'pool/ArticlesPool.dart';
+
 void main() {
+  ArticlesPool();
   querySelectorAll('.folder').forEach((folder) {
     folder.children[0].onClick.listen((event) {
       var children = querySelectorAll('#${folder.id}-children');
