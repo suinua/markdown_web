@@ -84,6 +84,6 @@ class Tag {
   Tag(this.text);
 
   String toHtmlOnMenu() {
-    return '''<a class="tag" id="$text"><span uk-icon="hashtag"></span>$text</a>''';
+    return '''<a class="tag" tag-text="$text"><span uk-icon="hashtag"></span>$text</a>''';
   }
 }

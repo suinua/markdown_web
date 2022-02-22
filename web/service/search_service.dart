@@ -13,6 +13,7 @@ class SearchService {
   }
   
   static bool _isTargetArticle(Article article) {
+    if (SearchContextPool.getTags().isEmpty) return true;
     var isTarget = false;
     SearchContextPool.getTags().forEach((searchTag) {
       isTarget = article.tags.contains(searchTag);

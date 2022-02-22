@@ -25,12 +25,13 @@ class MainPageController {
   }
 
   static void selectTag(MouseEvent event, Element clickedTag) {
-    SearchContextPool.addTag(Tag(clickedTag.id));
+    var tagText = clickedTag.attributes['tag-text']!;
+    SearchContextPool.addTag(Tag(tagText));
 
     var _htmlValidator = NodeValidatorBuilder.common()
-      ..allowElement('a', attributes: ['uk-icon']);
+      ..allowElement('a', attributes: ['uk-icon','tag-text']);
     var selectedTagHtml =
-        '''<div class="selected-tag"><a uk-icon="close"></a><div class="selected-tag-text">${clickedTag.id}</div></div>''';
+        '''<div class="selected-tag"><a class="remove-selected-tag-button" tag-text="$tagText" uk-icon="close"></a><div class="selected-tag-text">$tagText</div></div>''';
     var selectedTagsElement = querySelector('.selected-tags');
     selectedTagsElement?.setInnerHtml(
         selectedTagsElement.innerHtml! + selectedTagHtml,
@@ -38,14 +39,26 @@ class MainPageController {
 
     MainPageController.displayFilteredArticles(SearchService.filterBySearchContext());
     event.stopImmediatePropagation();
+
+    querySelectorAll('.remove-selected-tag-button').forEach((buttonElement) {
+      buttonElement.onClick.listen((event) => unselectTag(event, buttonElement));
+    });
+  }
+
+  static void unselectTag(MouseEvent event, Element clickedButtonElement) {
+    SearchContextPool.removeTag(Tag(clickedButtonElement.attributes['tag-text']!));
+    clickedButtonElement.parent?.remove();
+    MainPageController.displayFilteredArticles(SearchService.filterBySearchContext());
   }
 
   static void displayFilteredArticles(List<Article> filteredArticles) {
     querySelectorAll('.article').forEach((articleElement) {
       var isTarget = filteredArticles.any((article) => article.uuid == articleElement.attributes['uuid']);
+      var container = querySelector('#article-and-tags-container-${articleElement.attributes['uuid']}');
       if (!isTarget) {
-        var container = querySelector('#article-and-tags-container-${articleElement.attributes['uuid']}');
         container?.style.display = 'none';
+      } else {
+        container?.style.display = '';
       }
     });
   }
