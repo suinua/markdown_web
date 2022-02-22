@@ -1,6 +1,6 @@
 import 'dart:html';
 
-import 'pool/ArticlesPool.dart';
+import 'pool/articles_pool.dart';
 
 void main() {
   ArticlesPool();
