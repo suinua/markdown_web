@@ -71,11 +71,13 @@ LocalFolder analyze(LocalFolder parentFolder) {
 
   subNote.forEach((element) {
     var path = element.path;
-    if (!path.contains('.')) {
+    var fileName = path.replaceAll(RegExp(r'(.*)\' + Platform.pathSeparator), '');
+
+    if (!fileName.contains('.')) {
       var folder = LocalFolder(path);
       parentFolder.addFolder(folder);
       analyze(folder);
-    } else if (path.substring(path.length - 2, path.length) == 'md') {
+    } else if (fileName.substring(fileName.length - 2, fileName.length) == 'md') {
       parentFolder.addFile(LocalFile(path));
     }
   });
