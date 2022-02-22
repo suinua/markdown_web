@@ -57,6 +57,12 @@ void generateHomeHtml(Folder folder, String outputPath) {
     </div>
     <div class="container-divider"></div>
     <div class="container">
+        <div class="uk-margin">
+            <form class="uk-search uk-search-default">
+                <a href="" class="uk-search-icon-flip" uk-search-icon></a>
+                <input class="uk-search-input" type="search" placeholder="Search">
+            </form>
+        </div>
       <div class="folders-container">
         ${folder.toHtmlAsMenu()}
       </div>
