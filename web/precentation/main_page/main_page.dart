@@ -4,8 +4,6 @@ import 'main_page_controller.dart';
 
 class MainPage {
   static setup() {
-    print(querySelectorAll('.tag').length);
-
     querySelectorAll('.folder').forEach((folder) {
       folder.children[0].onClick.listen((event) => MainPageController.foldOrUnfoldFolder(event, folder));
     });

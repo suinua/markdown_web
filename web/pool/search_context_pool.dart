@@ -1,5 +1,4 @@
 import '../model/article.dart';
-import 'articles_pool.dart';
 
 class SearchContextPool {
   static String _text = '';
@@ -14,6 +13,10 @@ class SearchContextPool {
     _text = '';
   }
 
+  static String getText() {
+    return _text;
+  }
+
   //Tags
   static void addTag(Tag tag) {
     _tags.add(tag);
@@ -23,6 +26,10 @@ class SearchContextPool {
     _tags.remove(tag);
   }
 
+  static List<Tag> getTags(){
+    return _tags;
+  }
+
   static void resetTags(){
     _tags = [];
   }
@@ -30,8 +37,5 @@ class SearchContextPool {
   static void reset() {
     resetText();
     resetTags();
-  }
-
-  static void search() {
   }
 }

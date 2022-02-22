@@ -1,23 +1,27 @@
 import 'dart:io';
 
 import 'package:markdown/markdown.dart';
+import 'package:uuid/uuid.dart';
 
 import 'folder_analyzer.dart';
 
 class Article {
+  final String uuid;
   final List<Tag> tags;
   final String title;
   final String body;
   final String url;
 
   Article(
-      {required this.tags,
+      {required this.uuid,
+      required this.tags,
       required this.title,
       required this.body,
       required this.url});
 
   Article.fromLocalFile(LocalFile localFile)
-      : tags = localFile.tags.map((e) => Tag(e)).toList(),
+      : uuid = Uuid().v4(),
+        tags = localFile.tags.map((e) => Tag(e)).toList(),
         title = localFile.name.replaceAll('.md', ''),
         body = localFile.context,
         url = localFile.path
@@ -33,14 +37,10 @@ class Article {
   String toHtmlAsMenu() {
     var tagsAsHtml = tags.map((e) => e.toHtmlOnMenu()).toList().join();
     return '''
-<ul  class="js-filter" uk-grid>
-  <li class="${tags.map((e) => e.text).toList().join(' ')}">
-    <div class="article" id="$url">
-        <div class="article-title">$title</div>
-        $tagsAsHtml
-    </div>
-  </li>
-</ul>
+<div class="article" uuid="$uuid" url="$url">
+    <div class="article-title">$title</div>
+</div>
+<div class="tags-$uuid">$tagsAsHtml</div>
 ''';
   }
 
@@ -64,6 +64,7 @@ ${markdownToHtml(body)}
 
   Map<String, dynamic> toMap() {
     return {
+      'uuid': uuid,
       'tags': tags.map((e) => e.text).toList(),
       'title': title,
       'body': body,
@@ -78,6 +79,6 @@ class Tag {
   Tag(this.text);
 
   String toHtmlOnMenu() {
-    return '''<a uk-filter-control=".$text" class="tag" id="$text"><span uk-icon="hashtag"></span>$text</a>''';
+    return '''<a class="tag" id="$text"><span uk-icon="hashtag"></span>$text</a>''';
   }
 }

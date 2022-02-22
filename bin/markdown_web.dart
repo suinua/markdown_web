@@ -66,10 +66,8 @@ void generateHomeHtml(Folder folder, String outputPath, String indexFilePath) {
             </form>
         </div>
       <div class="selected-tags"></div>
-      <div uk-filter="target: .js-filter">
-        <div class="folders-container">
-          ${folder.toHtmlAsMenu()}
-        </div>
+      <div class="folders-container">
+        ${folder.toHtmlAsMenu()}
       </div>
     </div>
   </div>
