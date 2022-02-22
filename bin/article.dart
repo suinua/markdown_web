@@ -33,10 +33,14 @@ class Article {
   String toHtmlAsMenu() {
     var tagsAsHtml = tags.map((e) => e.toHtmlOnMenu()).toList().join();
     return '''
-<div class="article" id="$url">
-    <div class="article-title">$title</div>
-    $tagsAsHtml
-</div>
+<ul  class="js-filter" uk-grid>
+  <li class="${tags.map((e) => e.text).toList().join(' ')}">
+    <div class="article" id="$url">
+        <div class="article-title">$title</div>
+        $tagsAsHtml
+    </div>
+  </li>
+</ul>
 ''';
   }
 
@@ -74,6 +78,6 @@ class Tag {
   Tag(this.text);
 
   String toHtmlOnMenu() {
-    return '''<a><span uk-icon="hashtag"></span>$text</a> ''';
+    return '''<a uk-filter-control=".$text"><span uk-icon="hashtag"></span>$text</a>''';
   }
 }

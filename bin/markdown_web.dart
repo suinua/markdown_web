@@ -65,8 +65,10 @@ void generateHomeHtml(Folder folder, String outputPath, String indexFilePath) {
                 <input class="uk-search-input" type="search" placeholder="Search">
             </form>
         </div>
-      <div class="folders-container">
-        ${folder.toHtmlAsMenu()}
+      <div uk-filter="target: .js-filter">
+        <div class="folders-container">
+          ${folder.toHtmlAsMenu()}
+        </div>
       </div>
     </div>
   </div>
