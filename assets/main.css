@@ -37,12 +37,18 @@
     padding-left: 3px;
 }
 
-.article {
-    display: inline-block;
-    width: 40%;
-}
 .article-and-tags-container {
-    border-bottom: 1px solid;
+    display:-webkit-box;
+    display:-moz-box;
+    display:-ms-flexbox;
+    display:-webkit-flex;
+    display:-moz-flex;
+    display:flex;
+    -webkit-box-lines:multiple;
+    -webkit-flex-wrap:wrap;
+    -ms-flex-wrap:wrap;
+    flex-wrap:wrap;
+    width:396px;
 }
 
 ::-webkit-scrollbar {
@@ -50,14 +56,29 @@
     height: 10px;
 }
 
+.article {
+    display: inline-block;
+    width: 40%;
+    list-style:none;
+}
+
 .tags {
     display: inline-block;
     overflow-x: scroll;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
-    margin-left: 3%;
     border-left: 1px solid;
     width: 50%;
+
+    list-style:none;
+}
+
+.tag {
+    border: 1px solid;
+    border-radius: 5px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
 }
 
 ::-webkit-scrollbar {

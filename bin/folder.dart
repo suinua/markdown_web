@@ -19,10 +19,13 @@ class Folder {
 
   String toHtmlAsMenu() {
     var children = '';
-    folders.forEach((element) {
-      children += element.toHtmlAsMenu();
-    });
+    var index = 0;
     articles.forEach((element) {
+      children += element.toHtmlAsMenu(index == articles.length-1);
+      index++;
+    });
+
+    folders.forEach((element) {
       children += element.toHtmlAsMenu();
     });
 

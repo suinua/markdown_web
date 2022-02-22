@@ -34,17 +34,14 @@ class Article {
                 '')
             .replaceAll('md', 'html');
 
-  String toHtmlAsMenu() {
+  String toHtmlAsMenu(bool isLast) {
     var tagsAsHtml = tags.map((e) => e.toHtmlOnMenu()).toList().join();
     return '''
 <div class="article-and-tags-container" id="article-and-tags-container-$uuid">
   <div class="article" uuid="$uuid" url="$url">
-      <div class="article-title">・ $title</div>
+      <div class="article-title">${isLast ? '└─' : '├─' }$title</div>
   </div>
-  <div class="tags">
-  <span uk-icon="tag"></span>
-  $tagsAsHtml
-  </div>
+  <div class="tags">$tagsAsHtml</div>
 </div>
 ''';
   }
@@ -84,6 +81,6 @@ class Tag {
   Tag(this.text);
 
   String toHtmlOnMenu() {
-    return '''<a class="tag" tag-text="$text"><span uk-icon="hashtag"></span>$text</a>''';
+    return '''<a class="tag" tag-text="$text">#$text</a>''';
   }
 }
