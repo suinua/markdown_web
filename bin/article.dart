@@ -31,9 +31,11 @@ class Article {
             .replaceAll('md', 'html');
 
   String toHtmlAsMenu() {
+    var tagsAsHtml = tags.map((e) => e.toHtmlOnMenu()).toList().join();
     return '''
 <div class="article" id="$url">
     <div class="article-title">$title</div>
+    $tagsAsHtml
 </div>
 ''';
   }
@@ -67,4 +69,8 @@ class Tag {
   final String text;
 
   Tag(this.text);
+
+  String toHtmlOnMenu() {
+    return '''<a><span uk-icon="hashtag"></span>$text</a> ''';
+  }
 }
