@@ -44,10 +44,8 @@ class MainPageController {
     querySelectorAll('.article').forEach((articleElement) {
       var isTarget = filteredArticles.any((article) => article.uuid == articleElement.attributes['uuid']);
       if (!isTarget) {
-        articleElement.style.display = 'none';
-
-        var tagsElement = querySelector('.tags-${articleElement.attributes['uuid']}');
-        tagsElement?.style.display = 'none';
+        var container = querySelector('#article-and-tags-container-${articleElement.attributes['uuid']}');
+        container?.style.display = 'none';
       }
     });
   }

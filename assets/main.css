@@ -36,3 +36,31 @@
     padding-right: 6px;
     padding-left: 3px;
 }
+
+.article {
+    display: inline-block;
+    width: 40%;
+}
+.article-and-tags-container {
+    border-bottom: 1px solid;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.tags {
+    display: inline-block;
+    overflow-x: scroll;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    margin-left: 3%;
+    border-left: 1px solid;
+    width: 50%;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
