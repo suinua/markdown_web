@@ -40,8 +40,8 @@ class Article {
 ''';
   }
 
-  void saveAsHtml(String path) {
-    var context = '''
+  String toHtml() {
+    return '''
 <link rel="stylesheet" href="css/article.css">
 
 <script src="highlight/highlight.min.js"></script>
@@ -50,7 +50,10 @@ class Article {
 
 ${markdownToHtml(body)}
   ''';
+  }
 
+  void saveAsHtml(String path) {
+    var context = toHtml();
     var file = File('$path/$title.html');
     file.writeAsString(context);
   }

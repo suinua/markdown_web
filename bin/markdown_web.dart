@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'article.dart';
 import 'folder.dart';
 import 'folder_analyzer.dart';
 
@@ -10,6 +11,7 @@ void main() {
   var debug = !env.keys.contains('GITHUB_WORKSPACE');
   var articlesPath = '';
   var outputPath = '';
+  var indexFilePath = '';
 
   if (debug) {
     var basePath = Platform.script
@@ -19,24 +21,24 @@ void main() {
         .replaceAll('/', Platform.pathSeparator);
     articlesPath = basePath + Platform.pathSeparator + 'articles';
     outputPath = basePath + Platform.pathSeparator + 'output';
-
+    indexFilePath = articlesPath + '/index.md';
   } else {
     articlesPath =
         '${env['GITHUB_WORKSPACE']}/' + env['INPUT_ARTICLES_DIRECTORY_PATH']!;
     outputPath = Directory.current.path + '/output';
-
+    indexFilePath = '${env['GITHUB_WORKSPACE']}/' + env['INPUT_INDEX_FILE_PATH']!;
   }
 
   Directory(outputPath).create().then((_) {
     var folder = Folder.fromLocalFolder(analyze(LocalFolder(articlesPath)));
-    generateHomeHtml(folder, outputPath);
+    generateHomeHtml(folder, outputPath, indexFilePath);
     folder.saveAsHtml(outputPath);
 
-    generateArticlesDataFile(outputPath,folder);
+    generateArticlesDataFile(outputPath, folder);
   });
 }
 
-void generateHomeHtml(Folder folder, String outputPath) {
+void generateHomeHtml(Folder folder, String outputPath, String indexFilePath) {
   var homeHtmlContext = '''
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +55,7 @@ void generateHomeHtml(Folder folder, String outputPath) {
 <body>
   <div class="container-box">
     <div class="container" id="article-container">
-        aaaaaa
+      ${Article.fromLocalFile(LocalFile(indexFilePath)).toHtml()}
     </div>
     <div class="container-divider"></div>
     <div class="container">

@@ -6,7 +6,10 @@ branding:
   color: green
 inputs:
   articles_directory_path:
-    description: 'path to articles directory'
+    description: 'articles directory path'
+    required: true
+  index_file_path:
+    description: 'index file path'
     required: true
   github_token:
     description: ''
