@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'folder.dart';
@@ -30,6 +31,8 @@ void main() {
     var folder = Folder.fromLocalFolder(analyze(LocalFolder(articlesPath)));
     generateHomeHtml(folder, outputPath);
     folder.saveAsHtml(outputPath);
+
+    generateArticlesDataFile(outputPath,folder);
   });
 }
 
@@ -67,4 +70,9 @@ void generateHomeHtml(Folder folder, String outputPath) {
 
   var homeHtmlFile = File('$outputPath/index.html');
   homeHtmlFile.writeAsString(homeHtmlContext);
+}
+
+void generateArticlesDataFile(String outputPath, Folder folder) {
+  var file = File('$outputPath/data.json');
+  file.writeAsString(jsonEncode(folder.toMap()));
 }

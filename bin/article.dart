@@ -10,13 +10,25 @@ class Article {
   final String body;
   final String url;
 
-  Article({required this.tags, required this.title, required this.body, required this.url});
+  Article(
+      {required this.tags,
+      required this.title,
+      required this.body,
+      required this.url});
 
   Article.fromLocalFile(LocalFile localFile)
       : tags = localFile.tags.map((e) => Tag(e)).toList(),
         title = localFile.name.replaceAll('.md', ''),
         body = localFile.context,
-        url = localFile.path.replaceAll(RegExp(r'(.*)' + (Platform.environment['INPUT_ARTICLES_DIRECTORY_PATH'] ?? 'articles') + r'\' + Platform.pathSeparator), '').replaceAll('md', 'html');
+        url = localFile.path
+            .replaceAll(
+                RegExp(r'(.*)' +
+                    (Platform.environment['INPUT_ARTICLES_DIRECTORY_PATH'] ??
+                        'articles') +
+                    r'\' +
+                    Platform.pathSeparator),
+                '')
+            .replaceAll('md', 'html');
 
   String toHtmlAsMenu() {
     return '''
@@ -39,6 +51,15 @@ ${markdownToHtml(body)}
 
     var file = File('$path/$title.html');
     file.writeAsString(context);
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'tags': tags.map((e) => e.text).toList(),
+      'title': title,
+      'body': body,
+      'url': url
+    };
   }
 }
 

@@ -42,7 +42,7 @@ class Folder {
 
   void saveAsHtml(String parentPath) {
     var path = parentPath + Platform.pathSeparator + name;
-    Directory(path).create().then((_){
+    Directory(path).create().then((_) {
       if (articles.length + folders.length == 0) {
         File(path + Platform.pathSeparator + '.gitkeep').create();
       }
@@ -54,5 +54,23 @@ class Folder {
         folder.saveAsHtml(path);
       });
     });
+  }
+
+  Map<String, dynamic> toMap() {
+    var articlesAsMapList = [];
+    articles.forEach((article) {
+      articlesAsMapList.add(article.toMap());
+    });
+
+    var foldersAsMapList = [];
+    folders.forEach((folder) {
+      foldersAsMapList.add(folder.toMap());
+    });
+
+    return {
+      'name': name,
+      'articles': articlesAsMapList,
+      'folders': foldersAsMapList,
+    };
   }
 }
