@@ -13,12 +13,9 @@ class LocalFile {
 
   static List<String> _getTags(String path) {
     var file = File(path);
-    var result = <String>[];
-    file.readAsLines().then((value) {
-      result = value[0].split(' ');
-    });
-
-    return result;
+    var context = file.readAsStringSync();
+    var firstLine = context.replaceAll('\r\n', '\n').split('\n')[0];
+    return firstLine.split(' ');
   }
 
   static String _getContext(String path) {
