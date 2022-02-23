@@ -21,6 +21,14 @@ class MainPage {
     });
 
     _setupDraggableDivider();
+
+    querySelectorAll('.tag-button').forEach((tagButton) {
+      tagButton.onClick.listen((event) {
+        var id = tagButton.attributes['article-id']!;
+        var tagsElement = querySelector('#tags-$id')!;
+        tagsElement.style.display = tagsElement.style.display == 'none' ? '' : 'none';
+      });
+    });
   }
 
   static void _setupDraggableDivider() {

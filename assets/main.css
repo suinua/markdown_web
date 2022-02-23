@@ -74,10 +74,20 @@ body, html {
     width: 396px;
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
 .article {
     display: inline-block;
     width: 40%;
     list-style: none;
+}
+
+.tag-button {
+    width: 30px;
+    height: 30px;
 }
 
 .tags {
