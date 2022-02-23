@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:markdown/markdown.dart';
 import 'package:uuid/uuid.dart';
-import 'package:github/github.dart';
 
+import 'article_edit_log.dart';
 import 'folder_analyzer.dart';
 
 class Article {
@@ -20,19 +20,6 @@ class Article {
       required this.body,
       required this.url});
 
-  static void _test() {
-    var github = GitHub(auth: Authentication.withToken(Platform.environment['INPUT_GITHUB_TOKEN']));
-    var userName = Platform.environment['GITHUB_REPOSITORY']!.split('/')[0];
-    var repoName = Platform.environment['GITHUB_REPOSITORY']!.split('/')[1];
-    var branchName = Platform.environment['GITHUB_REF_NAME']!;
-    print('userName:$userName');
-    print('repoName:$repoName');
-    print('GITHUB_REF_NAME:$branchName');
-
-    github.repositories.getBranch(RepositorySlug(userName, repoName), branchName).then((branch){
-      print(branch.commit!.parents);
-    });
-  }
 
   Article.fromLocalFile(LocalFile localFile)
       : uuid = Uuid().v4(),
@@ -47,16 +34,20 @@ class Article {
                     r'\' +
                     Platform.pathSeparator),
                 '')
-            .replaceAll('md', 'html') {
-    _test();
-  }
+            .replaceAll('md', 'html');
 
-  String generateArticleMenuHtml() {
+  Future<String> generateArticleMenuHtml() async {
+    var logs = await ArticleEditLogService.getLogs(this);
+    var logsHtml = logs.map((e) => e.toHtml()).join();
+
+    var committerHtml = ArticleEditLogService.getCommitterList(logs).map((e) => e.toHtml()).join();
+
     var tagsAsHtml = tags.map((e) => e.toArticleMenuHtml()).toList().join();
     return '''
 <div class="article-menu">
     <div class="article-menu-tags">$tagsAsHtml</div>
-    <div class="article-menu-author"></div>
+    <div class="article-menu-committer-list">$committerHtml</div>
+    <div class="article-menu-logs">$logsHtml</div>
     <div class="article-menu-index"></div>
 </div>
 ''';
