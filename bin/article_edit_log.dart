@@ -57,7 +57,7 @@ class ArticleEditLogService {
 
     var logs = <ArticleEditLog>[];
     var url = 'https://api.github.com/repos/$repoName/commits?path=${Platform.environment['INPUT_ARTICLES_DIRECTORY_PATH'] ?? 'articles/'}${article.url.replaceAll('.html', '.md').replaceAll(r'\', '/')}&sha=$branchName';
-    print(url);
+    print(article.url);
     var response = await http.get(Uri.parse(url));
 
     var data = jsonDecode(response.body);
