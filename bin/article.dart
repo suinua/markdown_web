@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:markdown/markdown.dart';
 import 'package:uuid/uuid.dart';
+import 'package:github/github.dart';
 
 import 'folder_analyzer.dart';
 
@@ -17,7 +18,19 @@ class Article {
       required this.tags,
       required this.title,
       required this.body,
-      required this.url});
+      required this.url}){_test();}
+
+  static void _test() {
+    var github = GitHub(auth: Authentication.withToken(Platform.environment['INPUT_GITHUB_TOKEN']));
+    var userName = Platform.environment['GITHUB_REPOSITORY']!.split('\\')[0];
+    var repoName = Platform.environment['GITHUB_REPOSITORY']!.split('\\')[1];
+    var branchName = Platform.environment['GITHUB_REF_NAME']!;
+    print('GITHUB_REF_NAME:$branchName');
+
+    github.repositories.getBranch(RepositorySlug(userName, repoName), branchName).then((branch){
+      print(branch.commit!.parents);
+    });
+  }
 
   Article.fromLocalFile(LocalFile localFile)
       : uuid = Uuid().v4(),
