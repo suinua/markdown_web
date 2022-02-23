@@ -30,8 +30,7 @@ class Committer {
   Committer(this.name, this.url, this.avatarUrl);
 
   Committer.fromJson(Map json)
-      :
-        name = json['name'],
+      : name = json['name'],
         url = json['url'],
         avatarUrl = json['avatar_url'];
 
@@ -52,12 +51,13 @@ class Committer {
 
 class ArticleEditLogService {
   static Future<List<ArticleEditLog>> getLogs(Article article) async {
-    var repoName = Platform.environment['GITHUB_REPOSITORY'] ?? 'suinua/pmmp_sample_code';
+    var repoName =
+        Platform.environment['GITHUB_REPOSITORY'] ?? 'suinua/pmmp_sample_code';
     var branchName = Platform.environment['GITHUB_REF_NAME'] ?? 'master';
 
     var logs = <ArticleEditLog>[];
-    var url = 'https://api.github.com/repos/$repoName/commits?path=${Platform.environment['INPUT_ARTICLES_DIRECTORY_PATH'] ?? 'articles/'}${article.url.replaceAll('.html', '.md').replaceAll(r'\', '/')}&sha=$branchName';
-    print(article.url);
+    var url =
+        'https://api.github.com/repos/$repoName/commits?path=${(Platform.environment['INPUT_ARTICLES_DIRECTORY_PATH'] ?? 'articles')}/${article.url.replaceAll(r'\', '/')}&sha=$branchName';
     var response = await http.get(Uri.parse(url));
 
     var data = jsonDecode(response.body);
@@ -73,7 +73,9 @@ class ArticleEditLogService {
   static List<Committer> getCommitterList(List<ArticleEditLog> logs) {
     var committerList = <Committer>[];
     logs.forEach((log) {
-      if(!committerList.contains(log.committer)) committerList.add(log.committer);
+      if (!committerList.contains(log.committer)) {
+        committerList.add(log.committer);
+      }
     });
 
     return committerList;
