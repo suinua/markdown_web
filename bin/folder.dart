@@ -21,7 +21,7 @@ class Folder {
     var children = '';
     var index = 0;
     articles.forEach((element) {
-      children += element.toHtmlAsMenu(index == articles.length-1);
+      children += element.toSideMenuHtml(index == articles.length-1);
       index++;
     });
 

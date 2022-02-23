@@ -7,15 +7,17 @@ body, html {
 
 .article-container {
     width: 75%;
-    height: 500px;
+    height: 100vh;
     float: left;
     overflow-x: scroll;
     overflow-y: scroll;
+    text-align: center;
+    background: #EDF2F7;
 }
 
 .side-menu {
     width: 25%;
-    height: 500px;
+    height: 100vh;
     float: right;
     overflow-y: scroll;
 }
@@ -83,6 +85,34 @@ body, html {
     display: inline-block;
     width: 40%;
     list-style: none;
+}
+
+.article-context {
+    background: white;
+    width: 70%;
+    height: 100%;
+    margin: 5%;
+    float: left;
+}
+
+.article-menu {
+    width: 19%;
+    border-radius: 5px;
+    border: solid 1px #999999;
+    background: white;
+    margin-top: 5%;
+    height: 50%;
+    float: left;
+}
+
+.article-menu-tags {
+    margin: 5px;
+    border: solid 1px #999999;
+}
+
+.article-menu-tag {
+    display: inline-block;
+    margin: 3px;
 }
 
 .tag-button {

@@ -58,7 +58,7 @@ void generateHomeHtml(Folder folder, String outputPath, String indexFilePath) {
       <span class="position"></span>
       <div class="dragbar"></div>
       <div class="ghostbar"></div>
-      ${Article.fromLocalFile(LocalFile(indexFilePath)).toHtml()}
+        ${Article.fromLocalFile(LocalFile(indexFilePath)).toHtml()}
     </div>
     <div class="side-menu">
         <div class="uk-margin">

@@ -34,8 +34,19 @@ class Article {
                 '')
             .replaceAll('md', 'html');
 
-  String toHtmlAsMenu(bool isLast) {
-    var tagsAsHtml = tags.map((e) => e.toHtmlOnMenu()).toList().join();
+  String generateArticleMenuHtml() {
+    var tagsAsHtml = tags.map((e) => e.toArticleMenuHtml()).toList().join();
+    return '''
+<div class="article-menu">
+    <div class="article-menu-tags">$tagsAsHtml</div>
+    <div class="article-menu-author"></div>
+    <div class="article-menu-index"></div>
+</div>
+''';
+  }
+
+  String toSideMenuHtml(bool isLast) {
+    var tagsAsHtml = tags.map((e) => e.toSideMenuHtml()).toList().join();
     return '''
 <div class="article-and-tags-container" id="article-and-tags-container-$uuid">
   <div class="article" uuid="$uuid" url="$url">
@@ -55,7 +66,10 @@ class Article {
 <link rel="stylesheet" href="highlight/styles/idea.min.css">
 <script>hljs.highlightAll();</script>
 
-${markdownToHtml(body)}
+<div class="article-context">
+  ${markdownToHtml(body)}
+</div>
+${generateArticleMenuHtml()}
   ''';
   }
 
@@ -81,7 +95,11 @@ class Tag {
 
   Tag(this.text);
 
-  String toHtmlOnMenu() {
+  String toSideMenuHtml() {
     return '''<a class="tag" tag-text="$text">#$text</a>''';
+  }
+
+  String toArticleMenuHtml() {
+    return '''<div class="article-menu-tag">#$text</div>''';
   }
 }
