@@ -21,12 +21,13 @@ void main() {
         .replaceAll('/', Platform.pathSeparator);
     articlesPath = basePath + Platform.pathSeparator + 'articles';
     outputPath = basePath + Platform.pathSeparator + 'output';
-    indexFilePath = articlesPath + '/index.md';
+    indexFilePath = articlesPath + Platform.pathSeparator + 'index.md';
   } else {
     articlesPath =
         '${env['GITHUB_WORKSPACE']}/' + env['INPUT_ARTICLES_DIRECTORY_PATH']!;
     outputPath = Directory.current.path + '/output';
-    indexFilePath = '${env['GITHUB_WORKSPACE']}/' + env['INPUT_INDEX_FILE_PATH']!;
+    indexFilePath =
+        '${env['GITHUB_WORKSPACE']}/' + env['INPUT_INDEX_FILE_PATH']!;
   }
 
   Directory(outputPath).create().then((_) {
@@ -39,7 +40,8 @@ void main() {
 }
 
 void generateHomeHtml(Folder folder, String outputPath, String indexFilePath) {
-  var homeHtmlContext = '''
+  Article.fromLocalFile(LocalFile(indexFilePath)).toHtml().then((articleHtml) {
+    var homeHtmlContext = '''
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,7 +60,7 @@ void generateHomeHtml(Folder folder, String outputPath, String indexFilePath) {
       <span class="position"></span>
       <div class="dragbar"></div>
       <div class="ghostbar"></div>
-        ${Article.fromLocalFile(LocalFile(indexFilePath)).toHtml()}
+        $articleHtml
     </div>
     <div class="side-menu">
         <div class="uk-margin">
@@ -78,9 +80,9 @@ void generateHomeHtml(Folder folder, String outputPath, String indexFilePath) {
 
 </html>
 ''';
-
-  var homeHtmlFile = File('$outputPath/index.html');
-  homeHtmlFile.writeAsString(homeHtmlContext);
+    var homeHtmlFile = File('$outputPath/index.html');
+    homeHtmlFile.writeAsString(homeHtmlContext);
+  });
 }
 
 void generateArticlesDataFile(String outputPath, Folder folder) {

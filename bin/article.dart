@@ -27,13 +27,7 @@ class Article {
         title = localFile.name.replaceAll('.md', ''),
         body = localFile.context,
         url = localFile.path
-            .replaceAll(
-                RegExp(r'(.*)' +
-                    (Platform.environment['INPUT_ARTICLES_DIRECTORY_PATH'] ??
-                        'articles') +
-                    r'\' +
-                    Platform.pathSeparator),
-                '')
+            .replaceAll(RegExp(r'(.*)' + (Platform.environment['INPUT_ARTICLES_DIRECTORY_PATH'] ?? 'articles') +  r'\' + Platform.pathSeparator), '')
             .replaceAll('md', 'html');
 
   Future<String> generateArticleMenuHtml() async {

@@ -52,13 +52,13 @@ class Committer {
 
 class ArticleEditLogService {
   static Future<List<ArticleEditLog>> getLogs(Article article) async {
-    var repoName = Platform.environment['GITHUB_REPOSITORY'];
-    var branchName = Platform.environment['GITHUB_REF_NAME'];
+    var repoName = Platform.environment['GITHUB_REPOSITORY'] ?? 'suinua/pmmp_sample_code';
+    var branchName = Platform.environment['GITHUB_REF_NAME'] ?? 'master';
 
     var logs = <ArticleEditLog>[];
-    var response = await http.get(Uri.parse(
-        'https://api.github.com/repos/$repoName/commits?path=${article.url
-            .replaceAll('.html', '.md')}.md&sha=$branchName'));
+    var url = 'https://api.github.com/repos/$repoName/commits?path=${Platform.environment['INPUT_ARTICLES_DIRECTORY_PATH'] ?? 'articles/'}${article.url.replaceAll('.html', '.md').replaceAll('\\', '/')}&sha=$branchName';
+    print(url);
+    var response = await http.get(Uri.parse(url));
 
     var data = jsonDecode(response.body);
     data.forEach((commitAsMap) {
