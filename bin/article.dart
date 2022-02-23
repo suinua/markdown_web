@@ -18,13 +18,15 @@ class Article {
       required this.tags,
       required this.title,
       required this.body,
-      required this.url}){_test();}
+      required this.url});
 
   static void _test() {
     var github = GitHub(auth: Authentication.withToken(Platform.environment['INPUT_GITHUB_TOKEN']));
     var userName = Platform.environment['GITHUB_REPOSITORY']!.split('\\')[0];
     var repoName = Platform.environment['GITHUB_REPOSITORY']!.split('\\')[1];
     var branchName = Platform.environment['GITHUB_REF_NAME']!;
+    print('userName:$userName');
+    print('repoName:$repoName');
     print('GITHUB_REF_NAME:$branchName');
 
     github.repositories.getBranch(RepositorySlug(userName, repoName), branchName).then((branch){
@@ -45,7 +47,9 @@ class Article {
                     r'\' +
                     Platform.pathSeparator),
                 '')
-            .replaceAll('md', 'html');
+            .replaceAll('md', 'html') {
+    _test();
+  }
 
   String generateArticleMenuHtml() {
     var tagsAsHtml = tags.map((e) => e.toArticleMenuHtml()).toList().join();
