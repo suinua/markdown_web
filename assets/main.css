@@ -123,3 +123,8 @@ body, html {
 .article-title-text {
     display: inline-block;
 }
+
+.selected-tags {
+    height: 30px;
+    border-bottom: solid 1px;
+}
