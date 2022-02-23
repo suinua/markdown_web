@@ -39,7 +39,7 @@ class Article {
     return '''
 <div class="article-and-tags-container" id="article-and-tags-container-$uuid">
   <div class="article" uuid="$uuid" url="$url">
-      <div class="article-title">${isLast ? '└─' : '├─' }$title</div>
+      <div class="article-title">${isLast ? '└─' : '├─' }<div class="article-title-text" id="article-title-text-$uuid">$title</div></div>
   </div>
   <div class="tag-button" article-id="$uuid"><span uk-icon="tag"></span></div>
   <div class="tags" id="tags-$uuid">$tagsAsHtml</div>

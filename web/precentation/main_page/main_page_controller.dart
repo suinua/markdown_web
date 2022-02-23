@@ -54,11 +54,10 @@ class MainPageController {
   static void displayFilteredArticles(List<Article> filteredArticles) {
     querySelectorAll('.article').forEach((articleElement) {
       var isTarget = filteredArticles.any((article) => article.uuid == articleElement.attributes['uuid']);
-      var container = querySelector('#article-and-tags-container-${articleElement.attributes['uuid']}');
-      if (!isTarget) {
-        container?.style.display = 'none';
-      } else {
-        container?.style.display = '';
+      var articleTitleText = querySelector('#article-title-text-${articleElement.attributes['uuid']}')!;
+      articleTitleText.style.background = '';
+      if (isTarget) {
+        articleTitleText.style.background = 'linear-gradient(to top, #8392ff 10%, transparent 10%)';
       }
     });
   }
