@@ -66,7 +66,9 @@ class Article {
 ''';
   }
 
-  String toHtml() {
+  Future<String> toHtml() async {
+    var menu = await generateArticleMenuHtml();
+
     return '''
 <link rel="stylesheet" href="css/article.css">
 
@@ -77,14 +79,15 @@ class Article {
 <div class="article-context">
   ${markdownToHtml(body)}
 </div>
-${generateArticleMenuHtml()}
+$menu
   ''';
   }
 
   void saveAsHtml(String path) {
-    var context = toHtml();
-    var file = File('$path/$title.html');
-    file.writeAsString(context);
+    toHtml().then((value){
+      var file = File('$path/$title.html');
+      file.writeAsString(value);
+    });
   }
 
   Map<String, dynamic> toMap() {
