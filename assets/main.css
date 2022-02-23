@@ -1,18 +1,41 @@
-.container-box {
-    overflow: hidden;
+body, html {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
 }
 
-.container{
-    width: 40%;
-    float: left;
-}
-
-.container-divider {
-    margin-left: 3%;
-    margin-right: 3%;
-    float: left;
-    border-left: 1px solid #E1E1E1;
+.article-container {
+    width: 75%;
     height: 500px;
+    float: left;
+    overflow-x: scroll;
+    overflow-y: scroll;
+}
+
+.side-menu {
+    width: 25%;
+    height: 500px;
+    float: right;
+    overflow-y: scroll;
+}
+
+.dragbar {
+    background-color:#999999;
+    height:100%;
+    float: right;
+    width: 2px;
+    cursor: col-resize;
+}
+
+.ghostbar {
+    width:3px;
+    height:100%;
+    background-color:#999999;
+    opacity:0.5;
+    position:absolute;
+    cursor: col-resize;
+    z-index:999
 }
 
 .folder {
@@ -38,17 +61,17 @@
 }
 
 .article-and-tags-container {
-    display:-webkit-box;
-    display:-moz-box;
-    display:-ms-flexbox;
-    display:-webkit-flex;
-    display:-moz-flex;
-    display:flex;
-    -webkit-box-lines:multiple;
-    -webkit-flex-wrap:wrap;
-    -ms-flex-wrap:wrap;
-    flex-wrap:wrap;
-    width:396px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -webkit-box-lines: multiple;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    width: 396px;
 }
 
 ::-webkit-scrollbar {
@@ -59,7 +82,7 @@
 .article {
     display: inline-block;
     width: 40%;
-    list-style:none;
+    list-style: none;
 }
 
 .tags {
@@ -70,7 +93,7 @@
     border-left: 1px solid;
     width: 50%;
 
-    list-style:none;
+    list-style: none;
 }
 
 .tag {
@@ -84,4 +107,10 @@
 ::-webkit-scrollbar {
     width: 0;
     height: 0;
+}
+
+.clearfix:after {
+    content: '';
+    display: table;
+    clear: both;
 }

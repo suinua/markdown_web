@@ -54,11 +54,13 @@ void generateHomeHtml(Folder folder, String outputPath, String indexFilePath) {
 
 <body>
   <div class="container-box">
-    <div class="container" id="article-container">
+    <div class="article-container">
+      <span class="position"></span>
+      <div class="dragbar"></div>
+      <div class="ghostbar"></div>
       ${Article.fromLocalFile(LocalFile(indexFilePath)).toHtml()}
     </div>
-    <div class="container-divider"></div>
-    <div class="container">
+    <div class="side-menu">
         <div class="uk-margin">
             <form class="uk-search uk-search-default">
                 <a href="" class="uk-search-icon-flip" uk-search-icon></a>
