@@ -22,8 +22,8 @@ class Article {
 
   static void _test() {
     var github = GitHub(auth: Authentication.withToken(Platform.environment['INPUT_GITHUB_TOKEN']));
-    var userName = Platform.environment['GITHUB_REPOSITORY']!.split('\\')[0];
-    var repoName = Platform.environment['GITHUB_REPOSITORY']!.split('\\')[1];
+    var userName = Platform.environment['GITHUB_REPOSITORY']!.split('/')[0];
+    var repoName = Platform.environment['GITHUB_REPOSITORY']!.split('/')[1];
     var branchName = Platform.environment['GITHUB_REF_NAME']!;
     print('userName:$userName');
     print('repoName:$repoName');
