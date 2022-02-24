@@ -87,6 +87,11 @@ body, html {
     list-style: none;
 }
 
+.article-context-box {
+    width: 100%;
+    height: 100%;
+}
+
 .article-context {
     background: white;
     width: 70%;
@@ -101,7 +106,6 @@ body, html {
     border: solid 1px #999999;
     background: white;
     margin-top: 5%;
-    height: 50%;
     float: left;
 }
 
@@ -160,6 +164,25 @@ body, html {
 }
 
 .article-detail {
+    margin: 5px;
+    border: solid 1px #999999;
+}
+
+.article-menu-committer-list {
+    overflow-x: scroll;
+    height: 50px;
+}
+.article-menu-committer-icon {
+    display: inline-block;
+    float: left;
+}
+
+.article-menu-logs {
+    height: 200px;
+    overflow-y: scroll;
+}
+
+.article-menu-index {
     margin: 5px;
     border: solid 1px #999999;
 }

@@ -60,7 +60,9 @@ void generateHomeHtml(Folder folder, String outputPath, String indexFilePath) {
       <span class="position"></span>
       <div class="dragbar"></div>
       <div class="ghostbar"></div>
+      <div class="article-context-box">
         $articleHtml
+      </div>
     </div>
     <div class="side-menu">
         <div class="uk-margin">

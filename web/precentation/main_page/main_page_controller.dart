@@ -14,7 +14,7 @@ class MainPageController {
   }
 
   static void displayArticle(MouseEvent event, Element clickedArticle) {
-    var articleContainer = querySelector('.article-container');
+    var articleContainer = querySelector('.article-context-box');
     HttpRequest.getString(window.location.href +
             'articles/${clickedArticle.attributes['url']}')
         .then((value) {

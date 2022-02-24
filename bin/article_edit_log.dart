@@ -44,15 +44,17 @@ class Committer {
 
   String toHtml() {
     return '''
-<a href="url"><img class="uk-border-pill" src="$avatarUrl" width="40px" alt="name"></a>
+<div class="article-menu-committer-icon">
+<a href="$url"><img class="uk-border-pill" src="$avatarUrl" width="40px" alt="name"></a>
+</div>
     ''';
   }
 }
 
 class ArticleEditLogService {
   static Future<List<ArticleEditLog>> getLogs(Article article) async {
-    var repoName = Platform.environment['GITHUB_REPOSITORY'];
-    var branchName = Platform.environment['GITHUB_REF_NAME'];
+    var repoName = Platform.environment['GITHUB_REPOSITORY'] ?? 'suinua/pmmp_sample_code';
+    var branchName = Platform.environment['GITHUB_REF_NAME'] ?? 'master';
 
     var logs = <ArticleEditLog>[];
     var url =
