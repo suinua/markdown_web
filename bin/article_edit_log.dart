@@ -44,7 +44,7 @@ class Committer {
 
   String toHtml() {
     return '''
-<a href="url"><img class="uk-border-pill" src="$avatarUrl" width="50px" alt="name"></a>
+<a href="url"><img class="uk-border-pill" src="$avatarUrl" width="40px" alt="name"></a>
     ''';
   }
 }

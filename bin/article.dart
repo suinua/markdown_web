@@ -40,8 +40,10 @@ class Article {
     return '''
 <div class="article-menu">
     <div class="article-menu-tags">$tagsAsHtml</div>
-    <div class="article-menu-committer-list">$committerHtml</div>
-    <div class="article-menu-logs">$logsHtml</div>
+    <div class="article-detail">
+      <div class="article-menu-committer-list">$committerHtml</div>
+      <div class="article-menu-logs">$logsHtml</div>
+    </div>
     <div class="article-menu-index"></div>
 </div>
 ''';

@@ -158,3 +158,8 @@ body, html {
     height: 30px;
     border-bottom: solid 1px;
 }
+
+.article-detail {
+    margin: 5px;
+    border: solid 1px #999999;
+}
