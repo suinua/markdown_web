@@ -49,9 +49,17 @@ void generateHomeHtml(Folder folder, String outputPath, String indexFilePath) {
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="uikit-3.7.6/css/uikit.css">
-    <script src="uikit-3.7.6/js/uikit.js"></script>
-    <script src="uikit-3.7.6/js/uikit-icons.min.js"></script>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.11.1/dist/css/uikit.min.css" />
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.11.1/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.11.1/dist/js/uikit-icons.min.js"></script>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
 </head>
 
 <body>
