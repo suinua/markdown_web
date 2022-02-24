@@ -15,7 +15,7 @@ class ArticleEditLog {
   String toHtml() {
     return '''
 <div class="log">
-<a href="${committer.url}"><img class="uk-border-pill" src="${committer.avatarUrl}" width="25px" alt="${committer.name}"></a>
+<img class="uk-border-pill" src="${committer.avatarUrl}" width="25px" alt="${committer.name}">
 ${date.year} ${date.month}/${date.day} : $comment
 </div>
     ''';
@@ -31,7 +31,7 @@ class Committer {
 
   Committer.fromJson(Map json)
       : name = json['login'],
-        url = json['url'],
+        url = json['html_url'],
         avatarUrl = json['avatar_url'];
 
   @override
@@ -51,13 +51,12 @@ class Committer {
 
 class ArticleEditLogService {
   static Future<List<ArticleEditLog>> getLogs(Article article) async {
-    var repoName =
-        Platform.environment['GITHUB_REPOSITORY'];
+    var repoName = Platform.environment['GITHUB_REPOSITORY'];
     var branchName = Platform.environment['GITHUB_REF_NAME'];
 
     var logs = <ArticleEditLog>[];
     var url =
-        'https://api.github.com/repos/$repoName/commits?path=${(Platform.environment['INPUT_ARTICLES_DIRECTORY_PATH'] ?? 'articles')}/${article.url.replaceAll(r'\', '/').replaceAll('.html','.md')}&sha=$branchName';
+        'https://api.github.com/repos/$repoName/commits?path=${(Platform.environment['INPUT_ARTICLES_DIRECTORY_PATH'] ?? 'articles')}/${article.url.replaceAll(r'\', '/').replaceAll('.html', '.md')}&sha=$branchName';
     var response = await http.get(Uri.parse(url));
 
     var data = jsonDecode(response.body);

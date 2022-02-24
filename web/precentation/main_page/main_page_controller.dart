@@ -18,7 +18,9 @@ class MainPageController {
     HttpRequest.getString(window.location.href +
             'articles/${clickedArticle.attributes['url']}')
         .then((value) {
-      articleContainer?.innerHtml = value;
+      var _htmlValidator = NodeValidatorBuilder.common()
+        ..allowHtml5(uriPolicy: CustomUriPolicy());
+      articleContainer?.setInnerHtml(value, validator: _htmlValidator);
     });
 
     event.stopImmediatePropagation();
@@ -29,7 +31,7 @@ class MainPageController {
     SearchContextPool.addTag(Tag(tagText));
 
     var _htmlValidator = NodeValidatorBuilder.common()
-      ..allowElement('a', attributes: ['uk-icon','tag-text']);
+      ..allowElement('a', attributes: ['uk-icon', 'tag-text']);
     var selectedTagHtml =
         '''<div class="selected-tag"><a class="remove-selected-tag-button" tag-text="$tagText" uk-icon="close"></a><div class="selected-tag-text">$tagText</div></div>''';
     var selectedTagsElement = querySelector('.selected-tags');
@@ -37,28 +39,40 @@ class MainPageController {
         selectedTagsElement.innerHtml! + selectedTagHtml,
         validator: _htmlValidator);
 
-    MainPageController.displayFilteredArticles(SearchService.filterBySearchContext());
+    MainPageController.displayFilteredArticles(
+        SearchService.filterBySearchContext());
     event.stopImmediatePropagation();
 
     querySelectorAll('.remove-selected-tag-button').forEach((buttonElement) {
-      buttonElement.onClick.listen((event) => unselectTag(event, buttonElement));
+      buttonElement.onClick
+          .listen((event) => unselectTag(event, buttonElement));
     });
   }
 
   static void unselectTag(MouseEvent event, Element clickedButtonElement) {
-    SearchContextPool.removeTag(Tag(clickedButtonElement.attributes['tag-text']!));
+    SearchContextPool.removeTag(
+        Tag(clickedButtonElement.attributes['tag-text']!));
     clickedButtonElement.parent?.remove();
-    MainPageController.displayFilteredArticles(SearchService.filterBySearchContext());
+    MainPageController.displayFilteredArticles(
+        SearchService.filterBySearchContext());
   }
 
   static void displayFilteredArticles(List<Article> filteredArticles) {
     querySelectorAll('.article').forEach((articleElement) {
-      var isTarget = filteredArticles.any((article) => article.uuid == articleElement.attributes['uuid']);
-      var articleTitleText = querySelector('#article-title-text-${articleElement.attributes['uuid']}')!;
+      var isTarget = filteredArticles
+          .any((article) => article.uuid == articleElement.attributes['uuid']);
+      var articleTitleText = querySelector(
+          '#article-title-text-${articleElement.attributes['uuid']}')!;
       articleTitleText.style.background = '';
       if (isTarget) {
-        articleTitleText.style.background = 'linear-gradient(to top, #8392ff 10%, transparent 10%)';
+        articleTitleText.style.background =
+            'linear-gradient(to top, #8392ff 10%, transparent 10%)';
       }
     });
   }
+}
+
+class CustomUriPolicy implements UriPolicy {
+  @override
+  bool allowsUri(String uri) => true;
 }
