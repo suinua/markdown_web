@@ -1,14 +1,18 @@
 import 'dart:html';
 
-import '../../model/article.dart';
+import '../../../common/model/article.dart';
+import '../../../common/model/tag.dart';
 import '../../pool/search_context_pool.dart';
 import '../../service/search_service.dart';
 
 class MainPageController {
   static void foldOrUnfoldFolder(MouseEvent event, Element clickedFolder) {
-    var children = querySelectorAll('#${clickedFolder.id}-children');
-    children.style.display =
-        children.style.display == 'block' ? 'none' : 'block';
+    var folderChildrenList = querySelectorAll('.folder-children');
+    folderChildrenList.forEach((folderChildren) {
+      if (folderChildren.attributes['folder-uuid'] == clickedFolder.attributes['folder-uuid']) {
+        folderChildren.style.display = folderChildren.style.display == 'block' ? 'none' : 'block';
+      }
+    });
 
     event.stopImmediatePropagation();
   }

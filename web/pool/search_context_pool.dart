@@ -1,4 +1,5 @@
-import '../model/article.dart';
+
+import '../../common/model/tag.dart';
 
 class SearchContextPool {
   static String _text = '';

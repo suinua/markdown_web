@@ -1,3 +1,5 @@
+import 'tag.dart';
+
 class Article {
   final String uuid;
   final List<Tag> tags;
@@ -7,10 +9,10 @@ class Article {
 
   Article(
       {required this.uuid,
-      required this.tags,
-      required this.title,
-      required this.body,
-      required this.url});
+        required this.tags,
+        required this.title,
+        required this.body,
+        required this.url});
 
   Article.fromMap(Map<String,dynamic> data)
       : uuid = data['uuid'],
@@ -18,19 +20,14 @@ class Article {
         title = data['title'],
         body = data['body'],
         url = data['url'];
-}
 
-class Tag {
-  final String text;
-
-  Tag(this.text);
-
-  @override
-  bool operator ==(Object other) {
-    if (other is Tag) {
-      return text == other.text;
-    }
-
-    return false;
+  Map<String, dynamic> toMap() {
+    return {
+      'uuid': uuid,
+      'tags': tags.map((e) => e.text).toList(),
+      'title': title,
+      'body': body,
+      'url': url
+    };
   }
 }

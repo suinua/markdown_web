@@ -7,7 +7,7 @@ class MainPage {
 
   static setup() {
     querySelectorAll('.folder').forEach((folder) {
-      folder.children[0].onClick.listen(
+      folder.onClick.listen(
           (event) => MainPageController.foldOrUnfoldFolder(event, folder));
     });
 
@@ -24,9 +24,12 @@ class MainPage {
 
     querySelectorAll('.tag-button').forEach((tagButton) {
       tagButton.onClick.listen((event) {
-        var id = tagButton.attributes['article-id']!;
-        var tagsElement = querySelector('#tags-$id')!;
-        tagsElement.style.display = tagsElement.style.display == 'none' ? '' : 'none';
+        var uuid = tagButton.attributes['article-uuid'];
+        querySelectorAll('tags').forEach((tagsElement) {
+          if (tagsElement.attributes['article-uuid'] == uuid) {
+            tagsElement.style.display = tagsElement.style.display == 'none' ? '' : 'none';
+          }
+        });
       });
     });
   }
@@ -51,7 +54,7 @@ class MainPage {
         var mainPercentage = 100 - percentage;
 
         querySelector('.article-container')!.style.width = '$percentage%';
-        querySelector('.side-menu')!.style.width = '$mainPercentage%';
+        querySelector('.folder-like-menu')!.style.width = '$mainPercentage%';
         querySelector('.ghostbar')!.style.display = 'none';
         _dragging = false;
       }

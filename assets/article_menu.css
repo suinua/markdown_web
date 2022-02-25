@@ -1,0 +1,46 @@
+.article-menu {
+    width: 19%;
+    height: 80vh;
+    border-radius: 5px;
+    border: solid 1px #999999;
+    background: white;
+    margin-top: 5%;
+
+    float: left;
+    overflow-y: scroll;
+}
+
+.article-menu-tags {
+    margin: 5px;
+    border: solid 1px #999999;
+}
+
+.article-menu-tag {
+    display: inline-block;
+    margin: 3px;
+}
+
+.article-detail {
+    margin: 5px;
+    border: solid 1px #999999;
+}
+
+.article-menu-committer-list {
+    overflow-x: scroll;
+    height: 50px;
+}
+
+.article-menu-committer-icon {
+    display: inline-block;
+    float: left;
+}
+
+.article-menu-logs {
+    height: 200px;
+    overflow-y: scroll;
+}
+
+.article-menu-index {
+    margin: 5px;
+    border: solid 1px #999999;
+}

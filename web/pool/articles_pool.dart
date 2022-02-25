@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:html';
 
-import '../model/folder.dart';
+import '../../common/model/folder.dart';
 
 class ArticlesPool {
   static Folder? _data;

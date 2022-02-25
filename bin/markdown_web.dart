@@ -1,9 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'article.dart';
-import 'folder.dart';
+import '../common/model/folder.dart';
+import '../common/view/main_page.dart';
 import 'folder_analyzer.dart';
+import 'folder_service.dart';
+import 'local_file.dart';
+import 'local_folder.dart';
 
 void main() {
   var env = Platform.environment;
@@ -31,67 +34,19 @@ void main() {
   }
 
   Directory(outputPath).create().then((_) {
-    var folder = Folder.fromLocalFolder(analyze(LocalFolder(articlesPath)));
-    generateHomeHtml(folder, outputPath, indexFilePath);
-    folder.saveAsHtml(outputPath);
+    var folder = FolderAnalyzer.execute(LocalFolder(articlesPath)).toFolder();
+    saveMainPage(folder, outputPath, indexFilePath);
+    FolderService.saveAsHtml(outputPath, folder);
 
     generateArticlesDataFile(outputPath, folder);
   });
 }
 
-void generateHomeHtml(Folder folder, String outputPath, String indexFilePath) {
-  Article.fromLocalFile(LocalFile(indexFilePath)).toHtml().then((articleHtml) {
-    var homeHtmlContext = '''
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="main.css">
-    <!-- UIkit CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.11.1/dist/css/uikit.min.css" />
-
-    <!-- UIkit JS -->
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.11.1/dist/js/uikit.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.11.1/dist/js/uikit-icons.min.js"></script>
-
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
-</head>
-
-<body>
-  <div class="container-box">
-    <div class="article-container">
-      <span class="position"></span>
-      <div class="dragbar"></div>
-      <div class="ghostbar"></div>
-      <div class="article-context-box">
-        $articleHtml
-      </div>
-    </div>
-    <div class="side-menu">
-        <div class="uk-margin">
-            <form class="uk-search uk-search-default">
-                <a href="" class="uk-search-icon-flip" uk-search-icon></a>
-                <input class="uk-search-input" type="search" placeholder="Search">
-            </form>
-        </div>
-      <div class="selected-tags"></div>
-      <div class="folders-container">
-        ${folder.toHtmlAsMenu()}
-      </div>
-    </div>
-  </div>
-<script src="main.js"></script>
-</body>
-
-</html>
-''';
+void saveMainPage(Folder folder, String outputPath, String indexFilePath) {
+  var indexArticle = LocalFile(indexFilePath).toArticle();
+  MainPage.generate(folder, outputPath, indexArticle).then((htmlContext){
     var homeHtmlFile = File('$outputPath/index.html');
-    homeHtmlFile.writeAsString(homeHtmlContext);
+    homeHtmlFile.writeAsString(htmlContext);
   });
 }
 

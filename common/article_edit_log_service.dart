@@ -3,53 +3,9 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
-import 'article.dart';
-
-class ArticleEditLog {
-  final Committer committer;
-  final String comment;
-  final DateTime date;
-
-  ArticleEditLog(this.committer, this.comment, this.date);
-
-  String toHtml() {
-    return '''
-<div class="log">
-<img class="uk-border-pill" src="${committer.avatarUrl}" width="25px" alt="${committer.name}">
-${date.year} ${date.month}/${date.day} : $comment
-</div>
-    ''';
-  }
-}
-
-class Committer {
-  final String name;
-  final String url;
-  final String avatarUrl;
-
-  Committer(this.name, this.url, this.avatarUrl);
-
-  Committer.fromJson(Map json)
-      : name = json['login'],
-        url = json['html_url'],
-        avatarUrl = json['avatar_url'];
-
-  @override
-  bool operator ==(Object other) {
-    if (other is Committer) {
-      return other.name == name;
-    }
-    return false;
-  }
-
-  String toHtml() {
-    return '''
-<div class="article-menu-committer-icon">
-<a href="$url"><img class="uk-border-pill" src="$avatarUrl" width="40px" alt="name"></a>
-</div>
-    ''';
-  }
-}
+import 'model/article.dart';
+import 'model/article_edit_log.dart';
+import 'model/committer.dart';
 
 class ArticleEditLogService {
   static Future<List<ArticleEditLog>> getLogs(Article article) async {
