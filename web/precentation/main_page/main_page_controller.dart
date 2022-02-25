@@ -62,14 +62,12 @@ class MainPageController {
   }
 
   static void displayFilteredArticles(List<Article> filteredArticles) {
-    querySelectorAll('.article').forEach((articleElement) {
-      var isTarget = filteredArticles
-          .any((article) => article.uuid == articleElement.attributes['uuid']);
-      var articleTitleText = querySelector(
-          '#article-title-text-${articleElement.attributes['uuid']}')!;
-      articleTitleText.style.background = '';
+    querySelectorAll('.article-title-text').forEach((articleTitleTextElement) {
+      var isTarget = filteredArticles.any((article) => article.uuid == articleTitleTextElement.attributes['article-uuid']);
+
+      articleTitleTextElement.style.background = '';
       if (isTarget) {
-        articleTitleText.style.background =
+        articleTitleTextElement.style.background =
             'linear-gradient(to top, #8392ff 10%, transparent 10%)';
       }
     });

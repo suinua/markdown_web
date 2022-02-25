@@ -1,5 +1,7 @@
 import 'dart:html';
 
+import '../../pool/search_context_pool.dart';
+import '../../service/search_service.dart';
 import 'main_page_controller.dart';
 
 class MainPage {
@@ -27,10 +29,18 @@ class MainPage {
         var uuid = tagButton.attributes['article-uuid'];
         querySelectorAll('tags').forEach((tagsElement) {
           if (tagsElement.attributes['article-uuid'] == uuid) {
-            tagsElement.style.display = tagsElement.style.display == 'none' ? '' : 'none';
+            tagsElement.style.display =
+                tagsElement.style.display == 'none' ? '' : 'none';
           }
         });
       });
+    });
+
+    var searchInput = querySelector('.search-input')! as InputElement;
+    searchInput.onInput.listen((event) {
+      SearchContextPool.setText(searchInput.value!);
+      MainPageController.displayFilteredArticles(
+          SearchService.filterBySearchContext());
     });
   }
 
