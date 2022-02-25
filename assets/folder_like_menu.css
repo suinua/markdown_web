@@ -1,3 +1,13 @@
+.folder-like-menu {
+    width: 25%;
+    height: 100vh;
+    float: right;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: scroll;
+    overflow-y: scroll;
+}
+
 .article-menu-item {
     display: -webkit-box;
     display: -moz-box;
@@ -9,20 +19,43 @@
     -webkit-flex-wrap: wrap;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    width: 396px;
+    height: 20px;
+    width: 100vmax;
 }
 
 .article-on-menu {
     display: inline-block;
-    width: 40%;
+    width: 10%;
     list-style: none;
 }
 
+.folders-container {
+    margin-left: 10px;
+}
+
 .folder {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.folder-text {
+    display: inline-block;
+    width: 40%;
+    border: solid 1px;
+    border-radius: 8px;
 }
 
 .folder-children {
     margin-left: 3%;
+}
+
+.folder-divider {
+    border: solid 1px;
+    border-radius: 8px;
+    width: 80%;
+    height: 2px;
+    display: inline-block;
+    margin-bottom: 5px;
 }
 
 .selected-tag {
@@ -45,24 +78,23 @@
 }
 
 .tags {
-    display: inline-block;
-    overflow-x: scroll;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
     border-left: 1px solid;
-    width: 50%;
-
-    list-style: none;
+    height: 20px;
+    display: flex;
+    align-items: center;
 }
 
-.tag {
-    border: 1px solid;
+.folder-structure-menu-tag {
     border-radius: 5px;
     display: inline-block;
     vertical-align: middle;
     margin-left: 5px;
+    height: 20px;
 }
 
+.article-title {
+    height: 20px;
+}
 
 .article-title-text {
     display: inline-block;
@@ -71,4 +103,5 @@
 .selected-tags {
     height: 30px;
     border-bottom: solid 1px;
+    margin-bottom: 10px;
 }

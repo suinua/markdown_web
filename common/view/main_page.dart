@@ -47,7 +47,7 @@ class MainPage {
     </div>
     <div class="folder-like-menu">
         <div class="uk-margin">
-            <form class="uk-search uk-search-default">
+            <form class="uk-search uk-search-default" id="search-input">
                 <a href="" class="uk-search-icon-flip" uk-search-icon></a>
                 <input class="uk-search-input" type="search" placeholder="Search">
             </form>

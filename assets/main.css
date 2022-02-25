@@ -12,13 +12,6 @@ body, html {
     background: #EDF2F7;
 }
 
-.folder-like-menu {
-    width: 25%;
-    height: 100vh;
-    float: right;
-    overflow-y: scroll;
-}
-
 .dragbar {
     background-color:#999999;
     height:100%;
