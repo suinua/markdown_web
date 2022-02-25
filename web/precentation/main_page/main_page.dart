@@ -11,7 +11,7 @@ class MainPage {
           (event) => MainPageController.foldOrUnfoldFolder(event, folder));
     });
 
-    querySelectorAll('.article').forEach((article) {
+    querySelectorAll('.article-on-menu').forEach((article) {
       article.onClick
           .listen((event) => MainPageController.displayArticle(event, article));
     });

@@ -20,9 +20,9 @@ class FolderLikeMenuView {
     <span uk-icon="chevron-down"></span>${folder.name} 
     <span uk-icon="folder"></span>${folder.folders.length}
     <span uk-icon="file-text"></span>${folder.articles.length} 
-    <div class="folder-children" folder-uuid="${folder.uuid}">
-        $children
-    </div>
+</div>
+<div class="folder-children" folder-uuid="${folder.uuid}">
+    $children
 </div>
 ''';
   }
