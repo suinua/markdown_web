@@ -41,7 +41,7 @@
 .folder-text {
     display: inline-block;
     width: 40%;
-    border: solid 1px;
+    border: solid 2px;
     border-radius: 8px;
     font-weight: 600;
     line-height: 1.5;
@@ -53,7 +53,7 @@
 }
 
 .folder-divider {
-    border: solid 1px;
+    border: solid 2px;
     border-radius: 8px;
     width: 80%;
     height: 2px;
