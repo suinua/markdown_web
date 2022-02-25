@@ -6,16 +6,23 @@ class Folder {
   final List<Article> articles;
   final List<Folder> folders;
 
-  Folder({required this.name, required this.uuid, required this.articles, required this.folders});
+  Folder(
+      {required this.name,
+      required this.uuid,
+      required this.articles,
+      required this.folders});
 
   Folder.fromMap(Map data)
       : name = data['name'],
         uuid = data['uuid'],
         articles = data['articles']
             .map((article) => Article.fromMap(article))
-            .toList().cast<Article>(),
-        folders =
-        data['folders'].map((folder) => Folder.fromMap(folder)).toList().cast<Folder>();
+            .toList()
+            .cast<Article>(),
+        folders = data['folders']
+            .map((folder) => Folder.fromMap(folder))
+            .toList()
+            .cast<Folder>();
 
   Map<String, dynamic> toMap() {
     var articlesAsMapList = [];
@@ -30,6 +37,7 @@ class Folder {
 
     return {
       'name': name,
+      'uuid': uuid,
       'articles': articlesAsMapList,
       'folders': foldersAsMapList,
     };

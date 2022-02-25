@@ -41,6 +41,6 @@ class FolderLikeMenuView {
   }
 
   static String _tagToFolderStructureMenuHtml(Tag tag) {
-    return '''<a class="folder-structure-menu-tag">#${tag.text}</a>''';
+    return '''<a class="folder-structure-menu-tag" tag-text="${tag.text}">#${tag.text}</a>''';
   }
 }

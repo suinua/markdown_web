@@ -16,7 +16,7 @@ class MainPage {
           .listen((event) => MainPageController.displayArticle(event, article));
     });
 
-    querySelectorAll('.tag').forEach((tag) {
+    querySelectorAll('.folder-structure-menu-tag').forEach((tag) {
       tag.onClick.listen((event) => MainPageController.selectTag(event, tag));
     });
 
