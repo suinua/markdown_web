@@ -1,5 +1,6 @@
 import '../model/article.dart';
 import '../model/article_edit_log.dart';
+import '../model/article_index.dart';
 import '../model/committer.dart';
 import '../model/tag.dart';
 
@@ -43,5 +44,14 @@ class ArticleMenuView {
 ${editLog.date.year} ${editLog.date.month}/${editLog.date.day} : ${editLog.comment}
 </div>
     ''';
+  }
+
+  static String _indexListToHtml(List<ArticleIndex> indexList) {
+    var indexListHtml = indexList.map((e) => '''<li><a class=".article-index-item-h${e.level.toString()}" href="${e.id}">${e.text}</a></li>''');
+    return '''
+<ul class="uk-nav uk-nav-default" uk-scrollspy-nav="closest: li; scroll: true">
+  $indexListHtml
+</ul>
+''';
   }
 }

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:uuid/uuid.dart';
 
 import '../common/model/article.dart';
+import '../common/model/article_index.dart';
 import '../common/model/tag.dart';
 
 class LocalFile {
@@ -34,6 +35,17 @@ class LocalFile {
   }
 
   Article toArticle() {
+    var indexList = <ArticleIndex>[];
+    int count(String text) => indexList.where((element) => element.text == text).length;
+    context.replaceAll('\r\n', '\n').split('\n').forEach((line) {
+      if (RegExp('^#').hasMatch(line)) {
+        var level = IndexLevel.fromInt(line.split(' ')[0].length);
+        var text = line.replaceFirst(RegExp('^#(.*) '), '').replaceAll('-', '');//todo:-が使えない
+        var id = ArticleIndexId(text + '-${count(text)}');
+        indexList.add(ArticleIndex(id, level, text));
+      }
+    });
+
     return Article(
         uuid: Uuid().v4(),
         tags: tags.map((e) => Tag(e)).toList(),
@@ -47,6 +59,7 @@ class LocalFile {
                     r'\' +
                     Platform.pathSeparator),
                 '')
-            .replaceAll('md', 'html'));
+            .replaceAll('md', 'html'),
+    indexList: indexList);
   }
 }

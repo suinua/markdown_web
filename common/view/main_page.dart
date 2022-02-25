@@ -32,7 +32,6 @@ class MainPage {
 </head>
 
 <body>
-  <div class="container-box">
     <div class="article-container">
       <span class="position"></span>
       <div class="dragbar"></div>
@@ -48,7 +47,6 @@ class MainPage {
         ${FolderLikeMenuView.html(folder)}
       </div>
     </div>
-  </div>
 <script src="main.js"></script>
 </body>
 

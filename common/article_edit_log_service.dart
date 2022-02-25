@@ -9,7 +9,7 @@ import 'model/committer.dart';
 
 class ArticleEditLogService {
   static Future<List<ArticleEditLog>> getLogs(Article article) async {
-    var repoName = Platform.environment['GITHUB_REPOSITORY'] ?? 'suinua/pmmp_sample_code';
+    var repoName = Platform.environment['GITHUB_REPOSITORY'] ?? 'suinua/markdown_web';
     var branchName = Platform.environment['GITHUB_REF_NAME'] ?? 'master';
 
     var logs = <ArticleEditLog>[];

@@ -5,7 +5,7 @@
     border: solid 1px #999999;
     background: white;
     margin-top: 5%;
-
+    margin-left: 2%;
     float: left;
     overflow-y: scroll;
 }

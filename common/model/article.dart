@@ -1,3 +1,4 @@
+import 'article_index.dart';
 import 'tag.dart';
 
 class Article {
@@ -6,20 +7,23 @@ class Article {
   final String title;
   final String body;
   final String url;
+  final List<ArticleIndex> indexList;
 
   Article(
       {required this.uuid,
         required this.tags,
         required this.title,
         required this.body,
-        required this.url});
+        required this.url,
+        required this.indexList});
 
   Article.fromMap(Map<String,dynamic> data)
       : uuid = data['uuid'],
         tags = data['tags'].map((text) => Tag(text)).toList().cast<Tag>(),
         title = data['title'],
         body = data['body'],
-        url = data['url'];
+        url = data['url'],
+        indexList = data['index_list'].map((e) => ArticleIndex.fromMap(e)).toList().cast<ArticleIndex>();
 
   Map<String, dynamic> toMap() {
     return {
@@ -27,7 +31,8 @@ class Article {
       'tags': tags.map((e) => e.text).toList(),
       'title': title,
       'body': body,
-      'url': url
+      'url': url,
+      'index_list': indexList.map((e) => e.toMap()).toList(),
     };
   }
 }

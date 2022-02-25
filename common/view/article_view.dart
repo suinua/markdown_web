@@ -10,8 +10,8 @@ class ArticleView {
     var articleMenuHtml = ArticleMenuView.html(article, logs, ArticleEditLogService.getCommitterList(logs));
 
     return '''
-<div class="article-context">${markdownToHtml(article.body)}</div>
 $articleMenuHtml
+<div class="article-context">${markdownToHtml(article.body)}</div>
 ''';
   }
 }
