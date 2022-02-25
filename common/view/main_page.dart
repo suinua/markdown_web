@@ -1,14 +1,11 @@
-import '../article_edit_log_service.dart';
 import '../model/article.dart';
 import '../model/folder.dart';
-import 'article_menu_view.dart';
 import 'article_view.dart';
 import 'folder_structure_menu_view.dart';
 
 class MainPage {
   static Future<String> generate(
       Folder folder, String outputPath, Article indexArticle) async {
-    var logs = await ArticleEditLogService.getLogs(indexArticle);
     return '''
 <!DOCTYPE html>
 <html lang="en">
@@ -41,8 +38,7 @@ class MainPage {
       <div class="dragbar"></div>
       <div class="ghostbar"></div>
       <div class="article-context-box">
-        ${ArticleView.html(indexArticle)}
-        ${ArticleMenuView.html(indexArticle, logs, ArticleEditLogService.getCommitterList(logs))}
+        ${await ArticleView.html(indexArticle)}
       </div>
     </div>
     <div class="folder-like-menu">
