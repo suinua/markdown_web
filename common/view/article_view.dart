@@ -36,7 +36,7 @@ class ArticleView {
 
     return '''
 $articleMenuHtml
-<div class="article-context">$articleHtml}</div>
+<div class="article-context">$articleHtml</div>
 ''';
   }
 }
