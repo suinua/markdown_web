@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:markdown/markdown.dart';
 import 'package:uuid/uuid.dart';
 
 import '../common/model/article.dart';
@@ -36,15 +37,23 @@ class LocalFile {
 
   Article toArticle() {
     var indexList = <ArticleIndex>[];
-    int count(String text) => indexList.where((element) => element.text == text).length;
-    context.replaceAll('\r\n', '\n').split('\n').forEach((line) {
-      if (RegExp('^#').hasMatch(line)) {
-        var level = IndexLevel.fromInt(line.split(' ')[0].length);
-        var text = line.replaceFirst(RegExp('^#(.*) '), '').replaceAll('-', '');//todo:-が使えない
-        var id = ArticleIndexId(text + '-${count(text)}');
-        indexList.add(ArticleIndex(id, level, text));
-      }
-    });
+    var index = 0;
+
+    void add(IndexLevel level) {
+      markdownToHtml(context).replaceAll('\r\n', '\n').split('\n').forEach((line) {
+        var result = RegExp('<${level.toString()}>(.*)</${level.toString()}>').firstMatch(line);
+        if (result != null) {
+          var targetPlane = line.substring(result.start, result.end);
+          var text = targetPlane.replaceFirst('<${level.toString()}>', '').replaceFirst(
+              '</${level.toString()}>', '');
+          indexList.add(ArticleIndex(index, level,text));
+        }
+        index++;
+      });
+    }
+
+    add(IndexLevel.h1);
+    add(IndexLevel.h2);
 
     return Article(
         uuid: Uuid().v4(),

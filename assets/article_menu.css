@@ -44,3 +44,11 @@
     margin: 5px;
     border: solid 1px #999999;
 }
+
+.article-index-item-h1 {
+    margin-left: 5px;
+}
+
+.article-index-item-h2 {
+    margin-left: 10px;
+}

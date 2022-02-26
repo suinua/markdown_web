@@ -1,41 +1,24 @@
 class ArticleIndex {
-  final ArticleIndexId id;
+  final int line;
   final IndexLevel level;
   final String text;
+  final String href;
 
-  ArticleIndex(this.id, this.level, this.text);
+  ArticleIndex(this.line, this.level, this.text):href = '$text-$line';
 
   ArticleIndex.fromMap(Map data)
-      : id = ArticleIndexId(data['id']),
+      : line = data['line'],
         level = IndexLevel._(data['level']),
-        text = data['text'];
+        text = data['text'],
+        href = data['href'];
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id.toString(),
+      'line': line,
       'level': level.toString(),
       'text': text,
+      'href': href,
     };
-  }
-}
-
-class ArticleIndexId {
-  final String _id;
-
-  ArticleIndexId(this._id);
-
-  @override
-  bool operator ==(Object other) {
-    if (other is ArticleIndexId) {
-      return other._id == _id;
-    }
-
-    return false;
-  }
-
-  @override
-  String toString() {
-    return _id;
   }
 }
 

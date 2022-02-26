@@ -12,7 +12,6 @@ class ArticleMenuView {
     var tagsAsHtml =
         article.tags.map((tag) => _tagToArticleMenuHtml(tag)).toList().join();
 
-
     return '''
 <div class="article-menu">
     <div class="article-menu-tags">$tagsAsHtml</div>
@@ -20,7 +19,7 @@ class ArticleMenuView {
       <div class="article-menu-committer-list">$committerHtml</div>
       <div class="article-menu-logs">$logsHtml</div>
     </div>
-    <div class="article-menu-index"></div>
+    <div class="article-menu-index">${_indexListToHtml(article.indexList)}</div>
 </div>
 ''';
   }
@@ -45,12 +44,18 @@ ${editLog.date.year} ${editLog.date.month}/${editLog.date.day} : ${editLog.comme
 </div>
     ''';
   }
-
   static String _indexListToHtml(List<ArticleIndex> indexList) {
-    var indexListHtml = indexList.map((e) => '''<li><a class=".article-index-item-h${e.level.toString()}" href="${e.id}">${e.text}</a></li>''');
+    var indexListHtml = indexList.map((e) => '''
+ <li class=".article-index-item-h${e.level.toString()}">
+     <a href="#${e.href}" class="article-index-item-${e.level.toString()}">
+         ${e.text}
+     </a>
+ </li>
+''');
+
     return '''
-<ul class="uk-nav uk-nav-default" uk-scrollspy-nav="closest: li; scroll: true">
-  $indexListHtml
+<ul uk-scrollspy-nav="closest: li; scroll: true; offset: 100" class="uk-nav uk-nav-default tm-nav uk-nav-parent-icon">
+  ${indexListHtml.join()}
 </ul>
 ''';
   }
