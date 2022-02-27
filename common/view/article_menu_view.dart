@@ -57,7 +57,7 @@ ${editLog.date.year} ${editLog.date.month}/${editLog.date.day} : ${editLog.comme
 ''');
 
     return '''
-<ul uk-scrollspy-nav="closest: li; scroll: true" class="article-nav uk-overflow-auto" style="padding:0">
+<ul uk-scrollspy-nav="closest: li; scroll: true" class="article-nav uk-overflow-auto">
   ${indexListHtml.join()}
 </ul>
 ''';

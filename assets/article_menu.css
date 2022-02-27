@@ -65,6 +65,10 @@
     float: right;
 }
 
+.article-nav {
+    padding:0
+}
+
 .article-nav .uk-active {
     background: rgba(210, 210, 210, 0.67);
 }
