@@ -40,8 +40,8 @@ class MainPage {
         ${await ArticleView.html(indexArticle)}
       </div>
     </div>
-    <div class="folder-like-menu">
-      <label><input class="search-input" type="search" placeholder="Search"></label>
+    <div class="folder-structure-menu">
+      <div class="folder-structure-menu-close-button"><span uk-icon="chevron-double-right"></span></div><label><input class="search-input" type="search" placeholder="Search"></label>
       <div class="selected-tags"></div>
       <div class="folders-container">
         ${FolderLikeMenuView.html(folder)}

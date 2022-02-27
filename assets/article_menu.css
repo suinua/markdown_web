@@ -52,3 +52,14 @@
 .article-index-item-h2 {
     margin-left: 10%;
 }
+
+.article-menu-close-button-container {
+    display: inline-block;
+    height: 30px;
+    width: 100%;
+}
+
+.article-menu-close-button {
+    display: inline-block;
+    float: right;
+}

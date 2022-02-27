@@ -14,6 +14,9 @@ class ArticleMenuView {
 
     return '''
 <div class="article-menu">
+    <div class="article-menu-close-button-container">
+      <div class="article-menu-close-button"><span uk-icon="chevron-double-left"></span></div>
+    </div>
     <div class="article-menu-tags">$tagsAsHtml</div>
     <div class="article-detail">
       <div class="article-menu-committer-list">$committerHtml</div>

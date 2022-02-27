@@ -1,4 +1,4 @@
-.folder-like-menu {
+.folder-structure-menu {
     width: 25%;
     height: 100vh;
     float: right;
@@ -123,4 +123,9 @@
     color: #aaaaaa;
     border: 1px solid #1b2538;
     border-radius: 4px;
+}
+
+.folder-structure-menu-close-button {
+    display: inline;
+    margin-right: 3%;
 }

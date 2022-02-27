@@ -42,6 +42,32 @@ class MainPage {
       MainPageController.displayFilteredArticles(
           SearchService.filterBySearchContext());
     });
+
+    var closeButtonContainer =
+        querySelector('.article-menu-close-button-container')!;
+    var closeButton = querySelector('.article-menu-close-button')!;
+    closeButton.onClick.listen((event) {
+      var articleMenu = querySelector('.article-menu')!;
+      var isOpen = ['19%', ''].contains(articleMenu.style.width);
+
+      articleMenu.style.width = isOpen ? 'auto' : '19%';
+      articleMenu.children.forEach((child) {
+        if (child.className != closeButtonContainer.className) {
+          child.style.display = isOpen ? 'none' : 'block';
+        }
+      });
+
+      //記事のサイズ変更
+      querySelector('.article-context')!.style.width = isOpen ? '75%' : '60%';
+    });
+
+    querySelector('.folder-structure-menu-close-button')!.onClick.listen((event) {
+      querySelector('.article-container')!.style.width = '97.5%';
+      querySelector('.folders-container')!.style.display = 'none';
+      querySelector('.folder-structure-menu')!.style.width = 'auto';
+      querySelector('.ghostbar')!.style.display = 'none';
+      querySelector('.search-input')!.style.display = 'none';
+    });
   }
 
   static void _setupDraggableDivider() {
@@ -64,7 +90,7 @@ class MainPage {
         var mainPercentage = 100 - percentage;
 
         querySelector('.article-container')!.style.width = '$percentage%';
-        querySelector('.folder-like-menu')!.style.width = '$mainPercentage%';
+        querySelector('.folder-structure-menu')!.style.width = '$mainPercentage%';
         querySelector('.ghostbar')!.style.display = 'none';
         _dragging = false;
       }
