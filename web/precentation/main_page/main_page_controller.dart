@@ -19,9 +19,8 @@ class MainPageController {
 
   static void displayArticle(MouseEvent event, Element clickedArticle) {
     window.location.hash = '';
-    window.history.replaceState({}, document.title, window.location.href.replaceFirst('#(.*)', ''));
     var articleContainer = querySelector('.article-context-box');
-    HttpRequest.getString(window.location.href +
+    HttpRequest.getString(window.location.href.replaceFirst('#(.*)', '') +
         'articles/${clickedArticle.attributes['url']}')
         .then((value) {
       var _htmlValidator = NodeValidatorBuilder.common()
