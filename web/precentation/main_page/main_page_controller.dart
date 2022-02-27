@@ -25,7 +25,7 @@ class MainPageController {
       var _htmlValidator = NodeValidatorBuilder.common()
         ..allowHtml5(uriPolicy: CustomUriPolicy())
         ..allowElement('span', attributes: ['uk-icon'])
-        ..allowElement('ul', attributes: ['uk-scrollspy-nav'])
+        ..allowElement('ul', attributes: ['uk-scrollspy-nav']);
       articleContainer?.setInnerHtml(value, validator: _htmlValidator);
     });
 
