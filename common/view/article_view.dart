@@ -12,27 +12,31 @@ class ArticleView {
         article, logs, ArticleEditLogService.getCommitterList(logs));
 
     var articleHtml = markdownToHtml(article.body);
-    void convert(IndexLevel level) {
-    var index = 0;
-    articleHtml.replaceAll('\r\n', '\n').split('\n').forEach((line) {
-      var result = RegExp('<${level.toString()}>(.*)</${level.toString()}>').firstMatch(line);
-      if (result != null) {
-        var targetPlane = line.substring(result.start, result.end);
-        var text = targetPlane.replaceFirst('<${level.toString()}>', '').replaceFirst(
-            '</${level.toString()}>', '');
-        var id = ArticleIndex.generateId(index, text);
-        var replace = targetPlane.replaceFirst('<${level.toString()}>', '<section id="$id"><${level.toString()}>')
-            .replaceFirst('</${level.toString()}>', '</${level.toString()}></section>');
-        articleHtml = articleHtml.replaceFirst(targetPlane, replace
-        );
-      }
-      index++;
-    });
-    };
+    void convert(List<IndexLevel> levels) {
+      var index = 0;
+      articleHtml.replaceAll('\r\n', '\n').split('\n').forEach((line) {
+        levels.forEach((level) {
+          var result = RegExp('<${level.toString()}>(.*)</${level.toString()}>')
+              .firstMatch(line);
+          if (result != null) {
+            var targetPlane = line.substring(result.start, result.end);
+            var text = targetPlane
+                .replaceFirst('<${level.toString()}>', '')
+                .replaceFirst('</${level.toString()}>', '');
+            var id = ArticleIndex.generateId(index, text);
+            var replace = targetPlane
+                .replaceFirst('<${level.toString()}>',
+                    '<section id="${Uri.parse(id)}"><${level.toString()}>')
+                .replaceFirst('</${level.toString()}>',
+                    '</${level.toString()}></section>');
+            articleHtml = articleHtml.replaceFirst(targetPlane, replace);
+          }
+        });
+        index++;
+      });
+    }
 
-
-    convert(IndexLevel.h1);
-    convert(IndexLevel.h2);
+    convert([IndexLevel.h1, IndexLevel.h2]);
 
     return '''
 $articleMenuHtml

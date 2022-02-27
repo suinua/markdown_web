@@ -50,7 +50,7 @@ ${editLog.date.year} ${editLog.date.month}/${editLog.date.day} : ${editLog.comme
   static String _indexListToHtml(List<ArticleIndex> indexList) {
     var indexListHtml = indexList.map((e) => '''
 <li class="article-index-item-${e.level.toString()} uk-flex">
-    <a href="#${e.href}" class="uk-flex uk-link-reset">
+    <a href="#${Uri.parse(e.href)}" class="uk-flex uk-link-reset">
     <div class="mark-filled">${e.text}</div>
     </a>
 </li>

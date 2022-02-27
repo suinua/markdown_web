@@ -38,21 +38,28 @@ class LocalFile {
   Article toArticle() {
     var indexList = <ArticleIndex>[];
 
-    void add(IndexLevel level) {
+    void add(List<IndexLevel> levels) {
       var index = 0;
-      markdownToHtml(context).replaceAll('\r\n', '\n').split('\n').forEach((line) {
-        var result = RegExp('<${level.toString()}>(.*)</${level.toString()}>').firstMatch(line);
-        if (result != null) {
-          var targetPlane = line.substring(result.start, result.end);
-          var text = targetPlane.replaceFirst('<${level.toString()}>', '').replaceFirst('</${level.toString()}>', '');
-          indexList.add(ArticleIndex(index, level, text));
-        }
+      markdownToHtml(context)
+          .replaceAll('\r\n', '\n')
+          .split('\n')
+          .forEach((line) {
+        levels.forEach((level) {
+          var result = RegExp('<${level.toString()}>(.*)</${level.toString()}>')
+              .firstMatch(line);
+          if (result != null) {
+            var targetPlane = line.substring(result.start, result.end);
+            var text = targetPlane
+                .replaceFirst('<${level.toString()}>', '')
+                .replaceFirst('</${level.toString()}>', '');
+            indexList.add(ArticleIndex(index, level, text));
+          }
+        });
         index++;
       });
     }
 
-    add(IndexLevel.h1);
-    add(IndexLevel.h2);
+    add([IndexLevel.h1, IndexLevel.h2]);
 
     return Article(
         uuid: Uuid().v4(),
@@ -68,6 +75,6 @@ class LocalFile {
                     Platform.pathSeparator),
                 '')
             .replaceAll('md', 'html'),
-    indexList: indexList);
+        indexList: indexList);
   }
 }
