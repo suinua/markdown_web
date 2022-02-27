@@ -49,15 +49,15 @@ ${editLog.date.year} ${editLog.date.month}/${editLog.date.day} : ${editLog.comme
   }
   static String _indexListToHtml(List<ArticleIndex> indexList) {
     var indexListHtml = indexList.map((e) => '''
- <li class=".article-index-item-h${e.level.toString()}">
-     <a href="#${e.href}" class="article-index-item-${e.level.toString()}">
-         ${e.text}
-     </a>
- </li>
+<li class="article-index-item-${e.level.toString()} uk-margin-remove-top">
+    <a href="#${e.href}" class="uk-flex uk-link-reset">
+    <div class="mark-filled">${e.text}</div>
+    </a>
+</li>
 ''');
 
     return '''
-<ul uk-scrollspy-nav="closest: li; scroll: true; offset: 100" class="uk-nav uk-nav-default tm-nav uk-nav-parent-icon">
+<ul uk-scrollspy-nav="closest: li; scroll: true" class="article-nav uk-overflow-auto">
   ${indexListHtml.join()}
 </ul>
 ''';

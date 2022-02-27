@@ -37,16 +37,15 @@ class LocalFile {
 
   Article toArticle() {
     var indexList = <ArticleIndex>[];
-    var index = 0;
 
     void add(IndexLevel level) {
+      var index = 0;
       markdownToHtml(context).replaceAll('\r\n', '\n').split('\n').forEach((line) {
         var result = RegExp('<${level.toString()}>(.*)</${level.toString()}>').firstMatch(line);
         if (result != null) {
           var targetPlane = line.substring(result.start, result.end);
-          var text = targetPlane.replaceFirst('<${level.toString()}>', '').replaceFirst(
-              '</${level.toString()}>', '');
-          indexList.add(ArticleIndex(index, level,text));
+          var text = targetPlane.replaceFirst('<${level.toString()}>', '').replaceFirst('</${level.toString()}>', '');
+          indexList.add(ArticleIndex(index, level, text));
         }
         index++;
       });

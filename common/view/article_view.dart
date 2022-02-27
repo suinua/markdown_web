@@ -20,9 +20,9 @@ class ArticleView {
         var targetPlane = line.substring(result.start, result.end);
         var text = targetPlane.replaceFirst('<${level.toString()}>', '').replaceFirst(
             '</${level.toString()}>', '');
-        var id = '$text-$index';
+        var id = ArticleIndex.generateId(index, text);
         var replace = targetPlane.replaceFirst('<${level.toString()}>', '<section id="$id"><${level.toString()}>')
-            .replaceFirst('</${level.toString()}>', '</${level.toString()}><section>');
+            .replaceFirst('</${level.toString()}>', '</${level.toString()}></section>');
         articleHtml = articleHtml.replaceFirst(targetPlane, replace
         );
       }

@@ -4,7 +4,12 @@ class ArticleIndex {
   final String text;
   final String href;
 
-  ArticleIndex(this.line, this.level, this.text):href = '$text-$line';
+  ArticleIndex(this.line, this.level, this.text)
+      : href = generateId(line, text);
+
+  static String generateId(int line, String text) {
+    return 'index-$text-$line';
+  }
 
   ArticleIndex.fromMap(Map data)
       : line = data['line'],
@@ -31,7 +36,8 @@ class IndexLevel {
   static final h2 = IndexLevel._('h2');
   static final h3 = IndexLevel._('h3');
   static final h4 = IndexLevel._('h4');
-  IndexLevel.fromInt(int value):_value = 'h$value';
+
+  IndexLevel.fromInt(int value) : _value = 'h$value';
 
   @override
   String toString() {

@@ -63,3 +63,7 @@
     display: inline-block;
     float: right;
 }
+
+.article-nav .uk-active {
+    background: rgba(210, 210, 210, 0.67);
+}
