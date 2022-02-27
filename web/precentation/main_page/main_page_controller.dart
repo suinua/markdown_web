@@ -20,7 +20,7 @@ class MainPageController {
   static void displayArticle(MouseEvent event, Element clickedArticle) {
     window.location.hash = '';
     var articleContainer = querySelector('.article-context-box');
-    HttpRequest.getString(window.location.href.replaceFirst('#(.*)', '') +
+    HttpRequest.getString('https://suinua.github.io/markdown_web/#'.replaceFirst(RegExp('#(.*)'), '') +
         'articles/${clickedArticle.attributes['url']}')
         .then((value) {
       var _htmlValidator = NodeValidatorBuilder.common()
