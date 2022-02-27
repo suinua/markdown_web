@@ -46,11 +46,12 @@
 }
 
 .article-index-item-h1 {
-    margin-left: 5%;
+    padding-left: 5%;
 }
 
 .article-index-item-h2 {
-    margin-left: 10%;
+    padding-left: 5%;
+    margin-left: 5%;
 }
 
 .article-menu-close-button-container {
