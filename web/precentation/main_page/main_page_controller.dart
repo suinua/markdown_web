@@ -21,7 +21,7 @@ class MainPageController {
     window.location.hash = '';
     window.history.replaceState({}, document.title, window.location.href.replaceFirst('#(.*)', ''));
     var articleContainer = querySelector('.article-context-box');
-    HttpRequest.getString('https://suinua.github.io/markdown_web/' + //window.location.href +
+    HttpRequest.getString(window.location.href +
         'articles/${clickedArticle.attributes['url']}')
         .then((value) {
       var _htmlValidator = NodeValidatorBuilder.common()
