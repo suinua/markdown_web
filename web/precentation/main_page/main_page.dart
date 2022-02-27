@@ -10,7 +10,8 @@ class MainPage {
   static String _lastFolderStructureMenuWidth = '';
   static String _lastArticleContainerWidth = '';
 
-  static setup() {//todo:article-menuだけイベント再設定しろ
+  static setup() {
+    //todo:article-menuだけイベント再設定しろ
     querySelectorAll('.folder').forEach((folder) {
       folder.onClick.listen(
           (event) => MainPageController.foldOrUnfoldFolder(event, folder));
@@ -79,8 +80,9 @@ class MainPage {
       articleContainer.style.width =
           _isFolderStructureMenuOpen ? '97.5%' : _lastArticleContainerWidth;
       foldersContainer.style.display = _isFolderStructureMenuOpen ? 'none' : '';
-      folderStructureMenu.style.width =
-          _isFolderStructureMenuOpen ? '${document.body!.clientWidth-articleContainer.clientWidth}px' : _lastFolderStructureMenuWidth;
+      folderStructureMenu.style.width = _isFolderStructureMenuOpen
+          ? '${document.body!.clientWidth - articleContainer.clientWidth}px'
+          : _lastFolderStructureMenuWidth;
       querySelector('.search-input')!.style.display =
           _isFolderStructureMenuOpen ? 'none' : '';
 

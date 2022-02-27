@@ -7,6 +7,7 @@ import '../../service/search_service.dart';
 
 class MainPageController {
   static void foldOrUnfoldFolder(MouseEvent event, Element clickedFolder) {
+    window.history.replaceState({}, document.title, window.location.href.replaceFirst('#(.*)', ''));
     var folderChildrenList = querySelectorAll('.folder-children');
     folderChildrenList.forEach((folderChildren) {
       if (folderChildren.attributes['folder-uuid'] == clickedFolder.attributes['folder-uuid']) {
@@ -19,13 +20,13 @@ class MainPageController {
 
   static void displayArticle(MouseEvent event, Element clickedArticle) {
     var articleContainer = querySelector('.article-context-box');
-    HttpRequest.getString(window.location.href +
-            'articles/${clickedArticle.attributes['url']}')
+    HttpRequest.getString(window.location.href + 'articles/${clickedArticle.attributes['url']}')
         .then((value) {
       var _htmlValidator = NodeValidatorBuilder.common()
         ..allowHtml5(uriPolicy: CustomUriPolicy())
         ..allowElement('span', attributes: ['uk-icon'])
         ..allowElement('ul', attributes: ['uk-scrollspy-nav']);
+
       articleContainer?.setInnerHtml(value, validator: _htmlValidator);
     });
 
