@@ -10,9 +10,19 @@
     overflow-y: scroll;
 }
 
+.article-menu::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
 .article-menu-tags {
     margin: 5px;
     border: solid 1px #999999;
+}
+
+.article-menu-tags ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
 }
 
 .article-menu-tag {
@@ -22,12 +32,17 @@
 
 .article-detail {
     margin: 5px;
-    border: solid 1px #999999;
 }
 
 .article-menu-committer-list {
     overflow-x: scroll;
     height: 50px;
+    border: solid 1px #999999;
+}
+
+.article-menu-committer-list::-webkit-scrollbar {
+    width: 0;
+    height: 0;
 }
 
 .article-menu-committer-icon {
@@ -36,8 +51,15 @@
 }
 
 .article-menu-logs {
+    margin-top: 10px;
     height: 200px;
     overflow-y: scroll;
+    border: solid 1px #999999;
+}
+
+.article-menu-logs::-webkit-scrollbar {
+    width: 0;
+    height: 0;
 }
 
 .article-menu-index {
@@ -66,7 +88,7 @@
 }
 
 .article-nav {
-    padding:0
+    padding: 0
 }
 
 .article-nav .uk-active {

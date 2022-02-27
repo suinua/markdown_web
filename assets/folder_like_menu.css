@@ -8,6 +8,11 @@
     overflow-y: scroll;
 }
 
+.folder-structure-menu ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
 .article-menu-item {
     display: -webkit-box;
     display: -moz-box;

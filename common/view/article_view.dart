@@ -11,13 +11,17 @@ class ArticleView {
     var articleMenuHtml = ArticleMenuView.html(
         article, logs, ArticleEditLogService.getCommitterList(logs));
 
-    var articleHtml = markdownToHtml(article.body);
+    var basedArticleHtml = markdownToHtml(article.body);
+    var newArticleHtml = '';
     void convert(List<IndexLevel> levels) {
       var index = 0;
-      articleHtml.replaceAll('\r\n', '\n').split('\n').forEach((line) {
+      basedArticleHtml.replaceAll('\r\n', '\n').split('\n').forEach((line) {
+        var isMatch = false;
         levels.forEach((level) {
           var result = RegExp('<${level.toString()}>(.*)</${level.toString()}>')
               .firstMatch(line);
+          isMatch = result != null ? true : isMatch; //trueだったら上書き
+
           if (result != null) {
             var targetPlane = line.substring(result.start, result.end);
             var text = targetPlane
@@ -26,12 +30,13 @@ class ArticleView {
             var id = ArticleIndex.generateId(index, text);
             var replace = targetPlane
                 .replaceFirst('<${level.toString()}>',
-                    '<section id="${Uri.parse(id)}"><${level.toString()}>')
+                    '<${level.toString()} id="${Uri.parse(id)}">')
                 .replaceFirst('</${level.toString()}>',
-                    '</${level.toString()}></section>');
-            articleHtml = articleHtml.replaceFirst(targetPlane, replace);
+                    '</${level.toString()}>');
+            newArticleHtml += replace;
           }
         });
+        if (!isMatch) newArticleHtml += line;
         index++;
       });
     }
@@ -40,7 +45,7 @@ class ArticleView {
 
     return '''
 $articleMenuHtml
-<div class="article-context">$articleHtml</div>
+<div class="article-context">$newArticleHtml</div>
 ''';
   }
 }
