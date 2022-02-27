@@ -19,7 +19,6 @@ class MainPage {
     querySelectorAll('.article-on-menu').forEach((article) {
       article.onClick.listen((event) {
         MainPageController.displayArticle(event, article);
-        setup();//todo:おそらく必要 要検証
       });
     });
 
