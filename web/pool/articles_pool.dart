@@ -6,10 +6,12 @@ import '../../common/model/folder.dart';
 class ArticlesPool {
   static Folder? _data;
 
-  static void _init() {
-    HttpRequest.getString('data.json').then((value) {
-      _data = Folder.fromMap(jsonDecode(value));
-    });
+  static void _init()  {
+    var request = HttpRequest()
+      ..open('GET', 'data.json', async: false)
+      ..send();
+
+    _data = Folder.fromMap(jsonDecode(request.response));
   }
 
   static Folder data() {
