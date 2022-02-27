@@ -10,7 +10,7 @@ class MainPage {
   static String _lastFolderStructureMenuWidth = '';
   static String _lastArticleContainerWidth = '';
 
-  static setup() {
+  static setup() {//todo:article-menuだけイベント再設定しろ
     querySelectorAll('.folder').forEach((folder) {
       folder.onClick.listen(
           (event) => MainPageController.foldOrUnfoldFolder(event, folder));
@@ -62,7 +62,7 @@ class MainPage {
       });
 
       //記事のサイズ変更
-      querySelector('.article-context')!.style.width = isOpen ? '75%' : '60%';
+      querySelector('.article-context')!.style.width = isOpen ? '80%' : '60%';
     });
 
     querySelector('.folder-structure-menu-close-button')!
@@ -80,7 +80,7 @@ class MainPage {
           _isFolderStructureMenuOpen ? '97.5%' : _lastArticleContainerWidth;
       foldersContainer.style.display = _isFolderStructureMenuOpen ? 'none' : '';
       folderStructureMenu.style.width =
-          _isFolderStructureMenuOpen ? 'auto' : _lastFolderStructureMenuWidth;
+          _isFolderStructureMenuOpen ? '${document.body!.clientWidth-articleContainer.clientWidth}px' : _lastFolderStructureMenuWidth;
       querySelector('.search-input')!.style.display =
           _isFolderStructureMenuOpen ? 'none' : '';
 
