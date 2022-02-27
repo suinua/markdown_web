@@ -6,6 +6,9 @@ import 'main_page_controller.dart';
 
 class MainPage {
   static bool _dragging = false;
+  static bool _isFolderStructureMenuOpen = true;
+  static String _lastFolderStructureMenuWidth = '';
+  static String _lastArticleContainerWidth = '';
 
   static setup() {
     querySelectorAll('.folder').forEach((folder) {
@@ -14,8 +17,10 @@ class MainPage {
     });
 
     querySelectorAll('.article-on-menu').forEach((article) {
-      article.onClick
-          .listen((event) => MainPageController.displayArticle(event, article));
+      article.onClick.listen((event) {
+        MainPageController.displayArticle(event, article);
+        setup();//todo:おそらく必要 要検証
+      });
     });
 
     querySelectorAll('.folder-structure-menu-tag').forEach((tag) {
@@ -61,17 +66,32 @@ class MainPage {
       querySelector('.article-context')!.style.width = isOpen ? '75%' : '60%';
     });
 
-    querySelector('.folder-structure-menu-close-button')!.onClick.listen((event) {
-      querySelector('.article-container')!.style.width = '97.5%';
-      querySelector('.folders-container')!.style.display = 'none';
-      querySelector('.folder-structure-menu')!.style.width = 'auto';
-      querySelector('.ghostbar')!.style.display = 'none';
-      querySelector('.search-input')!.style.display = 'none';
+    querySelector('.folder-structure-menu-close-button')!
+        .onClick
+        .listen((event) {
+      var articleContainer = querySelector('.article-container')!;
+      var folderStructureMenu = querySelector('.folder-structure-menu')!;
+      var foldersContainer = querySelector('.folders-container')!;
+      if (_isFolderStructureMenuOpen) {
+        _lastArticleContainerWidth = articleContainer.style.width;
+        _lastFolderStructureMenuWidth = folderStructureMenu.style.width;
+      }
+
+      articleContainer.style.width =
+          _isFolderStructureMenuOpen ? '97.5%' : _lastArticleContainerWidth;
+      foldersContainer.style.display = _isFolderStructureMenuOpen ? 'none' : '';
+      folderStructureMenu.style.width =
+          _isFolderStructureMenuOpen ? 'auto' : _lastFolderStructureMenuWidth;
+      querySelector('.search-input')!.style.display =
+          _isFolderStructureMenuOpen ? 'none' : '';
+
+      _isFolderStructureMenuOpen = !_isFolderStructureMenuOpen;
     });
   }
 
   static void _setupDraggableDivider() {
     querySelector('.dragbar')!.onMouseDown.listen((event) {
+      if (!_isFolderStructureMenuOpen) return;
       event.preventDefault();
       _dragging = true;
       var ghostbar = querySelector('.ghostbar')!
@@ -90,7 +110,8 @@ class MainPage {
         var mainPercentage = 100 - percentage;
 
         querySelector('.article-container')!.style.width = '$percentage%';
-        querySelector('.folder-structure-menu')!.style.width = '$mainPercentage%';
+        querySelector('.folder-structure-menu')!.style.width =
+            '$mainPercentage%';
         querySelector('.ghostbar')!.style.display = 'none';
         _dragging = false;
       }
