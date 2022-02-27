@@ -18,9 +18,11 @@ class MainPageController {
   }
 
   static void displayArticle(MouseEvent event, Element clickedArticle) {
-    window.history.replaceState({}, document.title, window.location.href.replaceFirst('#(.*)', ''));
+    window.location.href = '';
+    window.history.replaceState({}, document.title, window.location.href.replaceFirst('#', ''));
     var articleContainer = querySelector('.article-context-box');
-    HttpRequest.getString(window.location.href + 'articles/${clickedArticle.attributes['url']}')
+    HttpRequest.getString(window.location.href +
+        'articles/${clickedArticle.attributes['url']}')
         .then((value) {
       var _htmlValidator = NodeValidatorBuilder.common()
         ..allowHtml5(uriPolicy: CustomUriPolicy())
