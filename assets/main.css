@@ -5,6 +5,10 @@ body, html {
     margin: 0;
 }
 
+body::-webkit-scrollbar {
+    display: none;
+}
+
 .dragbar {
     background-color:#999999;
     height:100vh;

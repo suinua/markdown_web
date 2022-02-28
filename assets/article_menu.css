@@ -11,6 +11,7 @@
 }
 
 .article-menu::-webkit-scrollbar {
+    display: none;
     width: 0;
     height: 0;
 }
@@ -18,11 +19,6 @@
 .article-menu-tags {
     margin: 5px;
     border: solid 1px #999999;
-}
-
-.article-menu-tags ::-webkit-scrollbar {
-    width: 0;
-    height: 0;
 }
 
 .article-menu-tag {
