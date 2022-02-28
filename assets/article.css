@@ -26,6 +26,17 @@
     padding-right: 5%;
 }
 
+.article-context::-webkit-scrollbar {
+    width: 4px;
+    height: 8px;
+    background-color: #cccccc;
+}
+
+.article-context::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #9a9a9a;
+}
+
 .article-context h1 {
     padding-bottom: 0.2em;
     margin-bottom: 1.1rem;
