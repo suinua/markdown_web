@@ -20,16 +20,17 @@ class MainPageController {
   static void displayArticle(MouseEvent event, Element clickedArticle) {
     window.location.hash = '';
     var articleContainer = querySelector('.article-context-box');
-    HttpRequest.getString('https://suinua.github.io/markdown_web/#'.replaceFirst(RegExp('#(.*)'), '') +
-        'articles/${clickedArticle.attributes['url']}')
-        .then((value) {
+    var url = window.location.href.replaceFirst(RegExp('#(.*)'), '') + 'articles/${clickedArticle.attributes['url']}';
+    var request = HttpRequest()
+      ..open('GET', url, async: false)
+      ..send();
+
       var _htmlValidator = NodeValidatorBuilder.common()
         ..allowHtml5(uriPolicy: CustomUriPolicy())
         ..allowElement('span', attributes: ['uk-icon'])
         ..allowElement('ul', attributes: ['uk-scrollspy-nav']);
 
-      articleContainer?.setInnerHtml(value, validator: _htmlValidator);
-    });
+      articleContainer?.setInnerHtml(request.responseText!, validator: _htmlValidator);
 
     event.stopImmediatePropagation();
   }

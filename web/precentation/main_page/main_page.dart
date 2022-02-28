@@ -11,15 +11,14 @@ class MainPage {
   static String _lastArticleContainerWidth = '';
 
   static setup() {
-    //todo:article-menuだけイベント再設定しろ
     querySelectorAll('.folder').forEach((folder) {
-      folder.onClick.listen(
-          (event) => MainPageController.foldOrUnfoldFolder(event, folder));
+      folder.onClick.listen((event) => MainPageController.foldOrUnfoldFolder(event, folder));
     });
 
     querySelectorAll('.article-on-menu').forEach((article) {
       article.onClick.listen((event) {
         MainPageController.displayArticle(event, article);
+        _setupArticleMenuEvent();
       });
     });
 
@@ -28,6 +27,7 @@ class MainPage {
     });
 
     _setupDraggableDivider();
+    _setupArticleMenuEvent();
 
     querySelectorAll('.tag-button').forEach((tagButton) {
       tagButton.onClick.listen((event) {
@@ -46,24 +46,6 @@ class MainPage {
       SearchContextPool.setText(searchInput.value!);
       MainPageController.displayFilteredArticles(
           SearchService.filterBySearchContext());
-    });
-
-    var closeButtonContainer =
-        querySelector('.article-menu-close-button-container')!;
-    var closeButton = querySelector('.article-menu-close-button')!;
-    closeButton.onClick.listen((event) {
-      var articleMenu = querySelector('.article-menu')!;
-      var isOpen = ['19%', ''].contains(articleMenu.style.width);
-
-      articleMenu.style.width = isOpen ? 'auto' : '19%';
-      articleMenu.children.forEach((child) {
-        if (child.className != closeButtonContainer.className) {
-          child.style.display = isOpen ? 'none' : 'block';
-        }
-      });
-
-      //記事のサイズ変更
-      querySelector('.article-context')!.style.width = isOpen ? '80%' : '60%';
     });
 
     querySelector('.folder-structure-menu-close-button')!
@@ -116,6 +98,27 @@ class MainPage {
         querySelector('.ghostbar')!.style.display = 'none';
         _dragging = false;
       }
+    });
+  }
+
+  static void _setupArticleMenuEvent() {
+    var closeButtonContainer =
+        querySelector('.article-menu-close-button-container')!;
+    var closeButton = querySelector('.article-menu-close-button')!;
+    closeButton.onClick.listen((event) {
+      print('click');
+      var articleMenu = querySelector('.article-menu')!;
+      var isOpen = ['19%', ''].contains(articleMenu.style.width);
+
+      articleMenu.style.width = isOpen ? 'auto' : '19%';
+      articleMenu.children.forEach((child) {
+        if (child.className != closeButtonContainer.className) {
+          child.style.display = isOpen ? 'none' : 'block';
+        }
+      });
+
+      //記事のサイズ変更
+      querySelector('.article-context')!.style.width = isOpen ? '80%' : '60%';
     });
   }
 }
