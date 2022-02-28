@@ -31,7 +31,8 @@
 
 .article-on-menu {
     display: inline-block;
-    width: 10%;
+    width: auto;
+    margin-right: 5px;
     list-style: none;
 }
 
@@ -88,7 +89,6 @@
 }
 
 .tags {
-    border-left: 1px solid;
     height: 20px;
     display: flex;
     align-items: center;
@@ -98,7 +98,6 @@
     border-radius: 5px;
     display: inline-block;
     vertical-align: middle;
-    margin-left: 5px;
     height: 20px;
 }
 
