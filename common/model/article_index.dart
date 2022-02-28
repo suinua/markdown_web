@@ -8,7 +8,7 @@ class ArticleIndex {
       : href = generateId(line, text);
 
   static String generateId(int line, String text) {
-    return 'index-$text-$line';
+    return 'line-$line';
   }
 
   ArticleIndex.fromMap(Map data)

@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:markdown/markdown.dart';
 import 'package:uuid/uuid.dart';
 
 import '../common/model/article.dart';
 import '../common/model/article_index.dart';
 import '../common/model/tag.dart';
+import '../common/view/custom_markdown_to_html.dart';
 
 class LocalFile {
   final String name;
@@ -36,31 +36,6 @@ class LocalFile {
   }
 
   Article toArticle() {
-    var indexList = <ArticleIndex>[];
-
-    void add(List<IndexLevel> levels) {
-      var index = 0;
-      markdownToHtml(context)
-          .replaceAll('\r\n', '\n')
-          .split('\n')
-          .forEach((line) {
-        levels.forEach((level) {
-          var result = RegExp('<${level.toString()}>(.*)</${level.toString()}>')
-              .firstMatch(line);
-          if (result != null) {
-            var targetPlane = line.substring(result.start, result.end);
-            var text = targetPlane
-                .replaceFirst('<${level.toString()}>', '')
-                .replaceFirst('</${level.toString()}>', '');
-            indexList.add(ArticleIndex(index, level, text));
-          }
-        });
-        index++;
-      });
-    }
-
-    add([IndexLevel.h1, IndexLevel.h2]);
-
     return Article(
         uuid: Uuid().v4(),
         tags: tags.map((e) => Tag(e)).toList(),
@@ -75,6 +50,6 @@ class LocalFile {
                     Platform.pathSeparator),
                 '')
             .replaceAll('md', 'html'),
-        indexList: indexList);
+        indexList: convertArticleToHtml(context).indexList);
   }
 }
