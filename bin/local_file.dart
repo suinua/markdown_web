@@ -36,10 +36,11 @@ class LocalFile {
   }
 
   Article toArticle() {
+    var title = name.replaceAll('.md', '');
     return Article(
         uuid: Uuid().v4(),
         tags: tags.map((e) => Tag(e)).toList(),
-        title: name.replaceAll('.md', ''),
+        title: title,
         body: context,
         url: path
             .replaceAll(
@@ -50,6 +51,6 @@ class LocalFile {
                     Platform.pathSeparator),
                 '')
             .replaceAll('md', 'html'),
-        indexList: convertArticleToHtml(context).indexList);
+        indexList: convertArticleToHtml(title,context).indexList);
   }
 }

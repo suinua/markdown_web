@@ -9,10 +9,10 @@ class ArticleConvertResult {
   ArticleConvertResult(this.html, this.indexList);
 }
 
-ArticleConvertResult convertArticleToHtml(String markdown) {
+ArticleConvertResult convertArticleToHtml(String articleTitle,String markdown) {
   var basedArticleHtml =
       markdownToHtml(markdown, blockSyntaxes: [const TableSyntax()]);
-  var newArticleHtml = '';
+  var newArticleHtml = '<h1 class="title">$articleTitle</h1><div class="article-context">';
 
   var indexList = <ArticleIndex>[];
   void convert(List<IndexLevel> levels) {
@@ -44,6 +44,6 @@ ArticleConvertResult convertArticleToHtml(String markdown) {
 
   convert([IndexLevel.h1, IndexLevel.h2]);
   newArticleHtml = newArticleHtml.replaceAll('<table>', '<table class="uk-table">');
-
+  newArticleHtml += '</div>';
   return ArticleConvertResult(newArticleHtml, indexList);
 }
