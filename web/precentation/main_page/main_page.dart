@@ -53,7 +53,7 @@ class MainPage {
       });
 
       //記事のサイズ変更
-      querySelector('.article-context-wrap')!.style.width = isOpen ? '90%' : '70%';
+      querySelector('.article-context-wrap')!.style.width = isOpen ? '85%' : '70%';
     });
   }
 }
