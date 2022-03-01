@@ -17,24 +17,6 @@ class MainPageController {
     event.stopImmediatePropagation();
   }
 
-  static void displayArticle(MouseEvent event, Element clickedArticle) {
-    window.location.hash = '';
-    var articleContainer = querySelector('.article-context-box');
-    var url = window.location.href.replaceFirst(RegExp('#(.*)'), '') + 'articles/${clickedArticle.attributes['url']}';
-    var request = HttpRequest()
-      ..open('GET', url, async: false)
-      ..send();
-
-      var _htmlValidator = NodeValidatorBuilder.common()
-        ..allowHtml5(uriPolicy: CustomUriPolicy())
-        ..allowElement('span', attributes: ['uk-icon'])
-        ..allowElement('ul', attributes: ['uk-scrollspy-nav']);
-
-      articleContainer?.setInnerHtml(request.responseText!, validator: _htmlValidator);
-
-    event.stopImmediatePropagation();
-  }
-
   static void selectTag(MouseEvent event, Element clickedTag) {
     var tagText = clickedTag.attributes['tag-text']!;
     SearchContextPool.addTag(Tag(tagText));

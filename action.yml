@@ -8,9 +8,6 @@ inputs:
   articles_directory_path:
     description: 'articles directory path'
     required: true
-  index_file_path:
-    description: 'index file path'
-    required: true
   github_token:
     description: ''
     required: true

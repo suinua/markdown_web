@@ -1,12 +1,13 @@
 import 'dart:io';
 
 import '../common/model/article.dart';
-import '../common/view/article_view.dart';
+import '../common/model/folder.dart';
+import '../common/view/main_page.dart';
 
 class ArticleService {
-  static void saveFile(String path,Article article){
+  static void saveFile(String path,Folder topFolder,Article article){
     var file = File('$path/${article.title}.html');
-    ArticleView.html(article).then((value) {
+    ArticlePage.html(topFolder, article).then((value) {
       file.writeAsString(value);
     });
   }

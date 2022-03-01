@@ -3,9 +3,8 @@ import '../model/folder.dart';
 import 'article_view.dart';
 import 'folder_structure_menu_view.dart';
 
-class MainPage {
-  static Future<String> generate(
-      Folder folder, String outputPath, Article indexArticle) async {
+class ArticlePage {
+  static Future<String> html(Folder topFolder, Article article) async {
     return '''
 <!DOCTYPE html>
 <html lang="en">
@@ -37,14 +36,14 @@ class MainPage {
       <div class="dragbar"></div>
       <div class="ghostbar"></div>
       <div class="article-context-box">
-        ${await ArticleView.html(indexArticle)}
+        ${await ArticleView.html(article)}
       </div>
     </div>
     <div class="folder-structure-menu">
       <div class="folder-structure-menu-close-button"><span uk-icon="chevron-double-right"></span></div><label><input class="search-input" type="search" placeholder="Search"></label>
       <div class="selected-tags"></div>
       <div class="folders-container">
-        ${FolderLikeMenuView.html(folder)}
+        ${FolderLikeMenuView.html(topFolder)}
       </div>
     </div>
 <script src="main.js"></script>

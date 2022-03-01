@@ -33,8 +33,8 @@ class FolderLikeMenuView {
 
     return '''
 <div class="article-menu-item">
-  <div class="article-on-menu" article-uuid="${article.uuid}" url="${article.url}">
-      <div class="article-title">${isLast ? '└─' : '├─' }<div class="article-title-text" article-uuid="${article.uuid}">${article.title}</div></div>
+  <div class="article-on-menu">
+      <div class="article-title">${isLast ? '└─' : '├─' }<div class="article-title-text" article-uuid="${article.uuid}"><a class="uk-link-reset" href="${article.title}.html"  target="_blank">${article.title}</a></div></div>
   </div>
   <div class="tags" article-uuid="${article.uuid}">${article.tags.map((tag) => _tagToFolderStructureMenuHtml(tag)).toList().join()}</div>
 </div>

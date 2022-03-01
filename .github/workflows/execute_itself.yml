@@ -15,5 +15,4 @@ jobs:
       - uses: suinua/markdown_web@master
         with:
           articles_directory_path: 'articles'
-          index_file_path: 'articles/index.md'
           github_token: ${{ secrets.GITHUB_TOKEN }}

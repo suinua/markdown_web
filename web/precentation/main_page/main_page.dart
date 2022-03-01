@@ -15,13 +15,6 @@ class MainPage {
       folder.onClick.listen((event) => MainPageController.foldOrUnfoldFolder(event, folder));
     });
 
-    querySelectorAll('.article-on-menu').forEach((article) {
-      article.onClick.listen((event) {
-        MainPageController.displayArticle(event, article);
-        _setupArticleMenuEvent();
-      });
-    });
-
     querySelectorAll('.folder-structure-menu-tag').forEach((tag) {
       tag.onClick.listen((event) => MainPageController.selectTag(event, tag));
     });
