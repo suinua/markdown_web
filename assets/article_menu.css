@@ -1,9 +1,13 @@
 .article-menu {
     width: 19%;
-    margin-top: 5%;
+    margin-top: 10%;
     margin-left: 2%;
+    margin-right: 2%;
+    top:0;
     display: inline-block;
+    position: sticky;
     overflow-y: scroll;
+    float: right;
 }
 
 .article-menu::-webkit-scrollbar {

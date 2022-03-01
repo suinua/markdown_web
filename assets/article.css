@@ -8,10 +8,8 @@
     width: 70%;
     margin-left: 5%;
     margin-right: 1%;
-    overflow-y: scroll;
-
     height: 100%;
-    float: left;
+    display: inline-block;
 }
 
 .article-context-wrap::-webkit-scrollbar {
