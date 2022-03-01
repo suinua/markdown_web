@@ -1,23 +1,22 @@
 開発
-# PMMPセットアップ
 
-## 作業フォルダ
+# 作業フォルダ
 `pmmp4/`フォルダを作成  
-## Pocketmineのダウンロード
+# Pocketmineのダウンロード
 [Github](https://github.com/pmmp/PocketMine-MP/releases/tag/4.2.1)から**Pocketmine.phar**と**start.cmd**をダウンロード
 ![download](https://raw.githubusercontent.com/suinua/pmmp-_sample_code/master/articles/download_from_github.png)
 
 `pmmp4/`フォルダにコピーします
 ![folder_1](https://raw.githubusercontent.com/suinua/pmmp-_sample_code/master/articles/folder_1.png)
 
-## Binのダウンロード
+# Binのダウンロード
 [Jenkins](https://jenkins.pmmp.io/job/PHP-8.0-Aggregate/)から**PHP-8.0-Windows-x64.zip**をダウンロード 
 ![download](https://raw.githubusercontent.com/suinua/pmmp-_sample_code/master/articles/jenkins.png)
 
 展開して**bin**を`pmmp4/`にコピー
 ![download_bin](https://raw.githubusercontent.com/suinua/pmmp-_sample_code/master/articles/folder_2)
 
-## Pocketmine起動
+# Pocketmine起動
 コマンドプロンプトを起動して`start.cmd`を実行
 ```bat
 cd D:\pmmp4\ 作成した場所に移動
@@ -116,11 +115,11 @@ PocketMine-MP は LGPL ライセンスのもとで許諾されており、
 実行後は`pmmp4/`フォルダがこのようになっているはずです
 ![folder2](https://raw.githubusercontent.com/suinua/pmmp-_sample_code/master/articles/folder_3.png)
 
-## サーバー機から参加できるようにする
+# サーバー機から参加できるようにする
 管理者権限で以下のコマンドを実行
 `CheckNetIsolation LoopbackExempt -a -n="Microsoft.MinecraftUWP_8wekyb3d8bbwe"`
 
-## サーバーに参加
+# サーバーに参加
 以下のようにサーバーを追加します
 
 サーバー名 : **自由**
