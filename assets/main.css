@@ -5,24 +5,10 @@ body, html {
     margin: 0;
 }
 
+body {
+    background: #EDF2F7;
+}
+
 body::-webkit-scrollbar {
     display: none;
-}
-
-.dragbar {
-    background-color: #cccccc;
-    height:100vh;
-    float: right;
-    width: 4px;
-    cursor: col-resize;
-}
-
-.ghostbar {
-    width: 4px;
-    height:100vh;
-    background-color: #cccccc;
-    opacity:0.5;
-    position:absolute;
-    cursor: col-resize;
-    z-index:999
 }

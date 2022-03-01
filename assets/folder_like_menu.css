@@ -1,17 +1,6 @@
-.folder-structure-menu {
-    width: 25%;
-    height: 100vh;
-    float: right;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-    overflow-x: scroll;
-    overflow-y: scroll;
-}
-
-.folder-structure-menu::-webkit-scrollbar {
-    display: none;
-    width: 0;
-    height: 0;
+.search-and-folders-container {
+    background: white;
+    border-radius: 10px;
 }
 
 .article-menu-item {
@@ -38,6 +27,17 @@
 
 .folders-container {
     margin-left: 10px;
+    padding-bottom: 10px;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: scroll;
+    overflow-y: scroll;
+}
+
+.folders-container::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
 }
 
 .folder {
@@ -58,15 +58,6 @@
 
 .folder-children {
     margin-left: 3%;
-}
-
-.folder-divider {
-    background: #1b2538;
-    border-radius: 8px;
-    width: 80%;
-    height: 2px;
-    display: inline-block;
-    margin-bottom: 5px;
 }
 
 .selected-tag {
@@ -128,6 +119,7 @@
     color: #aaaaaa;
     border: 1px solid #1b2538;
     border-radius: 4px;
+    margin: 10px;
 }
 
 .folder-structure-menu-close-button {

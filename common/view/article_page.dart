@@ -1,7 +1,7 @@
 import '../model/article.dart';
 import '../model/folder.dart';
+import 'article_menu_view.dart';
 import 'article_view.dart';
-import 'folder_structure_menu_view.dart';
 
 class ArticlePage {
   static Future<String> html(Folder topFolder, Article article) async {
@@ -11,7 +11,7 @@ class ArticlePage {
 
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>${article.title}</title>
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="article_menu.css">
     <link rel="stylesheet" href="folder_like_menu.css">
@@ -31,21 +31,8 @@ class ArticlePage {
 </head>
 
 <body>
-    <div class="article-container">
-      <span class="position"></span>
-      <div class="dragbar"></div>
-      <div class="ghostbar"></div>
-      <div class="article-context-box">
-        ${await ArticleView.html(article)}
-      </div>
-    </div>
-    <div class="folder-structure-menu">
-      <div class="folder-structure-menu-close-button"><span uk-icon="chevron-double-right"></span></div><label><input class="search-input" type="search" placeholder="Search"></label>
-      <div class="selected-tags"></div>
-      <div class="folders-container">
-        ${FolderLikeMenuView.html(topFolder)}
-      </div>
-    </div>
+    ${await ArticleView.html(article)}
+    ${ArticleMenuView.html(topFolder, article)}
 <script src="main.js"></script>
 </body>
 
