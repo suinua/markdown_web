@@ -16,6 +16,7 @@ class ArticlePage {
     <link rel="stylesheet" href="article_menu.css">
     <link rel="stylesheet" href="folder_like_menu.css">
     <link rel="stylesheet" href="article.css">
+    <link rel="stylesheet" href="smartphone.css" media="screen and (max-width: 1000px)">
 
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.11.1/dist/css/uikit.min.css" />
@@ -31,6 +32,18 @@ class ArticlePage {
 </head>
 
 <body>
+<div class="smartphone-menu uk-navbar-container tm-navbar-container uk-active uk-sticky-below">
+    <div class="uk-container uk-container-expand">
+        <nav class="uk-navbar">
+            <div class="uk-navbar-right">
+                <a class="uk-link-reset" href="#offcanvas-slide" uk-toggle>
+                    <span uk-icon="icon: menu; ratio: 3"></span>
+                </a>
+            </div>
+        </nav>
+    </div>
+</div>
+
     ${await ArticleView.html(article)}
     ${ArticleMenuView.html(topFolder, article)}
 <script src="main.js"></script>

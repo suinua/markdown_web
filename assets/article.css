@@ -152,3 +152,7 @@
     float: right;
     border-radius: 10px !important;
 }
+
+.smartphone-menu {
+    display: none;
+}

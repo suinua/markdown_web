@@ -11,11 +11,7 @@ class ArticleMenuView {
     var tagsAsHtml =
         article.tags.map((tag) => _tagToArticleMenuHtml(tag)).toList().join();
 
-    return '''
-<div class="article-menu">
-    <div class="article-menu-close-button-container">
-      <div class="article-menu-close-button"><span uk-icon="chevron-double-left"></span></div>
-    </div>
+    var context = '''
     <div class="article-menu-tags">
        $tagsAsHtml
     </div>
@@ -29,6 +25,19 @@ class ArticleMenuView {
         <div class="selected-tags"></div>
         <div class="folders-container"> ${FolderLikeMenuView.html(topFolder)}</div>
       </div>
+''';
+
+    return '''
+<div class="article-menu">
+    <div class="article-menu-close-button-container">
+      <div class="article-menu-close-button"><span uk-icon="chevron-double-left"></span></div>
+    </div>
+    $context
+</div>
+<div id="offcanvas-slide" uk-offcanvas>
+    <div class="uk-offcanvas-bar">
+        $context
+    </div>
 </div>
 ''';
   }
