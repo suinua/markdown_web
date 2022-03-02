@@ -19,7 +19,8 @@ class MainPageController {
 
   static void selectTag(MouseEvent event, Element clickedTag) {
     var tagText = clickedTag.attributes['tag-text']!;
-    SearchContextPool.addTag(Tag(tagText));
+    var result = SearchContextPool.addTag(Tag(tagText));
+    if (!result) return;
 
     var _htmlValidator = NodeValidatorBuilder.common()
       ..allowElement('a', attributes: ['uk-icon', 'tag-text']);

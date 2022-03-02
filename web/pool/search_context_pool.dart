@@ -19,8 +19,13 @@ class SearchContextPool {
   }
 
   //Tags
-  static void addTag(Tag tag) {
+  static bool addTag(Tag tag) {
+    if (_tags.contains(tag)) {
+      return false;
+    }
+
     _tags.add(tag);
+    return true;
   }
 
   static void removeTag(Tag tag) {
