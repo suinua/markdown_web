@@ -12,27 +12,31 @@ class SearchService {
           //両方が空
         } else {
           //テキストだけ
-          if (_isTargetArticleByTags(article) || _isTargetArticleByText(article)) filteredArticles.add(article);
+          if (_isTargetArticleByTags(article) ||
+              _isTargetArticleByText(article)) filteredArticles.add(article);
         }
-
       } else {
         if (SearchContextPool.getText().isEmpty) {
           //タグだけ
           if (_isTargetArticleByTags(article)) filteredArticles.add(article);
         } else {
           //両方
-          if (_isTargetArticleByTags(article) && _isTargetArticleByText(article)) filteredArticles.add(article);
+          if (_isTargetArticleByTags(article) &&
+              _isTargetArticleByText(article)) filteredArticles.add(article);
         }
       }
     });
     return filteredArticles;
   }
 
+  //すべてのタグを含んでるもののみ
   static bool _isTargetArticleByTags(Article article) {
     if (SearchContextPool.getTags().isEmpty) return false;
-    var isTarget = false;
+    var isTarget = true;
     SearchContextPool.getTags().forEach((searchTag) {
-      isTarget = article.tags.contains(searchTag);
+      if (!article.tags.contains(searchTag)) {
+        isTarget = false;
+      }
     });
     return isTarget;
   }
