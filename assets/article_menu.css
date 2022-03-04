@@ -51,18 +51,6 @@
     margin-left: 4%;
 }
 
-.article-menu-close-button-container {
-    display: inline-block;
-    background: white;
-    height: 30px;
-    width: 100%;
-}
-
-.article-menu-close-button {
-    display: inline-block;
-    float: left;
-}
-
 .article-nav {
     padding: 0
 }

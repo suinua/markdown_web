@@ -1,5 +1,6 @@
-import 'precentation/main_page/main_page.dart';
+import '../common/view/article_menu_view.dart';
+import '../common/view/folder_structure_menu_view.dart';
 
 void main() {
-  MainPage.setup();
+  FolderStructureMenuViewController.setUp();
 }

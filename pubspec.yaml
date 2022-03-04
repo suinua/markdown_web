@@ -9,6 +9,7 @@ dependencies:
   path: ^1.8.0
   uuid: ^3.0.6
   http: ^0.13.4
+  universal_html: ^2.0.8
 
 dev_dependencies:
   pedantic: ^1.10.0

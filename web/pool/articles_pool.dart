@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'dart:html';
 
+import 'package:universal_html/html.dart';
 import '../../common/model/folder.dart';
 
 class ArticlesPool {
@@ -10,7 +10,7 @@ class ArticlesPool {
     var request = HttpRequest()
       ..open('GET', 'data.json', async: false)
       ..send();
-
+    
     _data = Folder.fromMap(jsonDecode(request.response));
   }
 

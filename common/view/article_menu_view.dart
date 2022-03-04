@@ -1,7 +1,7 @@
+import 'package:universal_html/html.dart';
+
 import '../model/article.dart';
-import '../model/article_edit_log.dart';
 import '../model/article_index.dart';
-import '../model/committer.dart';
 import '../model/folder.dart';
 import '../model/tag.dart';
 import 'folder_structure_menu_view.dart';
@@ -23,15 +23,12 @@ class ArticleMenuView {
      <div class="search-and-folders-container">
         <label><input class="search-input" type="search" placeholder="Search"></label>
         <div class="selected-tags"></div>
-        <div class="folders-container"> ${FolderLikeMenuView.html(topFolder)}</div>
+        <div class="folders-container"> ${FolderStructureMenuView.html(topFolder)}</div>
       </div>
 ''';
 
     return '''
 <div class="article-menu">
-    <div class="article-menu-close-button-container">
-      <div class="article-menu-close-button"><span uk-icon="chevron-double-left"></span></div>
-    </div>
     $context
 </div>
 <div id="offcanvas-slide" uk-offcanvas>
@@ -45,7 +42,6 @@ class ArticleMenuView {
   static String _tagToArticleMenuHtml(Tag tag) {
     return '''<div class="${Tag.ON_ARTICLE_MENU_CLASS_NAME}">#${tag.text}</div>''';
   }
-
 
   static String _indexListToHtml(List<ArticleIndex> indexList) {
     var indexListHtml = indexList.map((e) => '''
