@@ -13,9 +13,8 @@ class ArticleView {
 <div class="article-context-wrap">
 $articleHtml
 <div class="share">
-    <a href="" class="uk-icon-button uk-margin-small-right" uk-icon="twitter"></a>
-    <a href="" class="uk-icon-button uk-margin-small-right" uk-icon="facebook"></a>
-    <a href="" class="uk-icon-button uk-margin-small-right" uk-icon="reddit"></a>
+    <span url="https://twitter.com/intent/tweet?ref_src=twsrc%5Etfw&url=${article.title} ${article.url}" class="uk-icon-button uk-margin-small-right twitter-button" uk-icon="twitter"></span>
+    <span text="${article.title}\n${article.url}" class="uk-icon-button uk-margin-small-right copy-link-button" uk-icon="link"></span><div class="copied-message">Copied!</div>
     <button class="uk-button uk-button-secondary github-button"><span uk-icon="github"></span>Go Github</button>
 </div>
 $articleDetailHtml
