@@ -25,10 +25,12 @@
 .smartphone-menu {
     position: fixed;
     top: 0;
-    width:100%;
     display: block !important;
     background: white !important;
-    border-bottom: solid 1px #EDF2F7;
+    border: solid 1px #EDF2F7;
+    float: right;
+    right: 0;
+    border-radius: 5px;
 }
 
 .search-and-folders-container {

@@ -43,7 +43,7 @@ class ArticleMenuView {
 
   static String _indexListToHtml(List<ArticleIndex> indexList) {
     var indexListHtml = indexList.map((e) => '''
-<li class="article-index-item-${e.level.toString()} uk-flex">
+<li class="article-index-item article-index-item-${e.level.toString()} uk-flex">
     <a href="#${Uri.parse(e.href)}" class="uk-flex uk-link-reset">
     <div class="mark-filled">${e.text}</div>
     </a>

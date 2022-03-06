@@ -26,4 +26,14 @@ void main() {
     await Future.delayed(Duration(seconds: 1));
     querySelector('.copied-message')!.style.display = 'none';
   });
+
+  querySelectorAll('.article-index-item').forEach((element) {
+    var anchorElement = element.children[0] as AnchorElement;
+    var id = anchorElement.href!.replaceFirst(RegExp('(.*)#'), '');
+    var target = querySelector('#$id')!;
+    element.onClick.listen((event) async {
+      await Future.delayed(Duration(milliseconds: 400));
+      window.scrollTo(0, target.offsetTop);
+    });
+  });
 }

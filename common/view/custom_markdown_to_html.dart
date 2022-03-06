@@ -31,9 +31,9 @@ ArticleConvertResult convertArticleToHtml(String articleTitle,String markdown) {
               .replaceFirst('</${level.toString()}>', '');
           var id = ArticleIndex.generateId(index, text);
           var replace = targetPlane
-              .replaceFirst('<${level.toString()}>','<${level.toString()} id="${Uri.parse(id)}">')
+              .replaceFirst('<${level.toString()}>','<${level.toString()}>')
               .replaceFirst('</${level.toString()}>', '</${level.toString()}>');
-          newArticleHtml += '\n' + replace;
+          newArticleHtml += '<div id="${Uri.parse(id)}"></div>' + replace;
           indexList.add(ArticleIndex(index, level, text));
         }
       });
