@@ -7,7 +7,7 @@ class ArticlePage {
   static Future<String> html(Folder topFolder, Article article) async {
     return '''
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
 <head>
     <meta charset="UTF-8">
