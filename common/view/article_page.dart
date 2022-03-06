@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import '../model/article.dart';
 import '../model/folder.dart';
 import 'article_menu_view.dart';
@@ -5,6 +7,11 @@ import 'article_view.dart';
 
 class ArticlePage {
   static Future<String> html(Folder topFolder, Article article) async {
+    var repository = Platform.environment['GITHUB_REPOSITORY']!;
+    var userName = repository.split('/')[0];
+    var repositoryName = repository.split('/')[1];
+    var path = 'https://$userName.github.io/$repositoryName/';
+
     return '''
 <!DOCTYPE html>
 <html lang="ja">
@@ -12,10 +19,10 @@ class ArticlePage {
 <head>
     <meta charset="UTF-8">
     <title>${article.title}</title>
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="article_menu.css">
-    <link rel="stylesheet" href="folder_like_menu.css">
-    <link rel="stylesheet" href="article.css">
+    <link rel="stylesheet" href="${path}main.css">
+    <link rel="stylesheet" href="${path}article_menu.css">
+    <link rel="stylesheet" href="${path}folder_like_menu.css">
+    <link rel="stylesheet" href="${path}article.css">
     <link rel="stylesheet" href="smartphone.css" media="screen and (max-width: 1000px)">
 
     <!-- UIkit CSS -->
