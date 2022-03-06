@@ -1,5 +1,3 @@
-import 'package:universal_html/html.dart';
-
 import '../model/article.dart';
 import '../model/article_index.dart';
 import '../model/folder.dart';

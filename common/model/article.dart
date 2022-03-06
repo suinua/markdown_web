@@ -6,6 +6,7 @@ class Article {
   final List<Tag> tags;
   final String title;
   final String body;
+  final String path;
   final String url;
   final List<ArticleIndex> indexList;
 
@@ -14,6 +15,7 @@ class Article {
         required this.tags,
         required this.title,
         required this.body,
+        required this.path,
         required this.url,
         required this.indexList});
 
@@ -22,6 +24,7 @@ class Article {
         tags = data['tags'].map((text) => Tag(text)).toList().cast<Tag>(),
         title = data['title'],
         body = data['body'],
+        path = data['path'],
         url = data['url'],
         indexList = data['index_list'].map((e) => ArticleIndex.fromMap(e)).toList().cast<ArticleIndex>();
 
@@ -31,6 +34,7 @@ class Article {
       'tags': tags.map((e) => e.text).toList(),
       'title': title,
       'body': body,
+      'path': path,
       'url': url,
       'index_list': indexList.map((e) => e.toMap()).toList(),
     };

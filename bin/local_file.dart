@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:uuid/uuid.dart';
 
 import '../common/model/article.dart';
-import '../common/model/article_index.dart';
 import '../common/model/tag.dart';
 import '../common/view/custom_markdown_to_html.dart';
 
@@ -37,20 +36,19 @@ class LocalFile {
 
   Article toArticle() {
     var title = name.replaceAll('.md', '');
+
+    var repository = Platform.environment['GITHUB_REPOSITORY'] ?? 'suinua/markdown_web';
+    var userName = repository.split('/')[0];
+    var repositoryName = repository.split('/')[1];
+    var basedUrl = 'https://$userName.github.io/$repositoryName/';
+    var articlePath =  path.replaceAll(RegExp(r'(.*)' +(Platform.environment['INPUT_ARTICLES_DIRECTORY_PATH'] ?? 'articles') + r'\' + Platform.pathSeparator), '').replaceAll('md', 'html');
     return Article(
         uuid: Uuid().v4(),
         tags: tags.map((e) => Tag(e)).toList(),
         title: title,
         body: context,
-        url: path
-            .replaceAll(
-                RegExp(r'(.*)' +
-                    (Platform.environment['INPUT_ARTICLES_DIRECTORY_PATH'] ??
-                        'articles') +
-                    r'\' +
-                    Platform.pathSeparator),
-                '')
-            .replaceAll('md', 'html'),
+        path: articlePath,
+        url: basedUrl + articlePath.replaceAll('\\', '/'),
         indexList: convertArticleToHtml(title,context).indexList);
   }
 }

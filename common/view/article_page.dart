@@ -7,7 +7,7 @@ import 'article_view.dart';
 
 class ArticlePage {
   static Future<String> html(Folder topFolder, Article article) async {
-    var repository = Platform.environment['GITHUB_REPOSITORY']!;
+    var repository = Platform.environment['GITHUB_REPOSITORY'] ?? 'suinua/markdown_web';
     var userName = repository.split('/')[0];
     var repositoryName = repository.split('/')[1];
     var path = 'https://$userName.github.io/$repositoryName/';
