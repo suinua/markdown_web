@@ -15,7 +15,9 @@ class FolderStructureMenuView {
       index++;
     });
 
-    folder.folders.forEach((folder) {
+    var folders = folder.folders;
+    folders.sort((a,b) => (b.folders.length + b.articles.length).compareTo(a.folders.length + a.articles.length));
+    folders.forEach((folder) {
       children += html(folder);
     });
 
