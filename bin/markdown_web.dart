@@ -29,7 +29,7 @@ void main() {
 
   Directory(outputPath).create().then((_) {
     var folder = FolderAnalyzer.execute(LocalFolder(articlesPath)).toFolder();
-    FolderService.saveAsHtml(outputPath+'/', folder, folder);
+    FolderService.saveTopFolder(folder, outputPath+'/');
 
     generateArticlesDataFile(outputPath, folder);
   });

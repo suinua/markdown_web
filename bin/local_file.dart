@@ -48,7 +48,7 @@ class LocalFile {
         title: title,
         body: context,
         path: articlePath,
-        url: basedUrl + articlePath.replaceAll('\\', '/'),
+        url: basedUrl + articlePath.replaceAll(r'\', '/'),
         indexList: convertArticleToHtml(title,context).indexList);
   }
 }

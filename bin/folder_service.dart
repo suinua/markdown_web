@@ -4,9 +4,19 @@ import '../common/model/folder.dart';
 import 'article_service.dart';
 
 class FolderService {
-  static void saveAsHtml(
-      String parentPath, Folder folder, Folder topParentFolder) {
+  static void saveTopFolder(Folder topFolder, String outputPath) {
+    topFolder.articles.forEach((article) {
+      ArticleService.saveFile(outputPath, topFolder, article);
+    });
+
+    topFolder.folders.forEach((folder) {
+      _saveFolder(outputPath, folder, topFolder);
+    });
+  }
+
+  static void _saveFolder(String parentPath, Folder folder, Folder topParentFolder) {
     var path = parentPath + Platform.pathSeparator + folder.name;
+
     Directory(path).create().then((_) {
       if (folder.articles.length + folder.folders.length == 0) {
         File(path + Platform.pathSeparator + '.gitkeep').create();
@@ -17,7 +27,7 @@ class FolderService {
       });
 
       folder.folders.forEach((folder) {
-        saveAsHtml(path, folder, topParentFolder);
+        _saveFolder(path, folder, topParentFolder);
       });
     });
   }
