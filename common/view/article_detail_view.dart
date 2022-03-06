@@ -2,7 +2,7 @@ import '../model/article_edit_log.dart';
 import '../model/committer.dart';
 
 class ArticleDetailView {
-  static toHtml(List<ArticleEditLog> logs, List<Committer> committerList) {
+  static String toHtml(List<ArticleEditLog> logs, List<Committer> committerList) {
     var logsHtml = logs.map((e) => _editLogToHtml(e)).join();
     var committerHtml = committerList.map((e) => _committerToHtml(e)).join();
 
