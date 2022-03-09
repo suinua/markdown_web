@@ -6,7 +6,8 @@ import 'custom_markdown_to_html.dart';
 class ArticleView {
   static Future<String> html(Article article) async {
     var logs = await ArticleEditLogService.getLogs(article);
-    var articleHtml = convertArticleToHtml(article.title, article.body).html;
+    var convertResult = await convertArticleToHtml(article.title, article.body);
+    var articleHtml = convertResult.html;
     var articleDetailHtml = ArticleDetailView.toHtml(logs, ArticleEditLogService.getCommitterList(logs));
 
     return '''

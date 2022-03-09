@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:markdown/markdown.dart';
+import 'package:http/http.dart' as http;
 
 import '../model/article_index.dart';
 
@@ -9,9 +12,8 @@ class ArticleConvertResult {
   ArticleConvertResult(this.html, this.indexList);
 }
 
-ArticleConvertResult convertArticleToHtml(String articleTitle,String markdown) {
-  var basedArticleHtml =
-      markdownToHtml(markdown, blockSyntaxes: [const TableSyntax()]);
+Future<ArticleConvertResult> convertArticleToHtml(String articleTitle, String markdown) async {
+  var basedArticleHtml = markdownToHtml(markdown, blockSyntaxes: [const TableSyntax()]);
   var newArticleHtml = '<h1 class="title">$articleTitle</h1><div class="article-context">';
 
   var indexList = <ArticleIndex>[];
@@ -45,5 +47,22 @@ ArticleConvertResult convertArticleToHtml(String articleTitle,String markdown) {
   convert([IndexLevel.h1, IndexLevel.h2]);
   newArticleHtml = newArticleHtml.replaceAll('<table>', '<table class="uk-table">');
   newArticleHtml += '</div>';
+
+
+  //tweet embed
+  var matchList = RegExp('tweet:(.*)[\r\n|\n]').allMatches(newArticleHtml).toList();
+
+  for (var i = 0; i  <matchList.length; i++) {
+    var match = matchList[i];
+    var matchedText = match.group(0)!;
+    var tweetUrl = matchedText.replaceFirst('tweet:', '').replaceAll('\n', '').replaceAll('\r\n', '');
+
+    var response = await http.get(Uri.parse('https://publish.twitter.com/oembed?url='+tweetUrl));
+    var json = jsonDecode(response.body);
+    var html = json['html'];
+
+    newArticleHtml = newArticleHtml.replaceFirst(matchedText, html);
+  }
+
   return ArticleConvertResult(newArticleHtml, indexList);
 }

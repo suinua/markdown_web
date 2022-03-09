@@ -19,7 +19,7 @@ void main() {
 
   var copyLinkButton = querySelector('.copy-link-button')!;
   copyLinkButton.onClick.listen((event) async {
-    window.navigator.clipboard?.writeText(copyLinkButton.getAttribute('text')!);
+    await window.navigator.clipboard?.writeText(copyLinkButton.getAttribute('text')!);
 
     querySelector('.copied-message')!.style.display = 'inline-block';
 

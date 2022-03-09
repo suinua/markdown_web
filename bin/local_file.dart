@@ -34,7 +34,7 @@ class LocalFile {
     return {'name': name, 'tags': tags};
   }
 
-  Article toArticle() {
+  Future<Article> toArticle() async {
     var title = name.replaceAll('.md', '');
 
     var repository = Platform.environment['GITHUB_REPOSITORY'] ?? 'suinua/markdown_web';
@@ -42,6 +42,9 @@ class LocalFile {
     var repositoryName = repository.split('/')[1];
     var basedUrl = 'https://$userName.github.io/$repositoryName/';
     var articlePath =  path.replaceAll(RegExp(r'(.*)' +(Platform.environment['INPUT_ARTICLES_DIRECTORY_PATH'] ?? 'articles') + r'\' + Platform.pathSeparator), '').replaceAll('md', 'html');
+
+    var markdownResult = await convertArticleToHtml(title,context);
+    var indexList = markdownResult.indexList;
     return Article(
         uuid: Uuid().v4(),
         tags: tags.map((e) => Tag(e)).toList(),
@@ -49,6 +52,6 @@ class LocalFile {
         body: context,
         path: articlePath,
         url: basedUrl + articlePath.replaceAll(r'\', '/'),
-        indexList: convertArticleToHtml(title,context).indexList);
+        indexList: indexList);
   }
 }

@@ -27,8 +27,8 @@ void main() {
     outputPath = Directory.current.path + '/output';
   }
 
-  Directory(outputPath).create().then((_) {
-    var folder = FolderAnalyzer.execute(LocalFolder(articlesPath)).toFolder();
+  Directory(outputPath).create().then((_) async {
+    var folder = await FolderAnalyzer.execute(LocalFolder(articlesPath)).toFolder();
     FolderService.saveTopFolder(folder, outputPath+'/');
 
     generateArticlesDataFile(outputPath, folder);

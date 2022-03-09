@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:uuid/uuid.dart';
 
+import '../common/model/article.dart';
 import '../common/model/folder.dart';
 import 'local_file.dart';
 
@@ -40,12 +41,23 @@ class LocalFolder {
     };
   }
 
-  Folder toFolder() {
+  Future<Folder> toFolder() async {
+    var resultArticles = <Article>[];
+    var resultFolders = <Folder>[];
+
+    for (var i = 0; i < files.length; i++) {
+      resultArticles.add(await files[i].toArticle());
+    }
+
+    for (var i = 0; i < folders.length; i++) {
+      resultFolders.add(await folders[i].toFolder());
+    }
+
     return Folder(
-        name : name,
-        uuid : Uuid().v4(),
-        articles : files.map((e) => e.toArticle()).toList(),
-        folders : folders.map((e) => e.toFolder()).toList(),
+      name: name,
+      uuid: Uuid().v4(),
+      articles: resultArticles,
+      folders: resultFolders,
     );
   }
 }
