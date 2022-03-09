@@ -23,7 +23,7 @@ class ArticlePage {
     <link rel="stylesheet" href="${path}article_menu.css">
     <link rel="stylesheet" href="${path}folder_like_menu.css">
     <link rel="stylesheet" href="${path}article.css">
-    <link rel="stylesheet" href="smartphone.css" media="screen and (max-width: 1000px)">
+    <link rel="stylesheet" href="${path}smartphone.css" media="screen and (max-width: 1000px)">
 
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.11.1/dist/css/uikit.min.css" />
