@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:html/parser.dart';
 import 'package:markdown/markdown.dart';
 import 'package:http/http.dart' as http;
 
@@ -49,20 +50,48 @@ Future<ArticleConvertResult> convertArticleToHtml(String articleTitle, String ma
   newArticleHtml += '</div>';
 
 
-  //tweet embed
-  var matchList = RegExp('tweet:(.*)[\r\n|\n]').allMatches(newArticleHtml).toList();
-
-  for (var i = 0; i  <matchList.length; i++) {
-    var match = matchList[i];
+  //url embed
+  var embedMatchList = RegExp(r'embed:(?:(?:https?|ftp):\/\/)?[\w/\-?=%.]+\.[\w/\-?=%.]+').allMatches(newArticleHtml).toList();
+  for (var i = 0; i < embedMatchList.length; i++) {
+    var match = embedMatchList[i];
     var matchedText = match.group(0)!;
-    var tweetUrl = matchedText.replaceFirst('tweet:', '').replaceAll('\n', '').replaceAll('\r\n', '');
+    var url = matchedText.replaceFirst('embed:', '');
 
-    var response = await http.get(Uri.parse('https://publish.twitter.com/oembed?url='+tweetUrl));
-    var json = jsonDecode(response.body);
-    var html = json['html'];
-
+    var html ='';
+    if (RegExp('https://twitter.com/(.*)/status/').hasMatch(url)) {
+      var response = await http.get(Uri.parse('https://publish.twitter.com/oembed?url='+url));
+      var json = jsonDecode(response.body);
+      html = json['html'];
+    } else {
+      html = await generateEmbed(url);
+    }
     newArticleHtml = newArticleHtml.replaceFirst(matchedText, html);
   }
 
   return ArticleConvertResult(newArticleHtml, indexList);
+}
+
+Future<String> generateEmbed(String url) async {
+  try {
+    var hostUrl = url.replaceFirst(RegExp('(.*)://'), '').replaceFirst(RegExp('/(.*)'), '');
+    var faviconPath ='https://$hostUrl/favicon.ico';
+
+    var response = await http.get(Uri.parse(url));
+    var title = parse(response.body).getElementsByTagName('title')[0].text;
+
+    return  '''
+<a href="$url" class="url-embed">
+  <div class="url-embed-context">
+    <div class="url-embed-site-title">$title</div>
+      <div class="url-embed-site-host"><img class="url-embed-fav-icon" src="$faviconPath">$hostUrl</div>
+  </div>
+  <div class="url-embed-thumnail">
+    <img src="https://s.wordpress.com/mshots/v1/$url?w=250">
+  </div>
+</a>
+  ''';
+  } catch(e) {
+    print(e);
+    return url;
+  }
 }
