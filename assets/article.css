@@ -90,13 +90,14 @@
     height: 0;
 }
 
-.article-menu-committer-icon {
+.committer-icon {
     display: inline-block;
-    float: left;
+    padding: 10px;
 }
 
 .article-menu-logs {
     display: inline-block;
+    padding-left: 10px;
     width: 49%;
     height: 100%;
     overflow-y: scroll;
