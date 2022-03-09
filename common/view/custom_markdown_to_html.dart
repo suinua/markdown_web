@@ -74,7 +74,6 @@ Future<ArticleConvertResult> convertArticleToHtml(String articleTitle, String ma
 Future<String> generateEmbed(String url) async {
   try {
     var hostUrl = url.replaceFirst(RegExp('(.*)://'), '').replaceFirst(RegExp('/(.*)'), '');
-    var faviconPath ='https://$hostUrl/favicon.ico';
 
     var response = await http.get(Uri.parse(url));
     var title = parse(response.body).getElementsByTagName('title')[0].text;
@@ -83,7 +82,7 @@ Future<String> generateEmbed(String url) async {
 <a href="$url" class="url-embed">
   <div class="url-embed-context">
     <div class="url-embed-site-title">$title</div>
-      <div class="url-embed-site-host"><img class="url-embed-fav-icon" src="$faviconPath">$hostUrl</div>
+      <div class="url-embed-site-host">$hostUrl</div>
   </div>
   <div class="url-embed-thumnail">
     <img src="https://s.wordpress.com/mshots/v1/$url?w=250">
