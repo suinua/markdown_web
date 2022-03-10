@@ -16,7 +16,9 @@ class FolderStructureMenuView {
     });
 
     var folders = folder.folders;
-    folders.sort((a,b) => (b.folders.length + b.articles.length).compareTo(a.folders.length + a.articles.length));
+    folders.sort((a, b) =>
+        (b.folders.length + b.articles.length).compareTo(
+            a.folders.length + a.articles.length));
     folders.forEach((folder) {
       children += html(folder);
     });
@@ -57,14 +59,13 @@ class FolderStructureMenuViewController {
       tagElement.onClick.listen((event) => selectTag(event, tagElement));
     });
 
-    var searchInputs = querySelectorAll('.search-input');
+    var searchInputs = querySelectorAll('.search-input').cast<InputElement>();
     searchInputs.forEach((searchInput) {
-      if (searchInput is InputElement) {
-        searchInput.onInput.listen((event) {
-          SearchContextPool.setText(searchInput.value!);
-          highlightArticles(SearchService.filterBySearchContext());
-        });
-      }
+      searchInput.onInput.listen((event) {
+        SearchContextPool.setText(searchInput.value!);
+        highlightArticles(SearchService.filterBySearchContext());
+        searchInputs.forEach((e) => e.value = searchInput.value);
+      });
     });
 
     querySelectorAll('.folder').forEach((folder) {
@@ -75,8 +76,10 @@ class FolderStructureMenuViewController {
   static void foldOrUnfoldFolder(MouseEvent event, Element clickedFolder) {
     var folderChildrenList = querySelectorAll('.folder-children');
     folderChildrenList.forEach((folderChildren) {
-      if (folderChildren.attributes['folder-uuid'] == clickedFolder.attributes['folder-uuid']) {
-        folderChildren.style.display = folderChildren.style.display == 'block' ? 'none' : 'block';
+      if (folderChildren.attributes['folder-uuid'] ==
+          clickedFolder.attributes['folder-uuid']) {
+        folderChildren.style.display =
+        folderChildren.style.display == 'block' ? 'none' : 'block';
       }
     });
 
@@ -90,7 +93,7 @@ class FolderStructureMenuViewController {
 
     var _htmlValidator = NodeValidatorBuilder.common()
       ..allowElement('a', attributes: ['uk-icon', 'tag-text']);
-    var selectedTagHtml ='''<div class="selected-tag"><a class="remove-selected-tag-button" tag-text="$tagText" uk-icon="close"></a><div class="selected-tag-text">$tagText</div></div>''';
+    var selectedTagHtml = '''<div class="selected-tag"><a class="remove-selected-tag-button" tag-text="$tagText" uk-icon="close"></a><div class="selected-tag-text">$tagText</div></div>''';
 
     var selectedTagsElements = querySelectorAll('.selected-tags');
     selectedTagsElements.forEach((selectedTagsElement) {
@@ -124,12 +127,12 @@ class FolderStructureMenuViewController {
   static void highlightArticles(List<Article> filteredArticles) {
     querySelectorAll('.article-title-text').forEach((articleTitleTextElement) {
       var isTarget = filteredArticles.any((article) =>
-          article.uuid == articleTitleTextElement.attributes['article-uuid']);
+      article.uuid == articleTitleTextElement.attributes['article-uuid']);
 
       articleTitleTextElement.style.background = '';
       if (isTarget) {
         articleTitleTextElement.style.background =
-            'linear-gradient(to top, #8392ff 10%, transparent 10%)';
+        'linear-gradient(to top, #8392ff 10%, transparent 10%)';
       }
     });
   }
