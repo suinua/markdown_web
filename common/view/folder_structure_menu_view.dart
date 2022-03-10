@@ -57,10 +57,14 @@ class FolderStructureMenuViewController {
       tagElement.onClick.listen((event) => selectTag(event, tagElement));
     });
 
-    var searchInput = querySelector('.search-input')! as InputElement;
-    searchInput.onInput.listen((event) {
-      SearchContextPool.setText(searchInput.value!);
-      highlightArticles(SearchService.filterBySearchContext());
+    var searchInputs = querySelectorAll('.search-input');
+    searchInputs.forEach((searchInput) {
+      if (searchInput is InputElement) {
+        searchInput.onInput.listen((event) {
+          SearchContextPool.setText(searchInput.value!);
+          highlightArticles(SearchService.filterBySearchContext());
+        });
+      }
     });
 
     querySelectorAll('.folder').forEach((folder) {
