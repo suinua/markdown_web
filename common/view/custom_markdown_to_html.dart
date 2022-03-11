@@ -14,7 +14,26 @@ class ArticleConvertResult {
 }
 
 Future<ArticleConvertResult> convertArticleToHtml(String articleTitle, String markdown) async {
-  var basedArticleHtml = markdownToHtml(markdown, blockSyntaxes: [const TableSyntax()]).replaceAll('<p>', '').replaceAll('</p>', '');
+
+  //url embed
+  var embedMatchList = RegExp(r'embed:((https?:www\.)|(https?:\/\/)|(www\.))[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9]{1,6}(\/[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)?').allMatches(markdown).toList();
+  for (var i = 0; i < embedMatchList.length; i++) {
+    var match = embedMatchList[i];
+    var matchedText = match.group(0)!;
+    var url = matchedText.replaceFirst('embed:', '');
+
+    var html ='';
+    if (RegExp('https://twitter.com/(.*)/status/').hasMatch(url)) {
+      var response = await http.get(Uri.parse('https://publish.twitter.com/oembed?url='+url));
+      var json = jsonDecode(response.body);
+      html = json['html'];
+    } else {
+      html = await generateEmbed(url);
+    }
+    markdown = markdown.replaceFirst(matchedText, html);
+  }
+
+  var basedArticleHtml = markdownToHtml(markdown, blockSyntaxes: [const TableSyntax()],inlineSyntaxes: [InlineHtmlSyntax()]);
   var newArticleHtml = '<h1 class="title">$articleTitle</h1><div class="article-context">';
 
   var indexList = <ArticleIndex>[];
@@ -49,25 +68,6 @@ Future<ArticleConvertResult> convertArticleToHtml(String articleTitle, String ma
   newArticleHtml = newArticleHtml.replaceAll('<table>', '<table class="uk-table">');
   newArticleHtml += '</div>';
 
-
-  //url embed
-  var embedMatchList = RegExp(r'embed:((https?:www\.)|(https?:\/\/)|(www\.))[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9]{1,6}(\/[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)?').allMatches(newArticleHtml).toList();
-  for (var i = 0; i < embedMatchList.length; i++) {
-    var match = embedMatchList[i];
-    var matchedText = match.group(0)!;
-    var url = matchedText.replaceFirst('embed:', '');
-
-    var html ='';
-    if (RegExp('https://twitter.com/(.*)/status/').hasMatch(url)) {
-      var response = await http.get(Uri.parse('https://publish.twitter.com/oembed?url='+url));
-      var json = jsonDecode(response.body);
-      html = json['html'];
-    } else {
-      html = await generateEmbed(url);
-    }
-    newArticleHtml = newArticleHtml.replaceFirst(matchedText, html);
-  }
-
   return ArticleConvertResult(newArticleHtml, indexList);
 }
 
@@ -79,15 +79,17 @@ Future<String> generateEmbed(String url) async {
     var title = parse(response.body).getElementsByTagName('title')[0].text;
 
     return  '''
-<a href="$url" class="url-embed">
-  <div class="url-embed-context">
-    <div class="url-embed-site-title">$title</div>
-      <div class="url-embed-site-host">$hostUrl</div>
-  </div>
-  <div class="url-embed-thumnail">
-    <img src="https://s.wordpress.com/mshots/v1/$url?w=250">
-  </div>
-</a>
+<div>
+  <a href="$url" class="url-embed">
+    <div class="url-embed-context">
+      <div class="url-embed-site-title">$title</div>
+        <div class="url-embed-site-host">$hostUrl</div>
+    </div>
+    <div class="url-embed-thumnail">
+      <img src="https://s.wordpress.com/mshots/v1/$url?w=250">
+    </div>
+  </a>
+</div>
   ''';
   } catch(e) {
     print(e);
