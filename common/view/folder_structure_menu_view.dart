@@ -41,9 +41,9 @@ class FolderStructureMenuView {
     return '''
 <div class="article-menu-item">
   <div class="article-on-menu">
-      <div class="article-title">${isLast ? '└─' : '├─'}<div class="article-title-text" article-uuid="${article.uuid}"><a class="uk-link-reset" href="${article.url}"  target="_blank">${article.title}</a></div></div>
+      <div class="article-title">├─<div class="article-title-text" article-uuid="${article.uuid}"><a class="uk-link-reset" href="${article.url}"  target="_blank">${article.title}</a></div></div>
   </div>
-  <div class="tags" article-uuid="${article.uuid}">${article.tags.map((tag) => _tagToFolderStructureMenuHtml(tag)).toList().join()}</div>
+  <div class="tags" article-uuid="${article.uuid}">${isLast ? '└─' : '├─'}${article.tags.map((tag) => _tagToFolderStructureMenuHtml(tag)).toList().join()}</div>
 </div>
 ''';
   }
