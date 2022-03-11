@@ -14,7 +14,7 @@ class ArticleConvertResult {
 }
 
 Future<ArticleConvertResult> convertArticleToHtml(String articleTitle, String markdown) async {
-  var basedArticleHtml = markdownToHtml(markdown, blockSyntaxes: [const TableSyntax()]);
+  var basedArticleHtml = markdownToHtml(markdown, blockSyntaxes: [const TableSyntax()]).replaceAll('<p>', '').replaceAll('</p>', '');
   var newArticleHtml = '<h1 class="title">$articleTitle</h1><div class="article-context">';
 
   var indexList = <ArticleIndex>[];
