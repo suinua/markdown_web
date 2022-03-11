@@ -34,6 +34,7 @@ Future<ArticleConvertResult> convertArticleToHtml(String articleTitle, String ma
   }
 
   var basedArticleHtml = markdownToHtml(markdown, blockSyntaxes: [const TableSyntax()],inlineSyntaxes: [InlineHtmlSyntax()]);
+  basedArticleHtml = basedArticleHtml.replaceAll('<div class="url-embed-wrap">', '\n<div class="url-embed-wrap">');
   var newArticleHtml = '<h1 class="title">$articleTitle</h1><div class="article-context">';
 
   var indexList = <ArticleIndex>[];
@@ -79,17 +80,17 @@ Future<String> generateEmbed(String url) async {
     var title = parse(response.body).getElementsByTagName('title')[0].text;
 
     return  '''
-<div>
+<div class="url-embed-wrap">
   <a href="$url" class="url-embed">
     <div class="url-embed-context">
       <div class="url-embed-site-title">$title</div>
         <div class="url-embed-site-host">$hostUrl</div>
     </div>
     <div class="url-embed-thumnail">
-      <img src="https://s.wordpress.com/mshots/v1/$url?w=250">
+      <img src="https://s.wordpress.com/mshots/v1/$url?w=250" alt="">
     </div>
   </a>
-</div>
+</div>  
   ''';
   } catch(e) {
     print(e);

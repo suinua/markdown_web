@@ -182,3 +182,7 @@
     height: 100%;
     flex-shrink: 0;
 }
+
+.article-context image{
+    display: block;
+}
