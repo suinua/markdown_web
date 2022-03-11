@@ -51,7 +51,7 @@ Future<ArticleConvertResult> convertArticleToHtml(String articleTitle, String ma
 
 
   //url embed
-  var embedMatchList = RegExp(r'embed:(?:(?:https?|ftp):\/\/)?[\w/\-?=%.]+\.[\w/\-?=%.]+').allMatches(newArticleHtml).toList();
+  var embedMatchList = RegExp(r'embed:((https?:www\.)|(https?:\/\/)|(www\.))[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9]{1,6}(\/[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)?').allMatches(newArticleHtml).toList();
   for (var i = 0; i < embedMatchList.length; i++) {
     var match = embedMatchList[i];
     var matchedText = match.group(0)!;
