@@ -33,7 +33,7 @@ void main() {
     var target = querySelector('#$id')!;
     element.onClick.listen((event) async {
       await Future.delayed(Duration(milliseconds: 400));
-      window.scrollTo(0, target.offsetTop);
+      window.scrollTo(0, target.offsetTop+10);
     });
   });
 }
