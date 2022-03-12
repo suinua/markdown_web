@@ -30,7 +30,7 @@ void main() {
   querySelectorAll('.article-index-item').forEach((element) {
     var anchorElement = element.children[0] as AnchorElement;
     var id = anchorElement.href!.replaceFirst(RegExp('(.*)#'), '');
-    var target = querySelector('#$id')!;
+    var target = document.getElementById(id)!;
     element.onClick.listen((event) async {
       await Future.delayed(Duration(milliseconds: 400));
       window.scrollTo(0, target.offsetTop+10);

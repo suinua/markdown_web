@@ -39,7 +39,6 @@ Future<ArticleConvertResult> convertArticleToHtml(String articleTitle, String ma
 
   var indexList = <ArticleIndex>[];
   void convert(List<IndexLevel> levels) {
-    var index = 0;
     basedArticleHtml.replaceAll('\r\n', '\n').split('\n').forEach((line) {
       var isMatch = false;
       levels.forEach((level) {
@@ -52,16 +51,15 @@ Future<ArticleConvertResult> convertArticleToHtml(String articleTitle, String ma
           var text = targetPlane
               .replaceFirst('<${level.toString()}>', '')
               .replaceFirst('</${level.toString()}>', '');
-          var id = ArticleIndex.generateId(index, text);
+          var articleIndex = ArticleIndex(level, text, indexList);
           var replace = targetPlane
               .replaceFirst('<${level.toString()}>','<${level.toString()}>')
               .replaceFirst('</${level.toString()}>', '</${level.toString()}>');
-          newArticleHtml += '<div id="${Uri.parse(id)}"></div>' + replace;
-          indexList.add(ArticleIndex(index, level, text));
+          newArticleHtml += '<div id="${Uri.parse(articleIndex.href)}"></div>' + replace;
+          indexList.add(articleIndex);
         }
       });
       if (!isMatch) newArticleHtml += '\n' + line;
-      index++;
     });
   }
 

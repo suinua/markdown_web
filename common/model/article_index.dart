@@ -1,25 +1,31 @@
 class ArticleIndex {
-  final int line;
   final IndexLevel level;
   final String text;
   final String href;
 
-  ArticleIndex(this.line, this.level, this.text)
-      : href = generateId(line, text);
+  ArticleIndex(this.level, this.text, List<ArticleIndex> others)
+      : href = generateId(text, others);
 
-  static String generateId(int line, String text) {
-    return 'line-$line';
+  static String generateId(String text, List<ArticleIndex> others) {
+    var num = 0;
+    others.forEach((other) {
+      if (other.text == text) num++;
+    });
+
+    if (num == 0) {
+      return text;
+    } else {
+      return 'text-$num';
+    }
   }
 
   ArticleIndex.fromMap(Map data)
-      : line = data['line'],
-        level = IndexLevel._(data['level']),
+      : level = IndexLevel._(data['level']),
         text = data['text'],
         href = data['href'];
 
   Map<String, dynamic> toMap() {
     return {
-      'line': line,
       'level': level.toString(),
       'text': text,
       'href': href,
