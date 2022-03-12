@@ -189,12 +189,12 @@
 }
 
 blockquote {
-    font-size: .97em;
-    margin: 1.4rem 0;
-    border-left: 3px solid #9dacb7;
-    padding: 2px 0 2px 0.7em;
-    color: #505c64;
+    font-size: .97em !important;
+    margin: 1.4rem 0 !important;
+    border-left: 3px solid #9dacb7 !important;
+    padding: 2px 0 2px 0.7em !important;
+    color: #505c64 !important;
 }
 .article-context p {
-    font-size: 1.2em;
+    font-size: 1.2em !important;
 }
