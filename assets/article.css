@@ -193,8 +193,8 @@ blockquote {
     margin: 1.4rem 0 !important;
     border-left: 3px solid #9dacb7 !important;
     padding: 2px 0 2px 0.7em !important;
-    color: #505c64 !important;
 }
 .article-context p {
+    color: #000000d1;
     font-size: 1.2em !important;
 }
