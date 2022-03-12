@@ -187,3 +187,14 @@
 .article-context img {
     display: block;
 }
+
+blockquote {
+    font-size: .97em;
+    margin: 1.4rem 0;
+    border-left: 3px solid #9dacb7;
+    padding: 2px 0 2px 0.7em;
+    color: #505c64;
+}
+.article-context p {
+    font-size: 1.2em;
+}
