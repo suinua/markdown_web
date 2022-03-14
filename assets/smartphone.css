@@ -16,6 +16,7 @@
     padding-left: 5%;
     padding-right: 5%;
     margin-bottom: 8%;
+    overflow-wrap: break-word;
 }
 
 .article-menu {
