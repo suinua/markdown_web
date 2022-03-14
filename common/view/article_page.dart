@@ -10,7 +10,13 @@ class ArticlePage {
     var repository = Platform.environment['GITHUB_REPOSITORY'] ?? 'suinua/markdown_web';
     var userName = repository.split('/')[0];
     var repositoryName = repository.split('/')[1];
-    var path = 'https://$userName.github.io/$repositoryName/';
+
+    var path ='';
+    if (repositoryName == '$userName.github.io') {
+      path = 'https://$userName.github.io/';
+    } else {
+      path = 'https://$userName.github.io/$repositoryName/';
+    }
 
     return '''
 <!DOCTYPE html>

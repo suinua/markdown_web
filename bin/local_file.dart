@@ -40,7 +40,12 @@ class LocalFile {
     var repository = Platform.environment['GITHUB_REPOSITORY'] ?? 'suinua/markdown_web';
     var userName = repository.split('/')[0];
     var repositoryName = repository.split('/')[1];
-    var basedUrl = 'https://$userName.github.io/$repositoryName/';
+    var basedUrl = '';
+    if (repositoryName == '$userName.github.io') {
+      basedUrl = 'https://$userName.github.io/';
+    } else {
+      basedUrl = 'https://$userName.github.io/$repositoryName/';
+    }
     var articlePath =  path.replaceAll(RegExp(r'(.*)' +(Platform.environment['INPUT_ARTICLES_DIRECTORY_PATH'] ?? 'articles') + r'\' + Platform.pathSeparator), '').replaceAll('md', 'html');
 
     var markdownResult = await convertArticleToHtml(title,context);
