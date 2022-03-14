@@ -10,7 +10,7 @@ void main() {
     var repositoryName = window.location.pathname!.replaceFirst('/', '').replaceFirst(RegExp('/(.*)'), '');
 
     if (repositoryName.isEmpty) {
-      var url = 'https://github.com/$userName.github.io';
+      var url = 'https://github.com/$userName/$userName.github.io';
       window.open(url, '_blank');
     } else {
       var url = 'https://github.com/$userName/$repositoryName';
