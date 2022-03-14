@@ -8,6 +8,8 @@
     position: sticky;
     overflow-y: scroll;
     float: right;
+
+    scrollbar-width: none;
 }
 
 .article-menu::-webkit-scrollbar {

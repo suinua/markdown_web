@@ -50,6 +50,8 @@
 .uk-offcanvas-bar {
     padding: 5px !important;
     background: white !important;
+
+    scrollbar-width: none;
 }
 
 .uk-offcanvas-bar::-webkit-scrollbar {

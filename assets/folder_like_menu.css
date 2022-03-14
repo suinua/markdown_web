@@ -33,6 +33,9 @@
     overflow-x: scroll;
     overflow-y: scroll;
     height: 25em;
+
+    scrollbar-width: thin;
+    scrollbar-color: #9a9a9a #cccccc;
 }
 
 .folders-container::-webkit-scrollbar {
