@@ -13,17 +13,17 @@ class ArticleEditLogService {
     var branchName = Platform.environment['GITHUB_REF_NAME'] ?? 'master';
 
     var logs = <ArticleEditLog>[];
-    var url =
-        'https://api.github.com/repos/$repoName/commits?path=${(Platform.environment['INPUT_ARTICLES_DIRECTORY_PATH'] ?? 'articles')}/${article.path.replaceAll(r'\', '/').replaceAll('.html', '.md')}&sha=$branchName';
-    var response = await http.get(Uri.parse(url));
-
-    var data = jsonDecode(response.body);
-    data.forEach((commitAsMap) {
-      var committer = Committer.fromJson(commitAsMap['committer']);
-      var comment = commitAsMap['commit']['message'];
-      var date = DateTime.parse(commitAsMap['commit']['committer']['date']);
-      logs.add(ArticleEditLog(committer, comment, date));
-    });
+    //var url =
+    //    'https://api.github.com/repos/$repoName/commits?client_id=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?path=${(Platform.environment['INPUT_ARTICLES_DIRECTORY_PATH'] ?? 'articles')}/${article.path.replaceAll(r'\', '/').replaceAll('.html', '.md')}&sha=$branchName';
+    //var response = await http.get(Uri.parse(url));
+//
+    //var data = jsonDecode(response.body);
+    //data.forEach((commitAsMap) {
+    //  var committer = Committer.fromJson(commitAsMap['committer']);
+    //  var comment = commitAsMap['commit']['message'];
+    //  var date = DateTime.parse(commitAsMap['commit']['committer']['date']);
+    //  logs.add(ArticleEditLog(committer, comment, date));
+    //});
     return logs;
   }
 
