@@ -27,3 +27,8 @@ jobs:
 embed:https://github.com/suinua/markdown_web
 embed:https://twitter.com/suinua/status/1497224778788139008?s=20&t=bkcX37X_4DJZ_DFXiZI6OQ
 ```
+
+# debug
+xcopy assets export /E/H/C/I
+dart --enable-asserts bin/markdown_web.dart
+dart2js -O2 -o export/main.js web/main.dart

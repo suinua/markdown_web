@@ -5,7 +5,7 @@ class IndexMenu {
     var children = '';
     indexList.forEach((index) {
       children += '''
-<li class="scroll-nav-item-wrap uk-flex">
+<li class="scroll-nav-item-wrap scroll-nav-item-${index.level.toString()} uk-flex">
     <a href="#${index.href}" class="scroll-nav-item uk-flex uk-link-reset">
         <div class="mark-filled">${index.text}</div>
     </a>
@@ -29,7 +29,7 @@ class IndexMenu {
     var children = '';
     indexList.forEach((index) {
       children += '''
-<li class="scroll-nav-item-wrap uk-flex">
+<li class="scroll-nav-item-wrap scroll-nav-item-${index.level.toString()} uk-flex">
     <a href="#${index.href}" class="scroll-nav-item uk-flex uk-link-reset">
         <div class="mark-filled">${index.text}</div>
     </a>

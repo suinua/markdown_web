@@ -1,12 +1,12 @@
 .side-menu {
-    vertical-align: top;
     box-sizing: border-box;
     width: 64%;
-    height: 80%;
 
+    display: inline-block;
     margin-left: 8%;
     margin-top: 18vh;
 
+    margin-right: 4%;
 }
 
 .side-menu-title {
@@ -25,14 +25,14 @@
 }
 
 .active-scroll-nav-item {
-    background: pink;
+    background: var(--highlight-color);
 }
 
 .side-menu-index {
     background: white;
     border-radius: 5px;
 
-    height: 30vh;
+    max-height: 70vh;
     width: 100%;
 
     /*scroll*/
@@ -45,6 +45,14 @@
     background: rgba(210, 210, 210, 0.67);
 }
 
-.side-menu-index-h1 {
+.scroll-nav-item-h1 {
+    font-weight: 600;
     font-size: 20px;
+    margin: 4px;
+}
+
+.scroll-nav-item-h2 {
+    font-weight: 500;
+    font-size: 16px;
+    margin: 2px 2px 2px 8px;
 }

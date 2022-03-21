@@ -4,7 +4,7 @@ body {
     --strong-font-color: #000000;
 
     --point-color: #90adc6;
-    --highlight-color: #fad02c;
+    --highlight-color: #FFC0CB;
     --mild-color: #e9eaec6b;
     --mood-color: #333652;
 
@@ -52,6 +52,7 @@ body {
 
 .right {
     width: 20%;
+    display: flex;
 }
 
 .sticky-element {

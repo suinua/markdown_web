@@ -9,7 +9,7 @@ environment:
 dependencies:
   tuple: ^2.0.0
   http_parser: ^4.0.0
-  path: ^1.8.0
+  path: ^1.8.1
   logger: ^1.1.0
   universal_html: ^2.0.8
   http:
