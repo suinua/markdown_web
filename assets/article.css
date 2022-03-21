@@ -176,3 +176,9 @@
     font-size: 1em;
     font-weight: 600;
 }
+
+pre {
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 8px;
+}
