@@ -9,7 +9,7 @@ class FolderStructureMenu {
       file.tags.map((e) => '<div class="tag">#${e.text}</div>').join('\n');
       children += '''
 <li>
-    <div class="menu-article">${file.fileName}
+    <div class="menu-article"><div class="menu-article-title" uuid="${file.uuid}">${file.fileName}</div>
         <div class="tags">
            $tagsHtml
         </div>
@@ -39,7 +39,7 @@ class FolderStructureMenu {
           file.tags.map((e) => '<div class="tag">#${e.text}</div>').join('\n');
       children += '''
 <li>
-    <div class="menu-article">${file.fileName}
+    <div class="menu-article"><div class="menu-article-title" uuid="${file.uuid}">${file.fileName}</div>
         <div class="tags">
            $tagsHtml
         </div>

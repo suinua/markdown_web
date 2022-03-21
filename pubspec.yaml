@@ -12,6 +12,7 @@ dependencies:
   path: ^1.8.1
   logger: ^1.1.0
   universal_html: ^2.0.8
+  uuid: ^3.0.6
   http:
     git: https://github.com/suinua/http.git
   markdown:

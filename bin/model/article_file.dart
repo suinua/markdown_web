@@ -1,10 +1,13 @@
 import 'dart:io';
 
+import 'package:uuid/uuid.dart';
+
 import '../service/markdown_service.dart';
 import 'article_index.dart';
 import 'article_tag.dart';
 
 class ArticleFile {
+  final String uuid;
   final String articleTitle;
   final String fileName;
   final String absolutePath;
@@ -19,14 +22,17 @@ class ArticleFile {
   List<ArticleIndex> get indexList => _indexList;
 
   ArticleFile(
-      {required this.fileName,
+      {required this.uuid,
+        required this.fileName,
       required this.absolutePath,
       required this.tags,
       required this.markdownBody})
       : articleTitle = fileName.replaceFirst('.md', '');
 
   ArticleFile.fromFile(File file)
-      : fileName = file.absolute.path
+      :
+        uuid = Uuid().v4(),
+        fileName = file.absolute.path
             .replaceFirst(RegExp(r'(.*)\' + Platform.pathSeparator), ''),
         absolutePath = file.absolute.path,
         tags = _getTags(file.absolute.path),
@@ -56,6 +62,7 @@ class ArticleFile {
 
   Map asMap() {
     return {
+      'uuid': uuid,
       'title': articleTitle,
       'body': markdownBody,
       'tags': tags.map((e) => e.text).toList()

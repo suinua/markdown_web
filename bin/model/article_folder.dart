@@ -16,8 +16,7 @@ class ArticleFolder {
 
   ArticleFolder.fromDirectory(Directory directory)
       : absolutePath = directory.absolute.path,
-        name = directory.absolute.path
-            .replaceFirst(RegExp(r'(.*)\' + Platform.pathSeparator), ''),
+        name = directory.absolute.path.replaceAll(r'\', '/').split('/').last,
         files = [],
         folders = [];
 

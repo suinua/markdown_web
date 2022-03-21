@@ -19,27 +19,6 @@ class ArticleFolder {
     required this.folders,
   });
 
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is ArticleFolder &&
-          runtimeType == other.runtimeType &&
-          name == other.name &&
-          articles == other.articles &&
-          folders == other.folders);
-
-  @override
-  int get hashCode => name.hashCode ^ articles.hashCode ^ folders.hashCode;
-
-  @override
-  String toString() {
-    return 'ArticleFolder{' +
-        ' name: $name,' +
-        ' articles: $articles,' +
-        ' folders: $folders,' +
-        '}';
-  }
-
   Map<String, dynamic> toMap() {
     return {
       'name': name,
@@ -48,11 +27,17 @@ class ArticleFolder {
     };
   }
 
-  factory ArticleFolder.fromMap(Map<String, dynamic> map) {
+  factory ArticleFolder.fromMap(Map map) {
     return ArticleFolder(
       name: map['name'] as String,
-      articles: (map['articles'] as List<Map>).map((e) => Article.fromMap(map)).toList(),
-      folders: (map['folders'] as List<Map>).map((e) => ArticleFolder.fromMap(map)).toList(),
+      articles: map['articles']
+          .map((e) => Article.fromMap(e))
+          .toList()
+          .cast<Article>(),
+      folders: map['folders']
+          .map((e) => ArticleFolder.fromMap(e))
+          .toList()
+          .cast<ArticleFolder>(),
     );
   }
 }

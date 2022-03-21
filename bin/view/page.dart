@@ -65,18 +65,10 @@ class Page {
             <div class="sticky-element">
                 <div class="search-form">
                     <form class="uk-search uk-search-default">
-                        <input class="uk-search-input" type="search" placeholder="Search">
+                        <input class="search-input uk-search-input" type="search" placeholder="Search">
                         <span uk-icon="icon: close; ratio: 1"></span>
                     </form>
                     <div class="selected-tags">
-                        <div class="selected-tag"><span uk-icon="icon: close; ratio: 1"></span>Tag1</div>
-                        <div class="selected-tag"><span uk-icon="icon: close; ratio: 1"></span>Tag1</div>
-                        <div class="selected-tag"><span uk-icon="icon: close; ratio: 1"></span>Tag1</div>
-                        <div class="selected-tag"><span uk-icon="icon: close; ratio: 1"></span>Tag1</div>
-                        <div class="selected-tag"><span uk-icon="icon: close; ratio: 1"></span>Tag1</div>
-                        <div class="selected-tag"><span uk-icon="icon: close; ratio: 1"></span>Tag1</div>
-                        <div class="selected-tag"><span uk-icon="icon: close; ratio: 1"></span>Tag1</div>
-                        <div class="selected-tag"><span uk-icon="icon: close; ratio: 1"></span>Tag1</div>
                     </div>
                 </div>
                 ${FolderStructureMenu.html(topFolder)}
@@ -94,7 +86,6 @@ class Page {
                             <span uk-icon="icon: close; ratio: 1"></span>
                         </form>
                         <div class="selected-tags">
-                            <div class="selected-tag"><span uk-icon="icon: close; ratio: 1"></span>Tag1</div>
                         </div>
                     </div>
                     ${FolderStructureMenu.html(topFolder)}
