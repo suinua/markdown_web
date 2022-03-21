@@ -1,0 +1,50 @@
+.side-menu {
+    vertical-align: top;
+    box-sizing: border-box;
+    width: 64%;
+    height: 80%;
+
+    margin-left: 8%;
+    margin-top: 18vh;
+
+}
+
+.side-menu-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.scroll-nav-item-wrap {
+    display: block;
+    width: 100%;
+}
+
+.scroll-nav-item {
+
+}
+
+.active-scroll-nav-item {
+    background: pink;
+}
+
+.side-menu-index {
+    background: white;
+    border-radius: 5px;
+
+    height: 30vh;
+    width: 100%;
+
+    /*scroll*/
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: var(--point-color) #cccccc;
+}
+
+.side-menu-index .uk-active {
+    background: rgba(210, 210, 210, 0.67);
+}
+
+.side-menu-index-h1 {
+    font-size: 20px;
+}

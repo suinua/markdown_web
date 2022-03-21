@@ -1,17 +1,21 @@
 name: markdown_web
+description: A simple command-line application.
+# version: 1.0.0
+# homepage: https://www.example.com
 
-description: convert md files to html
 environment:
   sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
-  markdown: ^4.0.1
+  tuple: ^2.0.0
+  http_parser: ^4.0.0
   path: ^1.8.0
-  uuid: ^3.0.6
-  http: ^0.13.4
+  logger: ^1.1.0
   universal_html: ^2.0.8
-  dependencies:
-  html: ^0.15.0
+  http:
+    git: https://github.com/suinua/http.git
+  markdown:
+    git: https://github.com/suinua/markdown.git
 
 dev_dependencies:
   pedantic: ^1.10.0

@@ -8,8 +8,6 @@ build/
 # Directory created by dartdoc
 doc/api/
 
+export/
 
-#idea
 .idea/
-
-output/

@@ -1,4 +1,4 @@
-import '../../common/model/article.dart';
+import '../model/article.dart';
 import '../pool/articles_pool.dart';
 import '../pool/search_context_pool.dart';
 

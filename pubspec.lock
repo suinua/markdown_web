@@ -28,7 +28,7 @@ packages:
       name: collection
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.15.0"
+    version: "1.16.0"
   crypto:
     dependency: transitive
     description:
@@ -43,22 +43,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.17.1"
-  dependencies:
-    dependency: "direct main"
-    description:
-      name: dependencies
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.5"
-  disposables:
-    dependency: transitive
-    description:
-      name: disposables
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.2"
   html:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: html
       url: "https://pub.dartlang.org"
@@ -67,24 +53,35 @@ packages:
   http:
     dependency: "direct main"
     description:
-      name: http
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "."
+      ref: HEAD
+      resolved-ref: "1f2cf7da17e7a078c8839044c13c4d88c55bf4de"
+      url: "https://github.com/suinua/http.git"
+    source: git
     version: "0.13.4"
   http_parser:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: http_parser
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0"
+  logger:
+    dependency: "direct main"
+    description:
+      name: logger
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0"
   markdown:
     dependency: "direct main"
     description:
-      name: markdown
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.0.1"
+      path: "."
+      ref: HEAD
+      resolved-ref: f8d993e81be3aedd30d03836f7ffd9bbc7cfeae9
+      url: "https://github.com/suinua/markdown.git"
+    source: git
+    version: "5.0.0-dev"
   matcher:
     dependency: transitive
     description:
@@ -119,7 +116,7 @@ packages:
       name: quiver
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.5"
+    version: "3.0.1+1"
   source_span:
     dependency: transitive
     description:
@@ -148,6 +145,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
+  tuple:
+    dependency: "direct main"
+    description:
+      name: tuple
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   typed_data:
     dependency: transitive
     description:
@@ -169,12 +173,5 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.4"
-  uuid:
-    dependency: "direct main"
-    description:
-      name: uuid
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.6"
 sdks:
   dart: ">=2.14.0 <3.0.0"

@@ -11,6 +11,46 @@ inputs:
   github_token:
     description: ''
     required: true
+
 runs:
-  using: docker
-  image: Dockerfile
+  using: "composite"
+  steps:
+    - name: Enable Git operation
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Setup Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.8'
+        architecture: 'x64'
+
+    - name: Install Python dependencies
+      shell: sh
+      run: pip install pillow
+
+    - name: Setup dart
+      uses: dart-lang/setup-dart@v1
+
+    - name: Install Dart dependencies
+      shell: sh
+      run: dart pub get
+
+    - name: Convert Markdown
+      shell: sh
+      run: dart --enable-asserts bin/markdown_web.dart
+      env:
+        GITHUB_TOKEN: ${{ inputs.github_token }}
+        ARTICLES_DIRECTORY_PATH : ${{ inputs.articles_directory_path }}
+
+    - name: Dart2js
+      run: dart2js -O2 -o export/main.js web/main.dart
+      shell: sh
+
+    - name: Deploy
+      run: dart --enable-asserts bin/deploy_gh_page.dart
+      shell: sh
+      env:
+        GITHUB_TOKEN: ${{ inputs.github_token }}
+        ARTICLES_DIRECTORY_PATH : ${{ inputs.articles_directory_path }}

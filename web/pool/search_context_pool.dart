@@ -1,9 +1,7 @@
 
-import '../../common/model/tag.dart';
-
 class SearchContextPool {
   static String _text = '';
-  static List<Tag> _tags = [];
+  static List<String> _tags = [];
 
   //Text
   static void setText(String text) {
@@ -19,7 +17,7 @@ class SearchContextPool {
   }
 
   //Tags
-  static bool addTag(Tag tag) {
+  static bool addTag(String tag) {
     if (_tags.contains(tag)) {
       return false;
     }
@@ -28,11 +26,11 @@ class SearchContextPool {
     return true;
   }
 
-  static void removeTag(Tag tag) {
+  static void removeTag(String tag) {
     _tags.remove(tag);
   }
 
-  static List<Tag> getTags(){
+  static List<String> getTags(){
     return _tags;
   }
 
