@@ -52,7 +52,7 @@
 }
 
 .tags {
-    display: flex;
+    white-space: nowrap;
 }
 
 .tags > .tag {

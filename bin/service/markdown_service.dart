@@ -7,24 +7,8 @@ import 'card_service.dart';
 class MarkdownService {
   static Future<Tuple2<String,List<ArticleIndex>>> convertToHtml(String markdown) async {
     var html = await markdownToHtml(markdown,
-        inlineSyntaxes: [InlineHtmlSyntax()],//↓継承して作成したクラス
-        blockSyntaxes: [const TableSyntax(), const EmbedUrlSyntax(), const HeaderWithIdSyntax()]);
-
-    //urlを[url](url)に変換
-    html = html.replaceAllMapped(
-        RegExp(
-            r'[^">]((https?:www\.)|(https?:\/\/)|(www\.))[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9]{1,6}(\/[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)?( |)'),
-        (match) {
-      var matchText = match[0]!;
-      var split = matchText.split('');
-
-      //"か>以外とマッチしている先頭の文字を取り出す。
-      var aheadCharacter = split[0];
-      split.removeAt(0);
-      //先頭以外の文字列を統合
-      var url = split.join('');
-      return aheadCharacter + '<a href="$url">$url</a>';
-    });
+        inlineSyntaxes: [InlineHtmlSyntax()],
+        blockSyntaxes: [const TableSyntax(), const EmbedUrlSyntax(), const RawUrlSyntax(), const HeaderWithIdSyntax()]);
 
     //index
     var indexList = <ArticleIndex>[];
@@ -48,7 +32,7 @@ class EmbedUrlSyntax extends BlockSyntax {
     var match = pattern.firstMatch(parser.current)!;
     parser.advance();
 
-    var url = match[1]!;
+    var url = match[1]!.trim();
     var html = await CardService.generateCardHtml(url);
     return UnparsedContent(html);
   }
@@ -56,4 +40,23 @@ class EmbedUrlSyntax extends BlockSyntax {
   @override
   RegExp get pattern => RegExp(r'embed:(.*)$');
 }
+
+class RawUrlSyntax extends BlockSyntax {
+  const RawUrlSyntax();
+
+  @override
+  Future<Node?> parse(BlockParser parser) async {
+    var match = pattern.firstMatch(parser.current)!;
+    parser.advance();
+
+    var url = match[0]!;
+    if(url.startsWith('embed:')) return null;
+
+    return UnparsedContent('<a href="$url">$url</a>');
+  }
+
+  @override
+  RegExp get pattern => RegExp(r'((https?:www\.)|(https?:\/\/)|(www\.))[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9]{1,6}(\/[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)?( |)');
+}
+
 

@@ -1,0 +1,67 @@
+.card {
+    display: flex;
+    width: 100%;
+    height: 120px;
+    border: solid 1px #c7c7c7;
+    border-radius: 10px;
+    position: relative;
+    margin: 5% 0 5% 0;
+}
+
+.card-body {
+    min-width: 60%;
+}
+
+.card .site-detail {
+    margin-left: 2%;
+    height: 30px;
+    position: absolute;
+    bottom: -2%;
+
+}
+
+.card .site-detail .favicon {
+    display: inline-block;
+    vertical-align: middle;
+    height: 20px;
+}
+
+.card .site-detail .host {
+    display: inline-block;
+    font-size: 16px;
+}
+
+
+.card .context {
+    margin-left: 2%;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.card .thumbnail {
+    display: inline-block;
+    height: 100%;
+    border-radius: 10px;
+    border-left: solid 1px #c7c7c7;
+    vertical-align: middle;
+    max-width: 40%;
+    overflow-x: hidden;
+}
+
+.card .title {
+    margin-top: 2%;
+    margin-left: 4%;
+    margin-bottom: 3%;
+
+    font-size: 16px;
+    font-weight: 700;
+    display: inline-block;
+    overflow: hidden;
+
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}

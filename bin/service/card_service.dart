@@ -5,6 +5,8 @@ import 'package:http/http.dart' as http;
 import 'package:html/dom.dart';
 import 'package:html/parser.dart';
 
+import '../custom_logger.dart';
+
 class CardService {
   static Future<String> generateCardHtml(String url) async {
     try {
@@ -14,23 +16,26 @@ class CardService {
       var favIcon = await _getFavicon(url);
 
       return '''
-<div class="card">
-      <div class="card-body">
-              <div class="title">$title</div>
-              <div class="context">$description</div>
-      </div>
-      <img class="thumbnail"
-           src="$thumbnail"
-           alt="icon">
-      <div class="site-detail">
-          <img class="favicon"
-               src="$favIcon"
-               alt="favicon">
-          <div class="host">${Uri.parse(url).host}</div>
-      </div>
-</div>
+<a href="$url" class="uk-link-reset">
+  <div class="card">
+        <div class="card-body">
+                <div class="title">$title</div>
+                <div class="context">$description</div>
+        </div>
+        <img class="thumbnail"
+             src="$thumbnail"
+             alt="thumbnail">
+        <div class="site-detail">
+            <img class="favicon"
+                 src="$favIcon"
+                 alt="">
+            <div class="host">${Uri.parse(url).host}</div>
+        </div>
+  </div>
+</a>
   ''';
     } catch (e) {
+      CustomLogger.normal.e('generateCardHtml, url is $url');
       return '<a href="$url">$url</a>';
     }
   }
@@ -80,7 +85,7 @@ class CardService {
 
     if (response.statusCode != 200) {
       if (Uri.parse(url).origin == url) return '';
-      return _getImageUrl(url.replaceFirst(RegExp(r'/(?!.*/).*$'), ''));
+      return _getDescription(url.replaceFirst(RegExp(r'/(?!.*/).*$'), ''));
     }
 
     var html = parse(response.body);
@@ -100,13 +105,15 @@ class CardService {
       if (Uri.parse(url).origin == url) {
         return description;
       } else {
-        return _getImageUrl(url.replaceFirst(RegExp(r'/(?!.*/).*$'), ''));
+        return _getDescription(url.replaceFirst(RegExp(r'/(?!.*/).*$'), ''));
       }
     }
   }
 
   static Future<String> _getTitle(String url) async {
     var response = await http.get(Uri.parse(url));
+    if (response.statusCode != 200) return url;
+
     var elements = parse(response.body).getElementsByTagName('title');
     if (elements.isEmpty) return '';
     return elements[0].text;
@@ -115,16 +122,14 @@ class CardService {
   static Future<String> _getFavicon(String url) async {
     var response = await http.get(Uri.parse(url));
     var html = parse(response.body);
-
-    await Future.forEach<Element>(html.getElementsByTagName('link'),
-        (element) async {
-      if (element.attributes.keys.contains('rel')) {
-        var property = element.attributes['rel']!;
-        if (property == 'shortcut icon') {
-          return element.attributes['href']!;
-        }
+    var elements = html.getElementsByTagName('link');
+    for (var i=0; i < elements.length; i++) {
+      var element = elements[i];
+      var rel = element.attributes['rel'];
+      if (rel == 'shortcut icon') {
+        return element.attributes['href'] ?? '';
       }
-    });
+    }
 
     return '';
   }

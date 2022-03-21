@@ -37,6 +37,7 @@ class Page {
         href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
 
     <link rel="stylesheet" href="${GithubActionService.getGhPageIndexUrl()}style.css" />
+    <link rel="stylesheet" href="${GithubActionService.getGhPageIndexUrl()}card.css" />
     <link rel="stylesheet" href="${GithubActionService.getGhPageIndexUrl()}folder-structre-menu.css" />
     <link rel="stylesheet" href="${GithubActionService.getGhPageIndexUrl()}article.css" />
     <link rel="stylesheet" href="${GithubActionService.getGhPageIndexUrl()}side-menu.css" />
