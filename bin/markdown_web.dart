@@ -11,7 +11,6 @@ import 'service/thumbnail_service.dart';
 import 'view/page.dart';
 
 void main(List<String> arguments) async {
-  CustomLogger.normal.v(Platform.environment);
   CustomLogger.normal.i('Start Converting');
   var folder = ArticleFolder.fromDirectory(
       Directory(GithubActionService.getArticlesFolderPath()));
