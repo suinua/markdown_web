@@ -129,8 +129,8 @@ class NoteSyntax extends BlockSyntax {
 
   static const _iconsMap = {
     'info' : 'check',
-    'warn' : 'close',
-    'alert' : 'warning',
+    'warn' : 'warning',
+    'alert' : 'close',
     'value' : 'pencil'
   };
 

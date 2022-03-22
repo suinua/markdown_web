@@ -16,19 +16,19 @@
 }
 
 
-.note-warn {
+.note-alert {
     background: rgba(255, 174, 174, 0.425);
 }
 
-.note-warn-icon {
+.note-alert-icon {
     background: rgb(255, 109, 109) !important;
 }
 
-.note-alert {
+.note-warn {
     background: rgba(238, 255, 138, 0.329);
 }
 
-.note-alert-icon {
+.note-warn-icon {
     background: rgb(255, 206, 46) !important;
 }
 
