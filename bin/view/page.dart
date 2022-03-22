@@ -27,7 +27,13 @@ class Page {
     <meta property="og:url" content="${GithubActionService.getGhPageUrl(articleFile)}" >
     <meta content="${GithubActionService.getRepoName()}" property="og:site_name">  
     
+    <!-- Twitter -->
+    <meta name="twitter:site" content="@suinua" />
+    <meta name="twitter:title" content="${articleFile.articleTitle}" />
+    <meta name="twitter:description" content="" />
+    <meta name="twitter:image" content="${path.join(GithubActionService.getThumbnailsUrl(), articleFile.articleTitle)}.png" />
     <meta name="twitter:card" content="summary_large_image">
+    
     <meta property="uuid" content="${articleFile.uuid}">
 
     <title>${articleFile.articleTitle}</title>
