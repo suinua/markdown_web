@@ -46,7 +46,7 @@ class ArticleFile {
             .replaceFirst('.md', '');
 
   static String _getGithubFileUrl(String absolutePath) {
-    var late = absolutePath.replaceFirst(RegExp('(.*)' + GithubActionService.getArticlesFolderName()), '').replaceAll('\\','/');
+    var late = GithubActionService.getArticlesFolderName() + '/' + absolutePath.replaceFirst(RegExp('(.*)' + GithubActionService.getArticlesFolderName()), '').replaceAll('\\','/');
     return 'https://github.com/${GithubActionService.getRepository()}/blob/${GithubActionService.getBranchName()}' + late;
   }
 
