@@ -1,4 +1,5 @@
 import '../model/article_folder.dart';
+import '../service/github_action_service.dart';
 
 class FolderStructureMenu {
   static String html(ArticleFolder topFolder) {
@@ -9,7 +10,7 @@ class FolderStructureMenu {
       file.tags.map((e) => '<div class="tag">#${e.text}</div>').join('\n');
       children += '''
 <li>
-    <div class="menu-article"><a class="menu-article-title uk-link-reset" uuid="${file.uuid}">${file.fileName}</a>
+    <div class="menu-article"><a class="menu-article-title uk-link-reset" href="${GithubActionService.getGhPageUrl(file)}" uuid="${file.uuid}">${file.fileName}</a>
         <div class="tags">
            $tagsHtml
         </div>
@@ -39,7 +40,7 @@ class FolderStructureMenu {
           file.tags.map((e) => '<div class="tag">#${e.text}</div>').join('\n');
       children += '''
 <li>
-    <div class="menu-article"><div class="menu-article-title" uuid="${file.uuid}">${file.fileName}</div>
+    <div class="menu-article"><a class="menu-article-title uk-link-reset" href="${GithubActionService.getGhPageUrl(file)}" uuid="${file.uuid}">${file.fileName}</a>
         <div class="tags">
            $tagsHtml
         </div>
