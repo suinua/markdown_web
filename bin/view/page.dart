@@ -22,8 +22,14 @@ class Page {
     <meta property="og:url" content="${GithubActionService.getGhPageUrl(articleFile)}">
     <meta property="og:title" content="${articleFile.articleTitle}">
     <meta property="og:image" content="${path.join(GithubActionService.getThumbnailsUrl(), articleFile.articleTitle)}.png">
-    <meta property="og:description" content="">
+    <meta property="og:description" content="">    
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="${GithubActionService.getGhPageUrl(articleFile)}" >
+    <meta content="${GithubActionService.getRepoName()}" property="og:site_name">  
+    
+    <meta name="twitter:card" content="summary_large_image">
     <meta property="uuid" content="${articleFile.uuid}">
+
     <title>${articleFile.articleTitle}</title>
 
     <!-- UIkit CSS -->
