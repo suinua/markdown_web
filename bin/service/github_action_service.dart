@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:path/path.dart' as path;
 
-import '../custom_logger.dart';
 import '../model/article_file.dart';
 
 class GithubActionService {
@@ -55,15 +54,12 @@ class GithubActionService {
 
   static String getGithubToken() {
     var token = Platform.environment['GITHUB_TOKEN'];
-    if (token == null) CustomLogger.normal.w('GITHUB_TOKEN is null');
 
     return token ?? '';
   }
 
   static String getArticlesFolderName() {
     var token = Platform.environment['ARTICLES_DIRECTORY_PATH'];
-    if (token == null) CustomLogger.normal.w('ARTICLES_DIRECTORY_PATH is null');
-
     return token ?? 'articles';
   }
 

@@ -88,9 +88,9 @@ infoは省略可能
 :::
 
 :::
-内側に一部マークダウンを記入可能(ヘッダー系は無理)  
+内側に一部マークダウンを記入可能  
+ヘッダー系や、embedは無理
 **強調**  
-embed:https://f1-motorsports-gp.com/bar/2022-f1-1-brn-race/  
-- [ ] タスク1
-- [x] タスク2
+~~打ち消し~~
+https://f1-motorsports-gp.com/bar/2022-f1-1-brn-race/
 :::

@@ -7,7 +7,7 @@ import 'card_service.dart';
 class MarkdownService {
   static Future<Tuple2<String,List<ArticleIndex>>> convertToHtml(String markdown) async {
     var html = await markdownToHtml(markdown,
-        inlineSyntaxes: [InlineHtmlSyntax()],
+        inlineSyntaxes: [InlineHtmlSyntax(), StrikethroughSyntax()],
         blockSyntaxes: [const TableSyntax(), const EmbedUrlSyntax(), const NoteSyntax(), const RawUrlSyntax(), const HeaderWithIdSyntax()]);
 
     //index
