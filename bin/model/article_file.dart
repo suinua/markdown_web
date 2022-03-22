@@ -2,12 +2,14 @@ import 'dart:io';
 
 import 'package:uuid/uuid.dart';
 
+import '../service/github_action_service.dart';
 import '../service/markdown_service.dart';
 import 'article_index.dart';
 import 'article_tag.dart';
 
 class ArticleFile {
   final String uuid;
+  final String githubFileUrl;
   final String articleTitle;
   final String fileName;
   final String absolutePath;
@@ -23,7 +25,8 @@ class ArticleFile {
 
   ArticleFile(
       {required this.uuid,
-        required this.fileName,
+      required this.githubFileUrl,
+      required this.fileName,
       required this.absolutePath,
       required this.tags,
       required this.markdownBody})
@@ -35,11 +38,17 @@ class ArticleFile {
         fileName = file.absolute.path
             .replaceFirst(RegExp(r'(.*)\' + Platform.pathSeparator), ''),
         absolutePath = file.absolute.path,
-        tags = _getTags(file.absolute.path),
+        githubFileUrl = _getGithubFileUrl(file.absolute.path),
+      tags = _getTags(file.absolute.path),
         markdownBody = _getBody(file.absolute.path),
         articleTitle = file.absolute.path
             .replaceFirst(RegExp(r'(.*)\' + Platform.pathSeparator), '')
             .replaceFirst('.md', '');
+
+  static String _getGithubFileUrl(String absolutePath) {
+    var late = absolutePath.replaceFirst(RegExp('(.*)' + GithubActionService.getArticlesFolderName()), '').replaceAll('\\','/');
+    return 'https://github.com/${GithubActionService.getRepository()}/blob/${GithubActionService.getBranchName()}' + late;
+  }
 
   static List<ArticleTag> _getTags(String filePath) {
     var file = File(filePath);
@@ -63,8 +72,9 @@ class ArticleFile {
   Map asMap() {
     return {
       'uuid': uuid,
+      'github_file_url': githubFileUrl,
       'title': articleTitle,
-      'body': markdownBody,
+      'body': markdownBody.replaceAll(RegExp(r'[\$\r\n]'), '').replaceAll(RegExp(r'[!"#%&\/()*+,-./:;<=>?@^_`{|}~\[\]「」〔〕“”〈〉『』【】＆＊・（）＄＃＠。、？！｀＋￥％]'), ''),
       'tags': tags.map((e) => e.text).toList()
     };
   }

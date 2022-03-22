@@ -1,8 +1,27 @@
 import 'dart:html';
 
 import 'model/article.dart';
+import 'pool/articles_pool.dart';
 import 'pool/search_context_pool.dart';
 import 'service/search_service.dart';
+
+String getOwnerName() {
+  return window.location.host.replaceAll(RegExp('\\.(.*)'), '');
+}
+
+String getRepoName() {
+  return window.location.pathname!
+      .replaceFirst('/', '')
+      .replaceFirst(RegExp('/(.*)'), '');
+}
+
+String getArticleUUID() {
+  return querySelectorAll('meta')
+      .whereType<MetaElement>()
+      .where((element) => element.getAttribute('property') == 'uuid')
+      .first
+      .content;
+}
 
 void main() {
   _FolderStructureMenu.setUp();
@@ -10,10 +29,8 @@ void main() {
 
   //Github
   querySelector('#github-repository-button')!.onClick.listen((event) {
-    var userName = window.location.host.replaceAll(RegExp('\\.(.*)'), '');
-    var repositoryName = window.location.pathname!
-        .replaceFirst('/', '')
-        .replaceFirst(RegExp('/(.*)'), '');
+    var userName = getOwnerName();
+    var repositoryName = getRepoName();
 
     if (repositoryName.isEmpty) {
       var url = 'https://github.com/$userName/$userName.github.io';
@@ -23,7 +40,11 @@ void main() {
       window.open(url, '_blank');
     }
   });
-  //todo : github-edit-button
+  querySelector('#github-edit-button')!.onClick.listen((event) {
+    var uuid = getArticleUUID();
+    var article = ArticlesPool.getByID(uuid);
+    window.open(article.githubFileUrl, '_blank');
+  });
 
   //Share
   var twitterButton = querySelector('.twitter-button')!;
@@ -164,7 +185,7 @@ class _FolderStructureMenu {
     var _htmlValidator = NodeValidatorBuilder.common()
       ..allowElement('span', attributes: ['uk-icon', 'tag-text']);
     var selectedTagHtml =
-        '''<div class="selected-tag"><span class="remove-selected-tag" tag-text="$tagText" uk-icon="icon: close; ratio: 1"></span>$tagText</div>''';
+    '''<div class="selected-tag"><span class="remove-selected-tag" tag-text="$tagText" uk-icon="icon: close; ratio: 1"></span>$tagText</div>''';
 
     var selectedTagsElements = querySelectorAll('.selected-tags');
     selectedTagsElements.forEach((selectedTagsElement) {
@@ -197,7 +218,8 @@ class _FolderStructureMenu {
 
   static void highlightArticles(List<Article> filteredArticles) {
     querySelectorAll('.menu-article-title').forEach((articleTitleTextElement) {
-      var isTarget = filteredArticles.any((article) => article.uuid == articleTitleTextElement.attributes['uuid']);
+      var isTarget = filteredArticles.any((article) =>
+      article.uuid == articleTitleTextElement.attributes['uuid']);
 
       articleTitleTextElement.classes.remove('active-menu-article-title');
       if (isTarget) {

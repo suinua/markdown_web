@@ -23,6 +23,7 @@ class Page {
     <meta property="og:title" content="${articleFile.articleTitle}">
     <meta property="og:image" content="${path.join(GithubActionService.getThumbnailsUrl(), articleFile.articleTitle)}.png">
     <meta property="og:description" content="">
+    <meta property="uuid" content="${articleFile.uuid}">
     <title>${articleFile.articleTitle}</title>
 
     <!-- UIkit CSS -->
