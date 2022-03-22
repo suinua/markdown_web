@@ -46,6 +46,7 @@ class Page {
     <link rel="stylesheet" href="${GithubActionService.getGhPageIndexUrl()}folder-structre-menu.css" />
     <link rel="stylesheet" href="${GithubActionService.getGhPageIndexUrl()}article.css" />
     <link rel="stylesheet" href="${GithubActionService.getGhPageIndexUrl()}side-menu.css" />
+    <link rel="stylesheet" href="${GithubActionService.getGhPageIndexUrl()}note.css" />
     <link rel="stylesheet" href="${GithubActionService.getGhPageIndexUrl()}smartphone.css" media="screen and (max-width: 1000px)">
     <script src="${GithubActionService.getGhPageIndexUrl()}main.js" defer></script>
 </head>

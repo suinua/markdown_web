@@ -8,7 +8,7 @@ class MarkdownService {
   static Future<Tuple2<String,List<ArticleIndex>>> convertToHtml(String markdown) async {
     var html = await markdownToHtml(markdown,
         inlineSyntaxes: [InlineHtmlSyntax()],
-        blockSyntaxes: [const TableSyntax(), const EmbedUrlSyntax(), const RawUrlSyntax(), const HeaderWithIdSyntax()]);
+        blockSyntaxes: [const TableSyntax(), const EmbedUrlSyntax(), const NoteSyntax(), const RawUrlSyntax(), const HeaderWithIdSyntax()]);
 
     //index
     var indexList = <ArticleIndex>[];
@@ -59,4 +59,81 @@ class RawUrlSyntax extends BlockSyntax {
   RegExp get pattern => RegExp(r'((https?:www\.)|(https?:\/\/)|(www\.))[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9]{1,6}(\/[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)?( |)');
 }
 
+class NoteSyntax extends BlockSyntax {
+  const NoteSyntax();
 
+  @override
+  bool canParse(BlockParser parser) {
+    final match = pattern.firstMatch(parser.current);
+    if (match == null) return false;
+    final start = match[0];
+
+    return (['note:::','note info:::','note warn:::','note alert:::','note value:::'].contains(start));
+  }
+
+  @override
+  List<String> parseChildLines(BlockParser parser, [String? endBlock]) {
+    endBlock ??= '';
+
+    var childLines = <String>[];
+    parser.advance();
+
+    while (!parser.isDone) {
+      var match = pattern.firstMatch(parser.current);
+      if (match?[0] != ':::') {
+        childLines.add(parser.current);
+        parser.advance();
+      } else {
+        parser.advance();
+        break;
+      }
+    }
+
+    return childLines;
+  }
+
+  @override
+  Future<Node> parse(BlockParser parser) async {
+    var match = pattern.firstMatch(parser.current)!;
+    var first = match[0]!.split(' ');
+    var type = 'info';
+    if (first.length == 2) {
+      type = first[1].replaceFirst(':::', '');
+    }
+
+    var endBlock = match.group(2);
+
+    var childLines = parseChildLines(parser, endBlock);
+
+    childLines.add('');
+
+    var text = childLines.join('\n');
+    var result = await MarkdownService.convertToHtml(text);
+    var childrenHtml = result.item1;
+
+    var icon = _iconsMap[type];
+
+    var html = '''
+<div class="note note-$type">
+    <div class="note-icon-wrap">
+        <span class="note-icon note-$type-icon" uk-icon="icon: $icon; ratio: 1.25"></span>
+    </div>
+    <div class="note-body">
+        $childrenHtml
+    </div>
+</div>\n
+''';
+
+    return UnparsedContent(html);
+  }
+
+  static const _iconsMap = {
+    'info' : 'check',
+    'warn' : 'close',
+    'alert' : 'warning',
+    'value' : 'pencil'
+  };
+
+  @override
+  RegExp get pattern => RegExp(r'^[ ]{0,3}(note( info| warn| alert| value|)|)(:{3,}|~{3,})(.*)$');
+}
