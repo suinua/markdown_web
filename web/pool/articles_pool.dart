@@ -13,6 +13,7 @@ class ArticlesPool {
       ..open('GET', 'data.json', async: false)
       ..send();
 
+    print(request.response);
     _data = ArticleFolder.fromMap(jsonDecode(request.response));
   }
 

@@ -163,8 +163,8 @@ class Page {
 <div class="share">
     <span url="https://twitter.com/intent/tweet?ref_src=twsrc%5Etfw&url=${articleFile.articleTitle} ${GithubActionService.getGhPageUrl(articleFile)}"
         class="uk-icon-button uk-margin-small-right twitter-button" uk-icon="twitter"></span>
-    <span text="copy text" class="uk-icon-button uk-margin-small-right copy-link-button"
-        uk-icon="link"></span>
+    <span text="${GithubActionService.getGhPageUrl(articleFile)}" class="uk-icon-button uk-margin-small-right copy-link-button"
+        uk-icon="link"></span>  
     <div class="copied-message">Copied!</div>
 
     <button id="github-edit-button" class="uk-button uk-button-secondary github-button"><span uk-icon="github"></span> view on github</button>
