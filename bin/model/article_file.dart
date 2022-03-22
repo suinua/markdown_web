@@ -51,7 +51,7 @@ class ArticleFile {
     var branch = GithubActionService.getBranchName();
 
     var last = folderName + absolutePath.replaceFirst(RegExp('(.*)$folderName'), '').replaceAll('\\','/');
-    return 'https://github.com/$repoName}/blob/$branch/$last';
+    return 'https://github.com/$repoName/blob/$branch/$last';
   }
 
   static List<ArticleTag> _getTags(String filePath) {
