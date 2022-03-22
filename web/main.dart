@@ -24,6 +24,7 @@ String getArticleUUID() {
 }
 
 void main() {
+  var pool = ArticlesPool();
   _FolderStructureMenu.setUp();
   _ScrollNav.setUp();
 
@@ -42,7 +43,7 @@ void main() {
   });
   querySelector('#github-edit-button')!.onClick.listen((event) {
     var uuid = getArticleUUID();
-    var article = ArticlesPool.getByID(uuid);
+    var article = pool.getByID(uuid);
     window.open(article.githubFileUrl, '_blank');
   });
 

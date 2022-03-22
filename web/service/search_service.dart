@@ -4,7 +4,8 @@ import '../pool/search_context_pool.dart';
 
 class SearchService {
   static List<Article> filterBySearchContext() {
-    var articles = ArticlesPool.data().getAllArticles();
+    var pool = ArticlesPool();
+    var articles = pool.data.getAllArticles();
     var filteredArticles = <Article>[];
     articles.forEach((article) {
       if (SearchContextPool.getTags().isEmpty) {

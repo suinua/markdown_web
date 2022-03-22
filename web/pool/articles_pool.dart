@@ -6,23 +6,28 @@ import '../model/article.dart';
 import '../model/article_folder.dart';
 
 class ArticlesPool {
-  static ArticleFolder? _data;
+  ArticleFolder? _data;
+  ArticleFolder get data => _data!;
 
-  static void _init() {
-    var request = HttpRequest()
-      ..open('GET', 'data.json', async: false)
-      ..send();
+  static final ArticlesPool _instance = ArticlesPool._internal();
 
-    print(request.response);
-    _data = ArticleFolder.fromMap(jsonDecode(request.response));
+  ArticlesPool._internal() {
+    _init();
   }
 
-  static Article getByID(String uuid){
-    return data().getAllArticles().where((element) => element.uuid == uuid).first;
+  factory ArticlesPool() {
+    return _instance;
   }
 
-  static ArticleFolder data() {
-    if (_data == null) _init();
-    return _data!;
+  void _init() async {
+    var response = await HttpRequest.getString('data.json');
+    _data = ArticleFolder.fromMap(jsonDecode(response));
+  }
+
+   Article getByID(String uuid) {
+    return _data!
+        .getAllArticles()
+        .where((element) => element.uuid == uuid)
+        .first;
   }
 }

@@ -20,7 +20,7 @@ class Article {
       githubFileUrl: map['github_file_url'] as String,
       title: map['title'] as String,
       body: map['body'] as String,
-      tags: map['tags'] as List<String>,
+      tags: map['tags'],
     );
   }
 
