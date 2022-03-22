@@ -99,3 +99,26 @@ https://ja.wikipedia.org/wiki/%E5%8F%99%E3%80%85%E8%8B%91
 | be         | be          | be           |
 | left       | right       | center       |
 | aligned    | aligned     | aligned      |
+
+# 折りたたみ
+```markdown
+<details><summary>５０音表</summary>
+
+あいうえお
+かきくけこ
+さしすせと
+たちつてと
+なにぬねの
+おわり
+</details>
+```
+
+<details><summary>５０音表</summary>
+
+あいうえお
+かきくけこ
+さしすせと
+たちつてと
+なにぬねの
+おわり
+</details>

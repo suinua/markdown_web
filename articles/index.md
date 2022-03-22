@@ -43,3 +43,46 @@ https://f1-motorsports-gp.com/
 https://f1-motorsports-gp.com/
 ## 目次
 `#`と`##`を目次に変換してます
+
+## ノート
+```markdown
+note info:::
+インフォ
+:::
+
+note warn:::
+警告
+:::
+
+note alert:::
+より強い警告
+:::
+
+note value:::
+無地
+:::
+
+note:::
+infoは省略可能
+:::
+```
+
+note info:::
+インフォ
+:::
+
+note warn:::
+警告
+:::
+
+note alert:::
+より強い警告
+:::
+
+note value:::
+無地
+:::
+
+note:::
+infoは省略可能
+:::
