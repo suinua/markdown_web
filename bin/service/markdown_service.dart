@@ -15,9 +15,11 @@ class MarkdownService {
     RegExp(r'<h(.*)</h[1-6]>').allMatches(html).forEach((match) {
       var matchText = match[0]!;
       var level = int.parse(matchText.replaceAll(RegExp(' (.*)'), '').replaceAll('<h', ''));
-      var text = matchText.replaceAll(RegExp('(.*)">'), '').replaceAll(RegExp('</(.*)'), '');
-      var id = matchText.replaceFirst(RegExp('(.*)id="'), '').replaceAll(RegExp('">(.*)'), '');
-      indexList.add(ArticleIndex(IndexLevel.fromInt(level), text, id));
+      if (level <= 2) {
+        var text = matchText.replaceAll(RegExp('(.*)">'), '').replaceAll(RegExp('</(.*)'), '');
+        var id = matchText.replaceFirst(RegExp('(.*)id="'), '').replaceAll(RegExp('">(.*)'), '');
+        indexList.add(ArticleIndex(IndexLevel.fromInt(level), text, id));
+      }
     });
 
     return Tuple2(html, indexList);
