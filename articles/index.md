@@ -46,43 +46,51 @@ https://f1-motorsports-gp.com/
 
 ## ノート
 ```markdown
-note info:::
+:::info
 インフォ
 :::
 
-note warn:::
+:::warn
 警告
 :::
 
-note alert:::
+:::alert
 より強い警告
 :::
 
-note value:::
+:::value
 無地
 :::
 
-note:::
+:::
 infoは省略可能
 :::
 ```
 
-note info:::
+:::info
 インフォ
 :::
 
-note warn:::
+:::warn
 警告
 :::
 
-note alert:::
+:::alert
 より強い警告
 :::
 
-note value:::
+:::value
 無地
 :::
 
-note:::
+:::
 infoは省略可能
+:::
+
+:::
+内側に一部マークダウンを記入可能(ヘッダー系は無理)  
+**強調**  
+embed:https://f1-motorsports-gp.com/bar/2022-f1-1-brn-race/  
+- [ ] タスク1
+- [x] タスク2
 :::

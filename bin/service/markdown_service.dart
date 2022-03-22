@@ -68,7 +68,7 @@ class NoteSyntax extends BlockSyntax {
     if (match == null) return false;
     final start = match[0];
 
-    return (['note:::','note info:::','note warn:::','note alert:::','note value:::'].contains(start));
+    return match.groupCount == 2 && ([':::info',':::warn',':::alert',':::value',':::'].contains(start));
   }
 
   @override
@@ -93,15 +93,12 @@ class NoteSyntax extends BlockSyntax {
   }
 
   @override
-  Future<Node> parse(BlockParser parser) async {
+  Future<Node?> parse(BlockParser parser) async {
     var match = pattern.firstMatch(parser.current)!;
-    var first = match[0]!.split(' ');
-    var type = 'info';
-    if (first.length == 2) {
-      type = first[1].replaceFirst(':::', '');
-    }
+    var type = match[0]!.replaceFirst(':::', '');
+    if (type.isEmpty) type = 'info';
 
-    var endBlock = match.group(2);
+    var endBlock = match.group(1);
 
     var childLines = parseChildLines(parser, endBlock);
 
@@ -135,5 +132,5 @@ class NoteSyntax extends BlockSyntax {
   };
 
   @override
-  RegExp get pattern => RegExp(r'^[ ]{0,3}(note( info| warn| alert| value|)|)(:{3,}|~{3,})(.*)$');
+  RegExp get pattern => RegExp(r'^(:::)(info|warn|alert|value|)$');
 }

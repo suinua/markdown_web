@@ -47,7 +47,7 @@ class CardService {
 
     if (response.statusCode != 200) {
       if (Uri.parse(url).origin == url) return '';
-      return _getImageUrl(url.replaceFirst(RegExp(r'/(?!.*/).*$'), ''));
+      return _getImageUrl(_getNextUrl(url));
     }
 
     var html = parse(response.body);
@@ -73,19 +73,20 @@ class CardService {
       if (Uri.parse(url).origin == url) {
         return imageUrl;
       } else {
-        return _getImageUrl(url.replaceFirst(RegExp(r'/(?!.*/).*$'), ''));
+        return _getImageUrl(_getNextUrl(url));
       }
     }
   }
 
   static Future<String> _getDescription(String url) async {
     var description = '';
+
     var response = await http.get(Uri.parse(url));
     url = response.url ?? url;
 
     if (response.statusCode != 200) {
       if (Uri.parse(url).origin == url) return '';
-      return _getDescription(url.replaceFirst(RegExp(r'/(?!.*/).*$'), ''));
+      return _getDescription(_getNextUrl(url));
     }
 
     var html = parse(response.body);
@@ -105,7 +106,7 @@ class CardService {
       if (Uri.parse(url).origin == url) {
         return description;
       } else {
-        return _getDescription(url.replaceFirst(RegExp(r'/(?!.*/).*$'), ''));
+        return _getDescription(_getNextUrl(url));
       }
     }
   }
@@ -116,6 +117,8 @@ class CardService {
 
     var elements = parse(response.body).getElementsByTagName('title');
     if (elements.isEmpty) return '';
+
+    print('getitle');
     return elements[0].text;
   }
 
@@ -127,10 +130,20 @@ class CardService {
       var element = elements[i];
       var rel = element.attributes['rel'];
       if (rel == 'shortcut icon') {
+        print('_getFavicon');
         return element.attributes['href'] ?? '';
       }
     }
 
+    print('_getFavicon');
     return '';
+  }
+
+  static String _getNextUrl(String url) {
+    if (url.split('').last == '/') {
+      url = url.substring(0, url.length-1);
+    }
+
+    return url.replaceFirst(RegExp(r'/(?!.*/).*$'), '');
   }
 }
