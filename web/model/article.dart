@@ -17,7 +17,7 @@ class Article {
   factory Article.fromMap(Map map) {
     return Article(
       uuid: map['uuid'] as String,
-      githubFileUrl: map['githubFileUrl'] as String,
+      githubFileUrl: map['github_file_url'] as String,
       title: map['title'] as String,
       body: map['body'] as String,
       tags: map['tags'] as List<String>,
