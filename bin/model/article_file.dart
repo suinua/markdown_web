@@ -46,8 +46,12 @@ class ArticleFile {
             .replaceFirst('.md', '');
 
   static String _getGithubFileUrl(String absolutePath) {
-    var late = GithubActionService.getArticlesFolderName() + '/' + absolutePath.replaceFirst(RegExp('(.*)' + GithubActionService.getArticlesFolderName()), '').replaceAll('\\','/');
-    return 'https://github.com/${GithubActionService.getRepository()}/blob/${GithubActionService.getBranchName()}' + late;
+    var folderName = GithubActionService.getArticlesFolderName();
+    var repoName = GithubActionService.getRepository();
+    var branch = GithubActionService.getBranchName();
+
+    var last = folderName + absolutePath.replaceFirst(RegExp('(.*)$folderName'), '').replaceAll('\\','/');
+    return 'https://github.com/$repoName}/blob/$branch/$last';
   }
 
   static List<ArticleTag> _getTags(String filePath) {
