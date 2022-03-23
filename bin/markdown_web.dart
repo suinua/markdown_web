@@ -6,37 +6,37 @@ import 'package:path/path.dart' as path;
 import 'custom_logger.dart';
 import 'model/article_file.dart';
 import 'model/article_folder.dart';
-import 'service/github_action_service.dart';
+import 'pool/path_pool.dart';
 import 'service/thumbnail_service.dart';
 import 'view/page.dart';
 
 void main(List<String> arguments) async {
   CustomLogger.normal.i('Start Converting');
   var folder = ArticleFolder.fromDirectory(
-      Directory(GithubActionService.getArticlesFolderPath()));
+      Directory(PathPool.articlesDir()));
   await folder.analyze();
   await exportArticleTopFolder(folder);
   CustomLogger.normal.i('Finish Converting');
 
   CustomLogger.normal.i('Save Data File');
   try {
-    File(path.join(GithubActionService.getExportPath(),'data.json')).writeAsStringSync(jsonEncode(folder.asMap()));
+    File(path.join(PathPool.exportDir(),'data.json')).writeAsStringSync(jsonEncode(folder.asMap()));
   } catch(e) {
     CustomLogger.simple.w(e);
   }
 }
 
 Future<void> exportArticleTopFolder(ArticleFolder topFolder) async {
-  await Directory(GithubActionService.getExportPath()).create();
+  await Directory(PathPool.exportDir()).create();
 
   await Future.forEach<ArticleFile>(topFolder.files, (article) async {
     await exportArticleFile(
-        GithubActionService.getExportPath(), topFolder, article);
+        PathPool.exportDir(), topFolder, article);
   });
 
   await Future.forEach<ArticleFolder>(topFolder.folders, (folder) async {
     await exportArticleFolder(
-        GithubActionService.getExportPath(), folder, topFolder);
+        PathPool.exportDir(), folder, topFolder);
   });
 }
 

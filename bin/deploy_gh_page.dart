@@ -3,15 +3,16 @@ import 'dart:io';
 import 'package:path/path.dart' as path;
 
 import 'custom_logger.dart';
-import 'service/github_action_service.dart';
+import 'pool/action_data.dart';
+import 'pool/path_pool.dart';
 
 void main() async {
-  var exportDirectory = Directory(GithubActionService.getExportPath());
+  var exportDirectory = Directory(PathPool.exportDir());
   var targets = <String>[];
   await exportDirectory.create();
 
   CustomLogger.normal.i('Start Copying Assets');
-  await _copyDirectory(Directory(GithubActionService.getAssetsFolderPath()), Directory(GithubActionService.getExportPath()));
+  await _copyDirectory(Directory(PathPool.assetsDir()), Directory(PathPool.exportDir()));
   CustomLogger.normal.i('Finish Copying Assets');
 
   if (Platform.isWindows) return;
@@ -20,28 +21,28 @@ void main() async {
   var children = exportDirectory.listSync();
   for (var child in children) {
     targets.add(child.path.replaceFirst(
-        GithubActionService.EXPORT_FOLDER_NAME + Platform.pathSeparator, ''));
+        PathPool.EXPORT_FOLDER_NAME + Platform.pathSeparator, ''));
   }
 
-  Directory.current = GithubActionService.getExportPath();
+  Directory.current = PathPool.exportDir();
 
   //Set git user
   var setNameResult = await Process.run('git', [
     'config',
     '--global',
     'user.name',
-    GithubActionService.getActorName()
+    ActionData.actorName()
   ]);
-  CustomLogger.simple.v('git config --global user.name ${GithubActionService.getActorName()}> stdout: ${setNameResult.stdout}');
-  CustomLogger.simple.v('git config --global user.name ${GithubActionService.getActorName()}> stderr: ${setNameResult.stderr}');
+  CustomLogger.simple.v('git config --global user.name ${ActionData.actorName()}> stdout: ${setNameResult.stdout}');
+  CustomLogger.simple.v('git config --global user.name ${ActionData.actorName()}> stderr: ${setNameResult.stderr}');
   var setEmailResult = await Process.run('git', [
     'config',
     '--global',
     'user.email',
-    '${GithubActionService.getActorName()}@users.noreply.github.com'
+    '${ActionData.actorName()}@users.noreply.github.com'
   ]);
-  CustomLogger.simple.v('git config --global user.email ${GithubActionService.getActorName()}@users.noreply.github.com> stdout: ${setEmailResult.stdout}');
-  CustomLogger.simple.v('git config --global user.email ${GithubActionService.getActorName()}@users.noreply.github.com> stderr: ${setEmailResult.stderr}');
+  CustomLogger.simple.v('git config --global user.email ${ActionData.actorName()}@users.noreply.github.com> stdout: ${setEmailResult.stdout}');
+  CustomLogger.simple.v('git config --global user.email ${ActionData.actorName()}@users.noreply.github.com> stderr: ${setEmailResult.stderr}');
   var setDefaultNameResult = await Process.run('git', [
     'config',
     '--global',
@@ -81,7 +82,7 @@ void main() async {
 
   //Remote
 
-  var remoteUrl = 'https://x-access-token:${GithubActionService.getGithubToken()}@github.com/${GithubActionService.getRepository()}.git';
+  var remoteUrl = 'https://x-access-token:${ActionData.token()}@github.com/${ActionData.repository()}.git';
   var remoteResult =
       await Process.run('git', ['remote', 'add', 'origin', remoteUrl]);
   CustomLogger.simple.v('git remote add $remoteUrl > stdout: ${remoteResult.stdout}');

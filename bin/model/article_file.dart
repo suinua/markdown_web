@@ -2,7 +2,8 @@ import 'dart:io';
 
 import 'package:uuid/uuid.dart';
 
-import '../service/github_action_service.dart';
+import '../pool/action_data.dart';
+import '../pool/path_pool.dart';
 import '../service/markdown_service.dart';
 import 'article_index.dart';
 import 'article_tag.dart';
@@ -46,12 +47,12 @@ class ArticleFile {
             .replaceFirst('.md', '');
 
   static String _getGithubFileUrl(String absolutePath) {
-    var folderName = GithubActionService.getArticlesFolderName();
-    var repoName = GithubActionService.getRepository();
-    var branch = GithubActionService.getBranchName();
+    var folderName = PathPool.articlesDirName();
+    var repo = ActionData.repository();
+    var branch = ActionData.branchName();
 
     var last = folderName + absolutePath.replaceFirst(RegExp('(.*)$folderName'), '').replaceAll('\\','/');
-    return 'https://github.com/$repoName/blob/$branch/$last';
+    return 'https://github.com/$repo/blob/$branch/$last';
   }
 
   static List<ArticleTag> _getTags(String filePath) {

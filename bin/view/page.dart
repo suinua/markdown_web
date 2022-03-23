@@ -3,7 +3,7 @@ import 'package:path/path.dart' as path;
 import '../model/article_file.dart';
 import '../model/article_folder.dart';
 import '../model/article_tag.dart';
-import '../service/github_action_service.dart';
+import '../pool/action_data.dart';
 import '../service/github_service.dart';
 import 'folder_structure_menu.dart';
 import 'index_menu.dart';
@@ -19,19 +19,19 @@ class Page {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:url" content="${GithubActionService.getGhPageUrl(articleFile)}">
+    <meta property="og:url" content="${ActionData.ghPageUrl(articleFile)}">
     <meta property="og:title" content="${articleFile.articleTitle}">
-    <meta property="og:image" content="${path.join(GithubActionService.getThumbnailsUrl(), articleFile.articleTitle)}.png">
+    <meta property="og:image" content="${path.join(ActionData.thumbnailsUrl(), articleFile.articleTitle)}.png">
     <meta property="og:description" content="">    
     <meta property="og:type" content="article">
-    <meta property="og:url" content="${GithubActionService.getGhPageUrl(articleFile)}" >
-    <meta content="${GithubActionService.getRepoName()}" property="og:site_name">  
+    <meta property="og:url" content="${ActionData.ghPageUrl(articleFile)}" >
+    <meta content="${ActionData.repoName()}" property="og:site_name">  
     
     <!-- Twitter -->
     <meta name="twitter:site" content="@suinua" />
     <meta name="twitter:title" content="${articleFile.articleTitle}" />
     <meta name="twitter:description" content="" />
-    <meta name="twitter:image" content="${path.join(GithubActionService.getThumbnailsUrl(), articleFile.articleTitle)}.png" />
+    <meta name="twitter:image" content="${path.join(ActionData.thumbnailsUrl(), articleFile.articleTitle)}.png" />
     <meta name="twitter:card" content="summary_large_image">
     
     <meta property="uuid" content="${articleFile.uuid}">
@@ -54,14 +54,14 @@ class Page {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
 
-    <link rel="stylesheet" href="${GithubActionService.getGhPageIndexUrl()}style.css" />
-    <link rel="stylesheet" href="${GithubActionService.getGhPageIndexUrl()}card.css" />
-    <link rel="stylesheet" href="${GithubActionService.getGhPageIndexUrl()}folder-structre-menu.css" />
-    <link rel="stylesheet" href="${GithubActionService.getGhPageIndexUrl()}article.css" />
-    <link rel="stylesheet" href="${GithubActionService.getGhPageIndexUrl()}side-menu.css" />
-    <link rel="stylesheet" href="${GithubActionService.getGhPageIndexUrl()}note.css" />
-    <link rel="stylesheet" href="${GithubActionService.getGhPageIndexUrl()}smartphone.css" media="screen and (max-width: 1000px)">
-    <script src="${GithubActionService.getGhPageIndexUrl()}main.js" defer></script>
+    <link rel="stylesheet" href="${path.join(ActionData.ghPageIndexUrl(),'style.css')}" />
+    <link rel="stylesheet" href="${path.join(ActionData.ghPageIndexUrl(),'card.css')}" />
+    <link rel="stylesheet" href="${path.join(ActionData.ghPageIndexUrl(),'folder-structre-menu.css')}" />
+    <link rel="stylesheet" href="${path.join(ActionData.ghPageIndexUrl(),'article.css')}" />
+    <link rel="stylesheet" href="${path.join(ActionData.ghPageIndexUrl(),'side-menu.css')}" />
+    <link rel="stylesheet" href="${path.join(ActionData.ghPageIndexUrl(),'note.css')}" />
+    <link rel="stylesheet" href="${path.join(ActionData.ghPageIndexUrl(),'smartphone.css')}" media="screen and (max-width: 1000px)">
+    <script src="${path.join(ActionData.ghPageIndexUrl(),'main.js')}" defer></script>
 </head>
 
 <body>
@@ -177,9 +177,9 @@ class Page {
   static String _shareHtml(ArticleFile articleFile) {
     return '''
 <div class="share">
-    <span url="https://twitter.com/intent/tweet?ref_src=twsrc%5Etfw&url=${articleFile.articleTitle} ${GithubActionService.getGhPageUrl(articleFile)}"
+    <span url="https://twitter.com/intent/tweet?ref_src=twsrc%5Etfw&url=${articleFile.articleTitle} ${ActionData.ghPageUrl(articleFile)}"
         class="uk-icon-button uk-margin-small-right twitter-button" uk-icon="twitter"></span>
-    <span text="${GithubActionService.getGhPageUrl(articleFile)}" class="uk-icon-button uk-margin-small-right copy-link-button"
+    <span text="${ActionData.ghPageUrl(articleFile)}" class="uk-icon-button uk-margin-small-right copy-link-button"
         uk-icon="link"></span>  
     <div class="copied-message">Copied!</div>
 

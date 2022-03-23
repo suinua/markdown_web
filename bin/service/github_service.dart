@@ -6,14 +6,14 @@ import '../custom_logger.dart';
 import '../model/article_edit_log.dart';
 import '../model/article_file.dart';
 import '../model/committer.dart';
-import 'github_action_service.dart';
+import '../pool/action_data.dart';
 
 class GithubService {
   static Future<List<ArticleEditLog>> getLogs(ArticleFile article) async {
-    var branchName = GithubActionService.getBranchName();
+    var branchName = ActionData.branchName();
     var logs = <ArticleEditLog>[];
     var url =
-        'https://api.github.com/repos/${GithubActionService.getRepository()}/commits?cliend_id=${GithubActionService.getGithubToken()}?path=${GithubActionService.getFileUrlForGithubAPI(article)}&sha=$branchName';
+        'https://api.github.com/repos/${ActionData.repository()}/commits?cliend_id=${ActionData.token()}?path=${ActionData.fileUrlOnGithub(article)}&sha=$branchName';
     CustomLogger.simple.i('github api : $url');
     try {
       var response = await http.get(Uri.parse(url));
