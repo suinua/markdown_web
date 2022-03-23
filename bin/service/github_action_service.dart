@@ -58,45 +58,38 @@ class GithubActionService {
     return token ?? '';
   }
 
-  static String getArticlesFolderName() {
-    var token = Platform.environment['ARTICLES_DIRECTORY_PATH'];
-    return token ?? 'articles';
-  }
-
-  static String getArticlesFolderPath() {
+  static String ASSETS_FOLDER_NAME = 'assets';
+  static String getAssetsFolderPath() {
     var env = Platform.environment;
-    if (env.keys.contains('GITHUB_WORKSPACE')) {
-      return path.join(env['GITHUB_WORKSPACE']!, getArticlesFolderName());
-    } else {
-      //for debug
-      return path.join(getBasePath(), 'articles');
-    }
+    return path.join(env['GITHUB_ACTION_PATH'] ?? _basedPathForDebug(), ASSETS_FOLDER_NAME);
   }
 
   static String EXPORT_FOLDER_NAME = 'export';
+
   static String getExportPath() {
-    return path.join(getBasePath(), EXPORT_FOLDER_NAME);
-  }
-
-  static String ASSETS_FOLDER_NAME = 'assets';
-
-  static String getAssetsFolderPath() {
-    return path.join(getBasePath(), ASSETS_FOLDER_NAME);
+    var env = Platform.environment;
+    return path.join(
+        env['GITHUB_ACTION_PATH'] ?? _basedPathForDebug(),
+        EXPORT_FOLDER_NAME);
   }
 
   static String getExportThumbnailPath() {
     return path.join(getExportPath(), 'thumbnails');
   }
 
-  static String getBasePath() {
+  static String getArticlesFolderName() {
+    var dirPath = Platform.environment['ARTICLES_DIRECTORY_PATH'];
+    return dirPath ?? 'articles';
+  }
+
+  static String getArticlesFolderPath() {
     var env = Platform.environment;
-    if (env.keys.contains('GITHUB_WORKSPACE')) {
-      return path.join(env['GITHUB_WORKSPACE']!);
-    } else {
-      //for debug
-      return Platform.script.path
-          .replaceRange(0, 1, '')
-          .replaceFirst(RegExp('bin(.*)'), '');
-    }
+    return path.join(env['GITHUB_WORKSPACE'] ?? _basedPathForDebug(), getArticlesFolderName());
+  }
+
+  static String _basedPathForDebug() {
+    return Platform.script.path
+        .replaceRange(0, 1, '')
+        .replaceFirst(RegExp('bin(.*)'), '');
   }
 }
