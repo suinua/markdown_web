@@ -15,6 +15,8 @@ class CardService {
       var thumbnail = await _getImageUrl(url);
       var favIcon = await _getFavicon(url);
 
+      var thumbnailHtml = thumbnail.isEmpty ? '' : '''<img class="thumbnail" src="$thumbnail" alt="thumbnail">''';
+
       return '''
 <a href="$url" class="uk-link-reset">
   <div class="card">
@@ -22,9 +24,7 @@ class CardService {
                 <div class="title">$title</div>
                 <div class="context">$description</div>
         </div>
-        <img class="thumbnail"
-             src="$thumbnail"
-             alt="thumbnail">
+        $thumbnailHtml
         <div class="site-detail">
             <img class="favicon"
                  src="$favIcon"
