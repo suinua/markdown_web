@@ -39,17 +39,17 @@ runs:
 
     - name: Convert Markdown
       shell: sh
-      run: dart --enable-asserts bin/markdown_web.dart
+      run: dart --enable-asserts $GITHUB_ACTION_PATH/bin/markdown_web.dart
       env:
         GITHUB_TOKEN: ${{ inputs.github_token }}
         ARTICLES_DIRECTORY_PATH : ${{ inputs.articles_directory_path }}
 
     - name: Dart2js
-      run: dart2js -O2 -o export/main.js web/main.dart
+      run: dart2js -O2 -o $GITHUB_ACTION_PATH/export/main.js $GITHUB_ACTION_PATH/web/main.dart
       shell: sh
 
     - name: Deploy
-      run: dart --enable-asserts bin/deploy_gh_page.dart
+      run: dart --enable-asserts $GITHUB_ACTION_PATH/bin/deploy_gh_page.dart
       shell: sh
       env:
         GITHUB_TOKEN: ${{ inputs.github_token }}
