@@ -53,6 +53,8 @@
 
 .note-icon svg {
     padding: 4px;
+    height: 30px;
+    width: 30px;
 }
 
 .note-body {

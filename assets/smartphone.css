@@ -31,7 +31,6 @@
     position: sticky;
     float: top;
     top: 0;
-    height: 64px;
     width: 100%;
     z-index: 200;
     color: white;
@@ -39,15 +38,35 @@
 }
 
 .smartphone-folder-structure-menu-button {
-    position: absolute;
-    left: 26px;
-    top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: .25em;
+    box-sizing: border-box;
+    height: 52px;
+    padding: 0 15px;
+    font-size: .875rem;
 }
 
 .smartphone-index-menu-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: .25em;
+    box-sizing: border-box;
+    height: 52px;
+    padding: 0 15px;
+    font-size: .875rem;
+}
+
+.smartphone-folder-structure-menu-button-wrap {
+    display: inline-block;
+}
+
+.smartphone-index-menu-button-wrap {
+    display: inline-block;
     position: absolute;
-    right: 16px;
-    top: 10px;
+    right: 0;
 }
 
 .smartphone-index {

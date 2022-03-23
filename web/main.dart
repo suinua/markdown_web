@@ -1,19 +1,11 @@
 import 'dart:html';
 
+import 'github.dart';
 import 'model/article.dart';
 import 'pool/articles_pool.dart';
 import 'pool/search_context_pool.dart';
 import 'service/search_service.dart';
 
-String getOwnerName() {
-  return window.location.host.replaceAll(RegExp('\\.(.*)'), '');
-}
-
-String getRepoName() {
-  return window.location.pathname!
-      .replaceFirst('/', '')
-      .replaceFirst(RegExp('/(.*)'), '');
-}
 
 String getArticleUUID() {
   return querySelectorAll('meta')
@@ -87,7 +79,7 @@ class _ScrollNav {
         .whereType<AnchorElement>()
         .toList();
     const collision = 50;
-    const navBarHeight = 64;
+    var navBarHeight = querySelector('.smartphone-nav')!.offsetHeight;
 
     //上のバーで隠れないように
     navItems.forEach((navItem) {

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:universal_html/html.dart';
 
+import '../github.dart';
 import '../model/article.dart';
 import '../model/article_folder.dart';
 
@@ -20,7 +21,7 @@ class ArticlesPool {
   }
 
   void _init() async {
-    var response = await HttpRequest.getString('data.json');
+    var response = await HttpRequest.getString(getDataUrl());
     _data = ArticleFolder.fromMap(jsonDecode(response));
   }
 
