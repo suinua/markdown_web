@@ -1,3 +1,6 @@
+![サンプル](https://suinua.github.io/markdown_web/)
+
+
 # 導入
 
 ```yaml
@@ -27,8 +30,31 @@ jobs:
 embed:https://github.com/suinua/markdown_web
 embed:https://twitter.com/suinua/status/1497224778788139008?s=20&t=bkcX37X_4DJZ_DFXiZI6OQ
 ```
+## ノート
+```markdown
+:::info
+インフォ
+:::
 
-# debug
-xcopy assets export /E/H/C/I
-dart --enable-asserts bin/markdown_web.dart
-dart2js -O2 -o export/main.js web/main.dart
+:::warn
+警告
+:::
+
+:::alert
+より強い警告
+:::
+
+:::value
+無地
+:::
+
+:::
+infoは省略可能
+:::
+```
+
+
+#
+xcopy assets export /E/H/C/I  
+dart --enable-asserts bin/markdown_web.dart  
+dart2js -O2 -o export/main.js web/main.dart  
