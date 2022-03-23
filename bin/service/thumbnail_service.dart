@@ -9,7 +9,7 @@ class ThumbNailService {
     await Directory(PathPool.exportThumbnailDir()).create();
 
     var destination = path.join(PathPool.exportThumbnailDir(),title);
-    var result = await Process.run('python', ['thumbnail_generator/main.py', title, destination]);
+    var result = await Process.run('python', [PathPool.thumbnailGenerator(), title, destination]);
     if (result.stderr.toString().isEmpty) {
       CustomLogger.simple.i('python $title $destination > stdout: ${result.stdout}');
     } else {

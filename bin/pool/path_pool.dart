@@ -4,6 +4,7 @@ import 'package:path/path.dart' as path;
 class PathPool {
   //EXPORT
   static String EXPORT_FOLDER_NAME = 'export';
+
   static String exportDir() {
     var env = Platform.environment;
     return path.join(
@@ -27,10 +28,18 @@ class PathPool {
   }
 
   static String ASSETS_FOLDER_NAME = 'assets';
+
   static String assetsDir() {
     var env = Platform.environment;
     return path.join(
         env['GITHUB_ACTION_PATH'] ?? _basedPathForDebug(), ASSETS_FOLDER_NAME);
+  }
+
+  //Thumbnail Generator
+  static String thumbnailGenerator() {
+    var env = Platform.environment;
+    return path.join(env['GITHUB_ACTION_PATH'] ?? _basedPathForDebug(),
+        'thumbnail_generator/main.py');
   }
 
   static String _basedPathForDebug() {
