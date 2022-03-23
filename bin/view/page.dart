@@ -72,12 +72,16 @@ class Page {
         <button id="github-repository-button" class="uk-button uk-button-secondary github-button"><span
                 uk-icon="github"></span> Github</button>
     </nav>
-    <div class="smartphone-nav">
-        <div class="smartphone-folder-structure-menu-button">
-            記事<span uk-icon="icon: chevron-down; ratio: 2"></span>
+    <div class="smartphone-nav uk-navbar">
+        <div class="smartphone-folder-structure-menu-button-wrap">
+            <div class="smartphone-folder-structure-menu-button">
+                <span uk-icon="icon: folder"></span>記事
+            </div>
         </div>
-        <div class="smartphone-index-menu-button">
-            <span uk-icon="icon: menu; ratio: 2.5"></span>
+        <div class="smartphone-index-menu-button-wrap">
+            <div class="smartphone-index-menu-button">
+                <span uk-icon="icon: menu"></span>目次
+            </div>
         </div>
         ${IndexMenu.smartphoneHtml(articleFile.indexList)}
 
