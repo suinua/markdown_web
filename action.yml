@@ -35,7 +35,9 @@ runs:
 
     - name: Install Dart dependencies
       shell: sh
-      run: dart pub get
+      run: |
+        cd $GITHUB_ACTION_PATH
+        dart pub get
 
     - name: Convert Markdown
       shell: sh
