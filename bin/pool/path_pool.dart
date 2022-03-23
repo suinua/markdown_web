@@ -39,7 +39,11 @@ class PathPool {
   static String thumbnailGenerator() {
     var env = Platform.environment;
     return path.join(env['GITHUB_ACTION_PATH'] ?? _basedPathForDebug(),
-        'thumbnail_generator/main.py');
+        'thumbnail_generator');
+  }
+
+  static String thumbnailGeneratorScript() {
+    return path.join(thumbnailGenerator(), 'main.py');
   }
 
   static String _basedPathForDebug() {

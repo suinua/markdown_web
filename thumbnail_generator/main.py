@@ -5,19 +5,20 @@ if __name__ == '__main__':
     args = sys.argv
 
     font_size = 60
-    astr = args[1]
+    text = args[1]
     fileName = args[2]
+    assets_dir = args[3]
 
-    img = Image.open('thumbnail_generator/thumbnail.png')
+    img = Image.open(assets_dir + 'thumbnail.png')
     draw = ImageDraw.Draw(img)
-    font = ImageFont.truetype('thumbnail_generator/NotoSerifJP-Regular.otf', font_size)
+    font = ImageFont.truetype(assets_dir + 'NotoSerifJP-Regular.otf', font_size)
     MAX_W, MAX_H = img.width, img.height
 
     index = 0
     line = 0
     now_width = 0
     now_text = ""
-    for char in astr:
+    for char in text:
         now_text += char
         font_width, font_height = font.getsize(char)
         now_width += font_width
@@ -27,7 +28,7 @@ if __name__ == '__main__':
             now_text = ""
             now_width = 0
             line += 1
-        elif index == len(astr)-1:
+        elif index == len(text)-1:
             w, h = draw.textsize(now_text, font=font)
             draw.text(((MAX_W - w) / 2, MAX_H / 2 + (line * 70) - 80), now_text, fill="black", font=font)
         index += 1
