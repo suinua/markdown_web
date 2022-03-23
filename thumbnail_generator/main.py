@@ -9,9 +9,9 @@ if __name__ == '__main__':
     fileName = args[2]
     assets_dir = args[3]
 
-    img = Image.open(assets_dir + 'thumbnail.png')
+    img = Image.open(assets_dir + '/thumbnail.png')
     draw = ImageDraw.Draw(img)
-    font = ImageFont.truetype(assets_dir + 'NotoSerifJP-Regular.otf', font_size)
+    font = ImageFont.truetype(assets_dir + '/NotoSerifJP-Regular.otf', font_size)
     MAX_W, MAX_H = img.width, img.height
 
     index = 0
