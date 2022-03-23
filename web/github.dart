@@ -13,5 +13,5 @@ String getRepoName() {
 }
 
 String getDataUrl() {
-  return path.join(window.location.host, getRepoName(),'data.json').toString();
+  return path.join(window.location.origin, getRepoName(), 'data.json').toString();
 }
