@@ -15,7 +15,9 @@ class CardService {
       var thumbnail = await _getImageUrl(url);
       var favIcon = await _getFavicon(url);
 
-      var thumbnailHtml = thumbnail.isEmpty ? '' : '''<img class="thumbnail" src="$thumbnail" alt="thumbnail">''';
+      var thumbnailHtml = thumbnail.isEmpty
+          ? ''
+          : '''<img class="thumbnail" src="$thumbnail" alt="thumbnail">''';
 
       return '''
 <a href="$url" class="uk-link-reset">
@@ -40,14 +42,17 @@ class CardService {
     }
   }
 
-  static Future<String> _getImageUrl(String url) async {
+  static Future<String> _getImageUrl(String url, {String? preUrl}) async {
     var imageUrl = '';
     var response = await http.get(Uri.parse(url));
     url = response.url ?? url;
 
+    //無限リダイレクト防止
+    if (url == preUrl) return '';
+
     if (response.statusCode != 200) {
       if (_isLastPage(url)) return '';
-      return _getImageUrl(_getNextUrl(url));
+      return await _getImageUrl(_getNextUrl(url), preUrl:url);
     }
 
     var html = parse(response.body);
@@ -73,20 +78,23 @@ class CardService {
       if (_isLastPage(url)) {
         return imageUrl;
       } else {
-        return _getImageUrl(_getNextUrl(url));
+        return await _getImageUrl(_getNextUrl(url), preUrl:url);
       }
     }
   }
 
-  static Future<String> _getDescription(String url) async {
+  static Future<String> _getDescription(String url, {String? preUrl}) async {
     var description = '';
 
     var response = await http.get(Uri.parse(url));
     url = response.url ?? url;
 
+    //無限リダイレクト防止
+    if (url == preUrl) return '';
+
     if (response.statusCode != 200) {
       if (_isLastPage(url)) return '';
-      return _getDescription(_getNextUrl(url));
+      return await _getDescription(_getNextUrl(url), preUrl:url);
     }
 
     var html = parse(response.body);
@@ -106,7 +114,7 @@ class CardService {
       if (_isLastPage(url)) {
         return description;
       } else {
-        return _getDescription(_getNextUrl(url));
+        return await _getDescription(_getNextUrl(url), preUrl:url);
       }
     }
   }
@@ -125,7 +133,7 @@ class CardService {
     var response = await http.get(Uri.parse(url));
     var html = parse(response.body);
     var elements = html.getElementsByTagName('link');
-    for (var i=0; i < elements.length; i++) {
+    for (var i = 0; i < elements.length; i++) {
       var element = elements[i];
       var rel = element.attributes['rel'];
       if (rel == 'shortcut icon') {
@@ -135,14 +143,14 @@ class CardService {
 
     return '';
   }
-  
+
   static bool _isLastPage(String url) {
-    return ['','/'].contains(Uri.parse(url).path);
-  } 
+    return ['', '/'].contains(Uri.parse(url).path);
+  }
 
   static String _getNextUrl(String url) {
     if (url.split('').last == '/') {
-      url = url.substring(0, url.length-1);
+      url = url.substring(0, url.length - 1);
     }
 
     return url.replaceFirst(RegExp(r'/(?!.*/).*$'), '');
