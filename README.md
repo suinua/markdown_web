@@ -1,4 +1,4 @@
-![サンプル](https://suinua.github.io/markdown_web/)
+[サンプル](https://suinua.github.io/markdown_web/)
 
 
 # 導入
@@ -55,6 +55,6 @@ infoは省略可能
 
 
 #
-xcopy assets export /E/H/C/I  
+//xcopy assets export /E/H/C/I  
 dart --enable-asserts bin/markdown_web.dart  
 dart2js -O2 -o export/main.js web/main.dart  
