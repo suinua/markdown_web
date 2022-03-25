@@ -6,7 +6,14 @@ import 'path_pool.dart';
 
 class ActionData {
   static String ghPageIndexUrl() {
-    return 'https://${ownerName()}.github.io/${repoName()}/';
+    var repositoryName = repoName();
+    var owner = ownerName();
+
+    if (repositoryName == '$owner.github.io') {
+      return 'https://$owner.github.io/';
+    } else {
+      return 'https://$owner.github.io/$repositoryName/';
+    }
   }
 
   static String ghPageUrl(ArticleFile file) {

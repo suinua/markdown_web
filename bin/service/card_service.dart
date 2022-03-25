@@ -11,6 +11,7 @@ class CardService {
   static Future<String> generateCardHtml(String url) async {
     try {
       var title = await _getTitle(url);
+      CustomLogger.simple.i('generate embed:$title');
       var description = await _getDescription(url);
       var thumbnail = await _getImageUrl(url);
       var favIcon = await _getFavicon(url);
