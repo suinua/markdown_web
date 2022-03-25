@@ -1,0 +1,66 @@
+body {
+    /*color*/
+    --general-font-color: #252525;
+    --strong-font-color: #000000;
+
+    --point-color: #90adc6;
+    --highlight-color: #FFC0CB;
+    --mild-color: #e9eaec6b;
+    --mood-color: #333652;
+
+    --h-border: #4367815d;
+
+    /*values*/
+    --radius: 5px;
+
+    width: 100%;
+    background: var(--mild-color);
+    color:var(--general-font-color);
+}
+
+.nav-bar {
+    background-color:var(--mood-color) !important;
+    height: 64px;
+    width: 100%;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.site-name {
+    margin-left: 2%;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.github-button {
+    position: absolute;
+    right: 2%;
+    border-radius: 10px !important;
+}
+
+.view-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.left {
+    width: 80%;
+    display: flex;
+}
+
+.right {
+    width: 20%;
+    display: flex;
+}
+
+.sticky-element {
+    position: sticky;
+    top: 4%;
+    width: 100%;
+}
+
+.smartphone-nav {
+    display: none;
+}

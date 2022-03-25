@@ -1,0 +1,58 @@
+.side-menu {
+    box-sizing: border-box;
+    width: 64%;
+
+    display: inline-block;
+    margin-left: 8%;
+    margin-top: 18vh;
+
+    margin-right: 4%;
+}
+
+.side-menu-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.scroll-nav-item-wrap {
+    display: block;
+    width: 100%;
+}
+
+.scroll-nav-item {
+
+}
+
+.active-scroll-nav-item {
+    background: var(--highlight-color);
+}
+
+.side-menu-index {
+    background: white;
+    border-radius: 5px;
+
+    max-height: 70vh;
+    width: 100%;
+
+    /*scroll*/
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: var(--point-color) #cccccc;
+}
+
+.side-menu-index .uk-active {
+    background: rgba(210, 210, 210, 0.67);
+}
+
+.scroll-nav-item-h1 {
+    font-weight: 600;
+    font-size: 20px;
+    margin: 4px;
+}
+
+.scroll-nav-item-h2 {
+    font-weight: 500;
+    font-size: 16px;
+    margin: 2px 2px 2px 8px;
+}

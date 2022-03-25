@@ -1,0 +1,145 @@
+.folder-structure-menu-wrap {
+    display: inline-block;
+    margin-left: 8%;
+    margin-right: 4%;
+
+    box-sizing: border-box;
+
+    width: 24%;
+    margin-top: 18vh;
+}
+
+.folder-structure-menu {
+    padding: 12px;
+    background: white;
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--general-font-color);
+
+    max-height: 80vh;
+    width: 100%;
+    box-sizing: border-box;
+
+    border-radius: var(--radius);
+    overflow-y: scroll;
+    overflow-x: scroll;
+
+    /*scroll*/
+    scrollbar-width: thin;
+    scrollbar-color: var(--point-color) #cccccc;
+}
+
+.folders-container::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+    background-color: #cccccc;
+}
+
+.folders-container::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: var(--point-color);
+}
+
+.menu-folder {
+    font-weight: 500;
+    color: var(--strong-font-color);
+}
+
+.menu-folder > i {
+    color: var(--point-color);
+    margin-right: 8px;
+}
+
+.tags {
+    white-space: nowrap;
+}
+
+.tags > .tag {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 16px;
+    color: var(--point-color);
+}
+
+.children {
+    padding-left: 10px;
+    list-style: none;
+}
+
+.children > li {
+    position: relative;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.children > li:before {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    width: 10px;
+    height: 1px;
+    margin: auto;
+    content: '';
+    background-color: #666;
+}
+
+.children > li:after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 1px;
+    height: 100%;
+    content: '';
+    background-color: #666;
+}
+
+.children > li:last-child:after {
+    height: 15px;
+}
+
+.search-form {
+    background: white;
+    margin-bottom: 2%;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.search-form input {
+    width: 85%;
+}
+
+.selected-tags {
+    margin: 2%;
+    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.selected-tag {
+    flex-shrink: 0;
+    display: inline-block;
+    height: 20px;
+    padding-right: .3em;
+    padding-left: .3em;
+    line-height: 1;
+    text-decoration: none;
+    color: var(--point-color);
+    background-color: #fff;
+    border: 1px solid var(--point-color);
+    border-radius: 2em;
+}
+
+.menu-article-title {
+    display: inline-block;
+}
+
+.active-menu-article-title {
+    background: linear-gradient(to top, var(--highlight-color) 10%, transparent 10%);
+}

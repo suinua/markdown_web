@@ -1,0 +1,64 @@
+.note {
+    width: 100%;
+    min-height: 60px;
+    box-sizing: border-box;
+    display: flex;
+    border-radius: 8px;
+    margin-top: 2%;
+}
+
+.note-info {
+    background: rgba(163, 238, 163, 0.425);
+}
+
+.note-info-icon {
+    background: rgb(62, 231, 62) !important;
+}
+
+
+.note-alert {
+    background: rgba(255, 174, 174, 0.425);
+}
+
+.note-alert-icon {
+    background: rgb(255, 109, 109) !important;
+}
+
+.note-warn {
+    background: rgba(238, 255, 138, 0.329);
+}
+
+.note-warn-icon {
+    background: rgb(255, 206, 46) !important;
+}
+
+.note-value {
+    background: rgba(199, 199, 199, 0.425);
+}
+
+.note-value-icon {
+    background: rgb(117, 117, 117) !important;
+}
+
+.note-icon-wrap {
+    display: inline-block;
+}
+
+.note-icon {
+    display: inline-block !important;
+    color: white !important;
+    border-radius: 100% !important;
+    margin: 8px !important;
+}
+
+.note-icon svg {
+    padding: 4px;
+    height: 30px;
+    width: 30px;
+}
+
+.note-body {
+    display: inline-block;
+    margin: 8px 0 16px 8px;
+    font-size: 16px;
+}
